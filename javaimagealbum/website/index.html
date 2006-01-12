@@ -1,0 +1,293 @@
+<!--
+  - <license>
+  - The contents of this file are subject to the Mozilla Public License 
+  - Version 1.1 (the "License"); you may not use this file except in 
+  - compliance with the License.  You may obtain a copy of the License 
+  - at http://www.mozilla.org/MPL/
+  - 
+  - Software distributed under the License is distributed on an 
+  - "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or 
+  - implied. See the License for the specific language governing rights 
+  - and limitations under the License.
+  - 
+  - The Original Code is Java Image Album.
+  - 
+  - The Initial Developer of the Original Code is Mirko Actis.  Portions 
+  - created by Mirko Actis are Copyright (C) 2006 Mirko Actis.  
+  - All Rights Reserved.
+  - 
+  - Contributor(s) listed below.
+  - </license>
+  -->
+
+<html>
+<head>
+	<title>jIA: Java Image Album</title>
+	<meta name="description" content="Java Image Album (jIA) is a easy to use wizard-style Java application that generates HTML photo albums. Automatically resize your images and produce a set of HTML pages including index pages with thumbnails and detailed caption pages for each photo. Publishing a new photo album is as simple as copying a directory of images to your web directory."/>
+	<meta name="keywords" content="photo,image,image album,photo album,photo gallery,image gallery,web photo,web image"/>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<table border="0" width="100%">
+  <tr>
+    <td>
+      <img src="images/plastik_icon_v05.png" width="64" height="64" align="middle" alt="Java Image Album"/>
+    </td>
+    <td>
+      <font size="+3"><b>Java Image Album</b></font><br/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="right">
+		<a href="index_it.html" target="_top"><img src="images/italy_flag.png" alt="Italian" border="0" height="25" width="45"/></a>
+    </td>
+  </tr>
+</table>
+<hr>
+<h2>Introduction</h2>
+Java Image Album (jIA) a is a Free Open Source easy to use wizard-style Java<sup>TM</sup> application that generates HTML photo albums.
+Automatically resize your images and produce a set of HTML pages including index pages with 
+thumbnails and detailed caption pages for each photo.
+Publishing a new photo album is as simple as copying a directory of images to your web directory. 
+<dl>
+  <dd><a href="#Features">Features</a></dd>
+  <dd><a href="#SampleOutput">Sample Output</a></dd>
+  <dd><a href="#Download">Download and Startup</a></dd>
+  <dd><a href="#Screenshots">Screenshots</a></dd>
+  <dd><a href="#Support">Support</a></dd>
+  <dd><a href="#RevisionHistory">Revision History</a></dd>
+  <dd><a href="#Disclaimer">Disclaimer, Terms of Use and Feedback</a></dd>
+</dl>
+<hr/>
+<!--
+<h2>Help support Java Image Album by Making a Donation</h2>
+<blockquote>
+Java Image Album is free software.  If you enjoy this program, 
+please consider supporting Octagon Software by 
+<a href="https://sourceforge.net/donate/index.php?group_id=71842">making
+a donation</a>.  Any amount is appreciated - thank you for your generosity!
+</blockquote>
+<hr/> 
+-->
+
+<a name="Features">
+<h2>Java Image Album Features</h2>
+<b>General Features</b>
+<ul>
+  <li>Wizard-style interface</li>
+  <li>100% Java, runs on all platforms</li>
+  <li>Supports .jpg images</li>
+  <li>Read Exif information <img src="images/new.gif" alt="new"/></li>
+  <li>Open Source! <a href="license.txt" target="_blank">See the licence</a></li>
+</ul>
+<b>User Interface Features</b>
+<ul>
+  <li>Image preview</li>
+  <li>HTML Caption editing</li>
+  <li>Change order of photos to be published</li>
+  <li>Select / deselect photos to be published</li>
+  <li>Enhanced user interface, including easier 
+      selection of folders
+  </li>
+  <li>Remembers most settings from previous 
+      runs, speeding up the publishing process.
+  </li>
+  <li>Stores captions with source photos, in .txt files</li>
+  <li>Time-saving shortcut keys for most options</li>
+  <li>Select All and Clear All buttons on captions panel</li>
+  <li>Faster thumbnail loading</li>
+</ul>
+<b>Publishing Features</b>
+<ul>
+  <li>Generates index page, with thumbnails</li>
+  <li>Generates HTML pages with next/prev links</li>
+  <li>Option to resize all portait or landscape images</li>
+  <li>Option to output original sized images as well</li>
+  <li>Customize number of output columns</li>
+  <li>Option to generate multiple thumbnail pages</li>
+  <li>Option to generate link to parent album</li>
+  <li>Option to place detail caption above or below photo</li>
+  <li>Option to align detail photo left, center or right</li>
+  <li>Option to display EXIF information <img src="images/new.gif" alt="new"/></li>
+</ul>
+<a name="SampleOutput">
+<!--
+<h2>Sample Output</h2>
+<blockquote>
+<a href="sample/index.html">To see a sample of the output that 
+Java Image Album produces, click here</a>.
+</blockquote>
+-->
+<a name="Download">
+<h2>Download and Startup</h2>
+<blockquote>
+Java Image Album is available as a Java Web Start<sup>TM</sup> application.  
+This is the preferred method of download, since you are automatically notified
+of new updates.  You may also choose to download a standalone JAR file if
+you are having trouble getting Java Web Start to work.
+<h3>Java Web Start Version</h3>
+<b>This is the preferred method of download</b>
+<p>
+To download the Java Web Start version of Java Web Start
+<ol>
+  <li>If you haven't already done so, download and install 
+      <a href="http://java.sun.com/products/javawebstart/index.html" target="_blank">
+      Java Web Start</a>, from java.sun.com.  This comes pre-installed with
+      most newer virtual machines.</li>
+  <li>You may need to restart your web browser.  Come back to this page
+      after doing so.</li>
+  <li>Click the following link to download 
+      <a href="dist/javaimagealbum.jnlp">Java Image Album, Web Start 
+      version</a>.</li>
+</ol>
+To start Java Image Album, simply click on the Java Image Album icon
+in Java Web Start.
+<p>
+If the above instructions do not work for you, please try the JAR version 
+instead.
+<h3>JAR Version</h3>
+The JAR version of Java Image Album allows you to run Java Image Album
+without the auto-update and easy-launch capabilities that Web Start gives you.
+This is only recommended if Web Start is not supported on your platform.
+<p>
+To download the JAR version of Java Web Start:
+<ol>
+  <li>Download the <a href="http://java.sun.com/j2se/" target="_blank">
+      Sun JDK or JRE</a>, version 1.4 or greater, from java.sun.com.
+      The application may run on earlier versions as well though version
+      1.5 is recommended.</li>
+  <li>Click on the following link to download the 
+      <a href="http://developer.berlios.de/project/showfiles.php?group_id=5725">Java Image Album JAR file</a>.</li>
+  <li>Save the JAR file to a folder on your computer.</li>
+</ol>
+To start Java Image Album, either double-click javaimagealbum.jar
+in your file explorer, or type the following at your command-prompt 
+or shell, from the folder containing javaimagealbum.jar:
+<pre>
+  java -jar javaimagealbum.jar
+</pre>
+<h3>Windows EXE Version</h3>
+The EXE version of Java Image Album allows you to run Java Image Album on Windows 
+platforms.
+<p>
+To download the EXE version:
+<ol>
+  <li>Click on the following link to download the 
+      <a href="http://developer.berlios.de/project/showfiles.php?group_id=5725">Java Image Album EXE file</a>.</li>
+  <li>Save the EXE file to a folder on your computer.</li>
+</ol>
+To start Java Image Album, either double-click javaimagealbum.exe.
+</blockquote>
+<a name="Screenshots">
+<h2>Screenshots</h2>
+<blockquote>
+<a href="screenshot/screenshot1-full.gif"><img src="screenshot/screenshot1.gif" border="0" alt="Choose input folder"></a>
+<a href="screenshot/screenshot2-full.gif"><img src="screenshot/screenshot2.gif" border="0" alt="Edit captions and reorder photos"></a><br>
+<a href="screenshot/screenshot3-full.gif"><img src="screenshot/screenshot3.gif" border="0" alt="Set output options"></a>
+<a href="screenshot/screenshot4-full.gif"><img src="screenshot/screenshot4.gif" border="0" alt="Publish photos!"></a>
+</blockquote>
+<a name="Support">
+<h2>Support</h2>
+Java Image Album is an open source project under the Mozilla Public
+License, supported at BerliOS.<br/>
+<blockquote>
+<a href="http://developer.berlios.de" title="BerliOS Developer"> <img src="http://developer.berlios.de/bslogo.php?group_id=5725" width="124px" height="32px" border="0" alt="BerliOS Developer Logo"></a>
+</blockquote>
+<ul>
+  <li><b>Main project group:</b>
+  <a href="http://developer.berlios.de/project/admin/?group_id=5725">
+  http://developer.berlios.de/projects/javaimagealbum/</a>
+  </li>
+  <li><b>Mailing list:</b>
+  <a href="http://developer.berlios.de/mail/?group_id=5725">
+  javaimagealbum-news</a> - News list.</li>
+  <li><b>CVS:</b>
+  <a href="http://developer.berlios.de/cvs/?group_id=5725">
+  Browse</a></li>
+<!--  <li><b>Donations:</b> <a href="https://sourceforge.net/donate/index.php?group_id=71842">
+  Click here</a> -->
+</ul>
+
+<a name="RevisionHistory">
+<h2>Revision History</h2>
+<ul>
+  <li>Version 0.1 - May 2, 2004
+    <ul>
+      <li>Created project to Berli OS, under open source license</li>
+      <li>Requires JDK1.4</li>
+      <li>Features:
+        <ul>
+	  <li>Wizard-style interface</li>
+	  <li>100% Java, runs on all platforms</li>
+	  <li>Image preview</li>
+	  <li>HTML Caption editing</li>
+	  <li>Change order of photos to be published</li>
+	  <li>Select / deselect photos to be published</li>
+      <li>Generate link to parent folder for Album Index Page</li>
+	  <li>Generates index page, with thumbnails</li>
+	  <li>Generates HTML pages with next/prev links</li>
+	  <li>Option to resize all portait or landscape images</li>
+      <li>Title on detail pages include album title and version.</li>
+      <li>Place detail caption above or below photo.</li>
+      <li>Align detail photo to the left, center, or to the right.</li>
+        </ul>
+      </li>
+      <li>Java Image Album (title screen)
+        <ul>
+	  <li>Shows version in frame title</li>
+        </ul>
+      </li>
+      <li>Pick Photos
+        <ul>
+      <li>Support for reading JPG input files.</li>
+	  <li>Shows how many photos found</li>
+        </ul>
+      </li>
+      <li>Rename Photos and Add Captions
+        <ul>
+	  <li>Allows selection of which photos to be published</li>
+	  <li>Allows changing output filename</li>
+	  <li>Caption editing</li>
+	  <li>Shows preview panel with thumbnail</li>
+	  <li>Enable / disable autopreview</li>
+        </ul>
+      </li>
+      <li>Choose Output Directory
+        <ul>
+          <li>Set Album Title</li>
+	</ul>
+      </li>
+      <li>Output Options
+        <ul>
+          <li>Resize all output images to at least ___ by ___</li>
+          <li>Subbullet: Resize portait Photos to at least ___ by ___</li>
+	</ul>
+      </li>
+      <li>Summary
+        <ul>
+          <li>Shows summary of what will be created</li>
+	  <li>Generate button</li>
+	  <li>Progress meter</li>
+	</ul>
+      </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+<a name="Disclaimer">
+<h2>Disclaimer, Terms of Use and Feedback</h2>
+<blockquote>
+Java Image Album is released under the Mozilla Public License 1.1.
+See the <a href="LICENSE.txt">license agreement</a> for more information.
+<p>
+Your feedback is strongly desired, and is required to make this product 
+more successful.  Please provide feedback and discuss potential bug fixes
+or feature additions on BerliOS at
+<a href="http://developer.berlios.de/projects/javaimagealbum/">
+http://developer.berlios.de/projects/javaimagealbum/</a>.
+</blockquote>
+<hr>
+<i>Last Updated: 09-01-2006</i>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  - <license>
+  - The contents of this file are subject to the Mozilla Public License 
+  - Version 1.1 (the "License"); you may not use this file except in 
+  - compliance with the License.  You may obtain a copy of the License 
+  - at http://www.mozilla.org/MPL/
+  - 
+  - Software distributed under the License is distributed on an 
+  - "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or 
+  - implied. See the License for the specific language governing rights 
+  - and limitations under the License.
+  - 
+  - The Original Code is Web Photo Publisher.
+  - 
+  - The Initial Developer of the Original Code is Mark Roth.  Portions 
+  - created by Mark Roth are Copyright (C) 2003 Mark Roth.  
+  - All Rights Reserved.
+  - 
+  - Contributor(s) listed below.
+  - Mirko Actis
+  - </license>
+  -->
+
+<!--
+  - Main build file for Web Photo Publisher
+  -
+  - Author: Mark Roth
+  -->
+
+<project basedir="." default="dist" name="javaimagealbum">
+
+  <target name="properties">
+    <property file="build.properties" />
+    <property name="build" value="build" />
+    <property name="src" value="src" />
+    <property name="dist" value="dist" />
+    <property name="PrjName" value="javaimagealbum" />
+    <echo>Compile Project ${PrjName}</echo>
+    <echo>Using ant home ${ant.home}</echo>
+  </target>
+  
+  <target name="init" depends="properties,checkproperties" />
+
+  <target name="checkproperties" unless="ant.home"> 
+    <fail>
+      One or more required properties have not been set.  Please
+      copy the build.properties.sample file to build.properties
+      and edit to suit your environment before continuing.
+    </fail>
+  </target>
+    
+  <target name="prepare" depends="init" 
+          description="Create build and dist directories">
+    <mkdir dir="${build}/classes" />
+    <mkdir dir="${dist}" />
+  </target>
+
+  <target name="compile" depends="prepare"
+          description="Compile the distribution">
+    <javac debug="on" destdir="${build}/classes" srcdir="${src}"/>
+    <copy todir="${build}/classes">
+      <fileset dir="${src}">
+        <include name="**/*.jpg" />
+        <include name="**/*.gif" />
+      </fileset>
+      <fileset dir=".">
+        <include name="LICENSE.txt" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="dist" depends="compile"
+          description="Creates target jar and distribution">
+    <jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
+         manifest="${src}/manifest/MANIFEST.MF">
+        <include name="**" />
+    </jar>
+  </target>
+
+  <target name="clean" depends="init" 
+          description="Cleans all generated files">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+  <target name="run" depends="dist"
+          description="Run Web Photo Publisher">
+    <java jar="${dist}/${PrjName}.jar" fork="yes"/>
+  </target>
+
+  <target name="debug" depends="dist" 
+          description="Debug Web Photo Publisher (JPDA)">
+    <java jar="${dist}/${PrjName}.jar" fork="yes">
+      <jvmarg value="-Xdebug"/>
+      <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y"/>
+      <!-- Alternative that works faster on Windows -->
+      <!--<jvmarg value="-Xrunjdwp:transport=dt_shmem,server=y,suspend=y"/>-->
+    </java>
+  </target>
+  
+</project>
