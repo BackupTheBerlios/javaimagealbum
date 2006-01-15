@@ -52,11 +52,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         lblTitle = new javax.swing.JLabel();
         pnlContents = new javax.swing.JPanel();
         tpInstructions = new javax.swing.JTextPane();
-        pnlAlbumTitleOption = new javax.swing.JPanel();
-        lblAlbumTitle = new javax.swing.JLabel();
-        tfAlbumTitle = new javax.swing.JTextField();
-        lblAlbumDescription = new javax.swing.JLabel();
-        tfAlbumDescription = new javax.swing.JTextField();
         pnlOutputColumnsOption = new javax.swing.JPanel();
         lblColumns = new javax.swing.JLabel();
         tfColumns = new javax.swing.JTextField();
@@ -78,8 +73,8 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         tfResizePortraitsHeight = new javax.swing.JTextField();
         pnlKeepFullSizeOption = new javax.swing.JPanel();
         cbFullSize = new javax.swing.JCheckBox();
-        pnlLinkToAlbumIndex = new javax.swing.JPanel();
-        cbLinkToAlbumIndex = new javax.swing.JCheckBox();
+        pnShowExif = new javax.swing.JPanel();
+        cbShowExif = new javax.swing.JCheckBox();
         pnlDetailPages = new javax.swing.JPanel();
         lblCaptionPosition = new javax.swing.JLabel();
         cbCaptionPosition = new javax.swing.JComboBox();
@@ -88,7 +83,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         lblPhotoPosition = new javax.swing.JLabel();
         cbPhotoPosition = new javax.swing.JComboBox();
         pnlBroom = new javax.swing.JPanel();
-        cbShowExif = new javax.swing.JCheckBox();
         pnlBroom2 = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -113,58 +107,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pnlContents.add(tpInstructions, gridBagConstraints);
-
-        pnlAlbumTitleOption.setLayout(new java.awt.GridBagLayout());
-
-        pnlAlbumTitleOption.setBackground(java.awt.Color.white);
-        lblAlbumTitle.setDisplayedMnemonic('t');
-        lblAlbumTitle.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblAlbumTitle.setLabelFor(tfAlbumTitle);
-        lblAlbumTitle.setText("Album Title:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
-        pnlAlbumTitleOption.add(lblAlbumTitle, gridBagConstraints);
-
-        tfAlbumTitle.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tfAlbumTitle.setText("Photos");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
-        pnlAlbumTitleOption.add(tfAlbumTitle, gridBagConstraints);
-        tfAlbumTitle.getAccessibleContext().setAccessibleName("Album Title");
-
-        lblAlbumDescription.setDisplayedMnemonic('t');
-        lblAlbumDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblAlbumDescription.setLabelFor(tfAlbumDescription);
-        lblAlbumDescription.setText("Album Description:");
-        pnlAlbumTitleOption.add(lblAlbumDescription, new java.awt.GridBagConstraints());
-        lblAlbumDescription.getAccessibleContext().setAccessibleName("Album Description:");
-
-        tfAlbumDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tfAlbumDescription.setText("Description");
-        tfAlbumDescription.setCaretPosition(6);
-        tfAlbumDescription.setPreferredSize(new java.awt.Dimension(50, 21));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
-        pnlAlbumTitleOption.add(tfAlbumDescription, gridBagConstraints);
-        tfAlbumDescription.getAccessibleContext().setAccessibleName("Album Description:");
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        pnlContents.add(pnlAlbumTitleOption, gridBagConstraints);
 
         pnlOutputColumnsOption.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -346,21 +288,22 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         gridBagConstraints.insets = new java.awt.Insets(0, 15, 5, 0);
         pnlCheckboxes.add(pnlKeepFullSizeOption, gridBagConstraints);
 
-        pnlLinkToAlbumIndex.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnShowExif.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        pnlLinkToAlbumIndex.setBackground(java.awt.Color.white);
-        cbLinkToAlbumIndex.setBackground(java.awt.Color.white);
-        cbLinkToAlbumIndex.setFont(new java.awt.Font("SansSerif", 0, 12));
-        cbLinkToAlbumIndex.setMnemonic('i');
-        cbLinkToAlbumIndex.setText("Include a link to parent folder for album index");
-        cbLinkToAlbumIndex.setToolTipText("Select this option if you plan on uploading more\nthan one photo album to your account.  A link\nto the parent folder will be included in the output.");
-        cbLinkToAlbumIndex.addActionListener(new java.awt.event.ActionListener() {
+        pnShowExif.setBackground(java.awt.Color.white);
+        cbShowExif.setBackground(java.awt.Color.white);
+        cbShowExif.setFont(new java.awt.Font("SansSerif", 0, 12));
+        cbShowExif.setMnemonic('i');
+        cbShowExif.setText("Print EXIF pictures informatio");
+        cbShowExif.setToolTipText("Select this option if you whant to have EXIF information printed in your web page.");
+        cbShowExif.setPreferredSize(new java.awt.Dimension(269, 25));
+        cbShowExif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbLinkToAlbumIndexActionPerformed(evt);
+                cbShowExifActionPerformed(evt);
             }
         });
 
-        pnlLinkToAlbumIndex.add(cbLinkToAlbumIndex);
+        pnShowExif.add(cbShowExif);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -370,7 +313,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        pnlCheckboxes.add(pnlLinkToAlbumIndex, gridBagConstraints);
+        pnlCheckboxes.add(pnShowExif, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -454,20 +397,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         pnlContents.add(pnlDetailPages, gridBagConstraints);
 
-        cbShowExif.setBackground(java.awt.Color.white);
-        cbShowExif.setFont(new java.awt.Font("SansSerif", 0, 12));
-        cbShowExif.setMnemonic('i');
-        cbShowExif.setText("Print EXIF pictures informatio");
-        cbShowExif.setToolTipText("Select this option if you whant to have EXIF information printed in your web page.");
-        cbShowExif.setPreferredSize(new java.awt.Dimension(269, 25));
-        cbShowExif.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbShowExifActionPerformed(evt);
-            }
-        });
-
-        pnlContents.add(cbShowExif, new java.awt.GridBagConstraints());
-
         pnlBroom2.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -490,10 +419,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private void cbCaptionAlignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCaptionPositionActionPerformed
         scanAndPersistOptions();
     }//GEN-LAST:event_cbCaptionPositionActionPerformed
-
-    private void cbLinkToAlbumIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLinkToAlbumIndexActionPerformed
-        scanAndPersistOptions();
-    }//GEN-LAST:event_cbLinkToAlbumIndexActionPerformed
 
     private void cbShowExifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowExifActionPerformed
         scanAndPersistOptions();
@@ -530,15 +455,12 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private javax.swing.JComboBox cbCaptionAlign;
     private javax.swing.JComboBox cbCaptionPosition;
     private javax.swing.JCheckBox cbFullSize;
-    private javax.swing.JCheckBox cbLinkToAlbumIndex;
     private javax.swing.JComboBox cbPhotoPosition;
     private javax.swing.JCheckBox cbResizeAll;
     private javax.swing.JCheckBox cbResizePortraits;
     private javax.swing.JCheckBox cbSaveCaptions;
     private javax.swing.JCheckBox cbShowExif;
     private javax.swing.JComboBox coThumbnailsPerPage;
-    private javax.swing.JLabel lblAlbumDescription;
-    private javax.swing.JLabel lblAlbumTitle;
     private javax.swing.JLabel lblBy;
     private javax.swing.JLabel lblBy2;
     private javax.swing.JLabel lblCaptionAlign;
@@ -547,21 +469,18 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private javax.swing.JLabel lblPhotoPosition;
     private javax.swing.JLabel lblThumbnailsPerPage;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JPanel pnlAlbumTitleOption;
+    private javax.swing.JPanel pnShowExif;
     private javax.swing.JPanel pnlBroom;
     private javax.swing.JPanel pnlBroom2;
     private javax.swing.JPanel pnlCheckboxes;
     private javax.swing.JPanel pnlContents;
     private javax.swing.JPanel pnlDetailPages;
     private javax.swing.JPanel pnlKeepFullSizeOption;
-    private javax.swing.JPanel pnlLinkToAlbumIndex;
     private javax.swing.JPanel pnlOutputColumnsOption;
     private javax.swing.JPanel pnlPortraitResizeOption;
     private javax.swing.JPanel pnlResizeOption;
     private javax.swing.JPanel pnlSaveCaptionsOption;
     private javax.swing.JPanel pnlThumbnailCountOption;
-    private javax.swing.JTextField tfAlbumDescription;
-    private javax.swing.JTextField tfAlbumTitle;
     private javax.swing.JTextField tfColumns;
     private javax.swing.JTextField tfResizeHeight;
     private javax.swing.JTextField tfResizePortraitsHeight;
@@ -611,7 +530,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
      * Called when the panel is shown to the user
      */
     public void showPanel() {
-        tfAlbumTitle.setText( publishManager.getAlbumTitle() );
         tfColumns.setText( "" + publishManager.getOutputColumns() );
         coThumbnailsPerPage.setSelectedItem( 
             publishManager.getThumbnailsPerPage() );
@@ -625,7 +543,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
             publishManager.getResizePortraitsHeight() );
         cbSaveCaptions.setSelected( publishManager.getStoreCaptions() );
         cbFullSize.setSelected( publishManager.getPublishFullSize() );
-        cbLinkToAlbumIndex.setSelected( publishManager.getLinkToAlbumIndex() );
         cbShowExif.setSelected( publishManager.getShowExif() );
         String photoPosition = publishManager.getPhotoPosition();
         String captionPosition = publishManager.getCaptionPosition();
@@ -649,8 +566,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     }
     
     private void scanAndPersistOptions() {
-        publishManager.setAlbumTitle( tfAlbumTitle.getText() );
-        publishManager.setAlbumDescription( tfAlbumDescription.getText() );
         publishManager.setOutputColumns( 
             Integer.parseInt( tfColumns.getText() ) );
         publishManager.setThumbnailsPerPage( 
@@ -667,7 +582,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
             Integer.parseInt( tfResizePortraitsHeight.getText() ) );
         publishManager.setStoreCaptions( cbSaveCaptions.isSelected() );
         publishManager.setPublishFullSize( cbFullSize.isSelected() );
-        publishManager.setLinkToAlbumIndex( cbLinkToAlbumIndex.isSelected() );
         publishManager.setShowExif( cbShowExif.isSelected() );
         publishManager.setPhotoPosition( (String)photoPositions.get( 
             cbPhotoPosition.getSelectedIndex() ) );

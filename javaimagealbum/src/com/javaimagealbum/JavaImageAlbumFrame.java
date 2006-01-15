@@ -47,7 +47,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         initComponents ();
         setIconImage( new javax.swing.ImageIcon(
             getClass().getResource(
-            "/com/javaimagealbum/images/icon.gif")
+            "/com/javaimagealbum/images/icon.png")
             ).getImage());
         pack ();
         
@@ -116,6 +116,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             }
         });
 
+        getAccessibleContext().setAccessibleName("Java Image Album");
         pnlCurrent.setLayout(new java.awt.GridLayout(1, 1));
 
         pnlCurrent.setBackground(java.awt.Color.white);
@@ -126,8 +127,8 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         pnlButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         pnlButtons.setBackground(java.awt.Color.white);
-        btnRestart.setMnemonic('r');
-        btnRestart.setText("Restart");
+        btnRestart.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("RESTART"));
+        btnRestart.setActionCommand("res.getString(\"RESTART\")");
         btnRestart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestartActionPerformed(evt);
@@ -137,7 +138,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         pnlButtons.add(btnRestart);
 
         btnBack.setMnemonic('b');
-        btnBack.setText("<< Back");
+        btnBack.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("BACK"));
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -147,7 +148,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         pnlButtons.add(btnBack);
 
         btnNext.setMnemonic('n');
-        btnNext.setText("Next >>");
+        btnNext.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("NEXT"));
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
@@ -157,7 +158,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         pnlButtons.add(btnNext);
 
         btnCancel.setMnemonic('c');
-        btnCancel.setText("Cancel");
+        btnCancel.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CANCEL"));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -226,13 +227,14 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         boolean skipIntro = Settings.getInstance().getProperty( 
             Constants.SKIP_INTRO, "false" ).toLowerCase().equals( "true" );
         
-        panels = new JPanel[6];
+        panels = new JPanel[7];
         panels[0] = new IntroPanel();
         panels[1] = new PickPhotosPanel( publishManager );
         panels[2] = new RenameAndDescribePanel( publishManager );
         panels[3] = new PickOutputPanel( publishManager );
-        panels[4] = new OutputOptionsPanel( publishManager );
-        panels[5] = new SummaryPanel( publishManager );
+        panels[4] = new OutputDescriptionPanel( publishManager );
+        panels[5] = new OutputOptionsPanel( publishManager );
+        panels[6] = new SummaryPanel( publishManager );
         
         if( skipIntro ) {
             JPanel[] tmp = panels;
@@ -307,7 +309,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         btnRestart.setEnabled( 
                 ( currentPanelIndex == (panels.length - 1) ));
         if( publishManager.isGenerationComplete() ) {
-            btnCancel.setText( "Close" );
+            btnCancel.setText( res.getString("CANCEL") );
         }
     }
     

@@ -24,7 +24,7 @@ package com.javaimagealbum;
 
 import javax.swing.*;
 
-import com.javaimagealbum.resources.ResourceFactory;
+import com.javaimagealbum.resources.*;
 
 import java.io.*;
 import java.util.ResourceBundle;

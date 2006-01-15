@@ -68,6 +68,7 @@ public class PublishManager extends Observable {
     private int outputColumns = 4;
     private String thumbnailsPerPage = Constants.UNLIMITED_THUMBNAILS;
     private boolean linkToAlbumIndex = false;
+    private boolean descriptionInEmptyPage = false;
     private String photoPosition = Constants.PHOTO_POSITION_LEFT;
     private String captionPosition = Constants.CAPTION_POSITION_BELOW;
     private String captionAlign = Constants.CAPTION_ALIGN_LEFT;
@@ -332,6 +333,14 @@ public class PublishManager extends Observable {
     
     public boolean getLinkToAlbumIndex() {
         return this.linkToAlbumIndex;
+    }
+    
+    public void setDescriptionInEmptyPage( boolean descriptionInEmptyPage ) {
+        this.descriptionInEmptyPage = descriptionInEmptyPage;
+    }
+    
+    public boolean getDescriptionInEmptyPage() {
+        return this.descriptionInEmptyPage;
     }
     
     public void setShowExif( boolean showExif ) {

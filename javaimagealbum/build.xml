@@ -19,12 +19,12 @@
   - All Rights Reserved.
   - 
   - Contributor(s) listed below.
-  - Mirko Actis
+  - Mirko Actis Grosso
   - </license>
   -->
 
 <!--
-  - Main build file for Web Photo Publisher
+  - Main build file for Java Image Album
   -
   - Author: Mark Roth
   -->
@@ -64,11 +64,21 @@
       <fileset dir="${src}">
         <include name="**/*.jpg" />
         <include name="**/*.gif" />
+        <include name="**/*.png" />
+        <include name="**/*.properties" />
       </fileset>
       <fileset dir=".">
-        <include name="LICENSE.txt" />
+        <include name="license.txt" />
       </fileset>
     </copy>
+  </target>
+
+  <target name="jar" depends="compile"
+          description="Creates target jar and distribution">
+    <jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
+         manifest="${src}/manifest/MANIFEST.MF">
+        <include name="**" />
+    </jar>
   </target>
 
   <target name="dist" depends="compile"
@@ -86,12 +96,12 @@
   </target>
 
   <target name="run" depends="dist"
-          description="Run Web Photo Publisher">
+          description="Run Java Image Album">
     <java jar="${dist}/${PrjName}.jar" fork="yes"/>
   </target>
 
   <target name="debug" depends="dist" 
-          description="Debug Web Photo Publisher (JPDA)">
+          description="Debug Java Image Album (JPDA)">
     <java jar="${dist}/${PrjName}.jar" fork="yes">
       <jvmarg value="-Xdebug"/>
       <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y"/>
