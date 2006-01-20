@@ -44,6 +44,10 @@ public class ResourceFactory {
         return textBundle;
     }
 
+    public static ResourceBundle getBundle(Locale locale) {
+        return ResourceBundle.getBundle("com.javaimagealbum.resources.Resource", locale);
+    }
+
     public static ResourceBundle getMnemonicBundle() {
         return mnemonicBundle;
     }

@@ -108,7 +108,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         lblSideBar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Web Photo Publisher");
+        setTitle("Java Image Album");
         setBackground(java.awt.Color.white);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -309,7 +309,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         btnRestart.setEnabled( 
                 ( currentPanelIndex == (panels.length - 1) ));
         if( publishManager.isGenerationComplete() ) {
-            btnCancel.setText( res.getString("CANCEL") );
+            btnCancel.setText( res.getString("CLOSE") );
         }
     }
     

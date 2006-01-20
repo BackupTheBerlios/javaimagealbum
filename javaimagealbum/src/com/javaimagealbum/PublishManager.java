@@ -134,6 +134,9 @@ public class PublishManager extends Observable {
         setLinkToAlbumIndex( settings.getProperty( 
             Constants.LINK_TO_ALBUM_INDEX, "true" ).toLowerCase().equals( 
             "true" ) );
+        setDescriptionInEmptyPage( settings.getProperty( 
+                Constants.DESCRIPTION_IN_EMPTY_PAGE, "true" ).toLowerCase().equals( 
+                "true" ) );
         setShowExif( settings.getProperty( 
                 Constants.LINK_TO_ALBUM_INDEX, "true" ).toLowerCase().equals( 
                 "true" ) );
@@ -173,6 +176,8 @@ public class PublishManager extends Observable {
             "" + getStoreCaptions() );
         settings.setProperty( Constants.LINK_TO_ALBUM_INDEX, 
             "" + getLinkToAlbumIndex() );
+        settings.setProperty( Constants.DESCRIPTION_IN_EMPTY_PAGE, 
+                "" + getDescriptionInEmptyPage() );
         settings.setProperty( Constants.SHOW_EXIF, 
                 "" + getShowExif() );
         settings.setProperty( Constants.PHOTO_POSITION, 

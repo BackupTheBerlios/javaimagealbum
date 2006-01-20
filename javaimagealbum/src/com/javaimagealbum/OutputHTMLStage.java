@@ -17,6 +17,7 @@
  * All Rights Reserved.
  * 
  * Contributor(s) listed below.
+ * Mirko Actis Grosso
  * </license>
  */
 
@@ -26,6 +27,8 @@ import java.text.*;
 import java.io.*;
 import java.util.*;
 
+import com.javaimagealbum.resources.ResourceFactory;
+
 /**
  * Generates all HTML output files.
  *
@@ -33,6 +36,7 @@ import java.util.*;
  * @author  Mirko Actis
  */
 public class OutputHTMLStage extends OutputStage {
+    static ResourceBundle res = ResourceFactory.getBundle();
 
     /** Current progress */
     int progress = 0;
@@ -78,6 +82,11 @@ public class OutputHTMLStage extends OutputStage {
                     generateDetailPage( i, i / perPage ) );
             }
             
+            // Construct description pages:
+            if (publishManager.getDescriptionInEmptyPage()) {
+            	generateDescriptionPage();
+            }
+
             // Construct thumbnail pages:
             progress = numPhotos * 100 / Math.max(numPhotos + 1, 1);
             updateProgress();
@@ -95,6 +104,56 @@ public class OutputHTMLStage extends OutputStage {
     /**
      * Performs generation for this stage
      */
+    public void generateDescriptionPage()
+    throws IOException
+    {
+        if (publishManager.getAlbumDescription().length() > 0) {
+	        SimpleDateFormat sdf = new SimpleDateFormat( res.getString("DATE_FORMAT") );
+	        String todaysDate = sdf.format( new Date() );
+	        
+	        String indexFilename = "indexDEscription";
+	        indexFilename += ".html";
+	
+	        File outputDirectory = publishManager.getOutputDirectory();
+	        File destFile = new File( outputDirectory, indexFilename );
+	        PrintWriter out = new PrintWriter( new FileWriter( destFile ) );
+	        out.print( 
+	            "<html>\n" +
+	            "  <head>\n" +
+	            "    <title>" + publishManager.getAlbumTitle() );
+	        out.print(
+	            "</title>\n" +
+	            "  </head>\n" +
+	            "  <body bgcolor=\"#ffffff\">\n" );
+	        if( publishManager.getLinkToAlbumIndex() ) {
+	            out.print(
+	                "    <a href=\"../\">&lt; "+res.getString("BACK_ALBUM_INDEX")+"</a><br>\n");
+	        }
+	        out.print( 
+	            "    <div align=\"Center\">\n" +
+	            "      <h1>" + publishManager.getAlbumTitle() + "</h1>\n" );
+	        out.print( 
+	            "    <div align=\"Left\">\n" +
+	            "      " + publishManager.getAlbumDescription() + "\n" +
+	            "    </div>\n" +
+	            "    <br>");
+	
+	        out.print( 
+	            "      </table>\n" +
+	            "    </div>\n" +
+	            "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
+	            "      <i>"+res.getString("PUBLISHED")+": " + todaysDate + "\n" +
+	            "      <div align=\"right\"><small>"+res.getString("GENERATED_BY")+"</i><br>\n" +
+	            "      <a href=\""+Constants.SITE_URL+"\"" +
+	                "\">"+Constants.APP_NAME+"</a>" +
+	                "</small></div>\n" +
+	            "  </body>\n" +
+	            "</html>" );
+
+	        out.close();
+        }
+    }
+    
     public void generateThumbnailPage( int index, int perPage, int numPages )
         throws IOException
     {
@@ -116,7 +175,7 @@ public class OutputHTMLStage extends OutputStage {
             numCols = onThisPage;
         }
         
-        SimpleDateFormat sdf = new SimpleDateFormat( "MM-dd-yyyy" );
+        SimpleDateFormat sdf = new SimpleDateFormat( res.getString("DATE_FORMAT") );
         String todaysDate = sdf.format( new Date() );
         
         String indexFilename = "index";
@@ -139,24 +198,34 @@ public class OutputHTMLStage extends OutputStage {
             "  <body bgcolor=\"#ffffff\">\n" );
         if( publishManager.getLinkToAlbumIndex() ) {
             out.print(
-                "    <a href=\"../\">&lt; Go Back to Album Index</a><br>\n");
+                "    <a href=\"../\">&lt; "+res.getString("BACK_ALBUM_INDEX")+"</a><br>\n");
         }
         out.print( 
             "    <div align=\"Center\">\n" +
             "      <h1>" + publishManager.getAlbumTitle() + "</h1>\n" );
         if (publishManager.getAlbumDescription().length() > 0) {
-            out.print( 
-                "    <div align=\"Left\">\n" +
-                "      " + publishManager.getAlbumDescription() + "\n" +
-                "    </div>\n" +
-                "    <br>");
+        	if (publishManager.getDescriptionInEmptyPage()) {
+                    // Create link to Description Page
+	            out.print(
+		                "    <div align=\"Center\">\n" +
+	            		"       <a href=\"indexDescription.html\">Album Description</a>\n" + 
+		                "    </div>\n" +
+		                "    <br>");
+        	} else {
+                    // Add Album Description
+	            out.print( 
+	                "    <div align=\"Left\">\n" +
+	                "      " + publishManager.getAlbumDescription() + "\n" +
+	                "    </div>\n" +
+	                "    <br>");
+        	}
         }
         if( numPages > 1 ) {
             out.print(
                 "      <hr>\n" +
-                "      Page " + (index + 1) + " of " + numPages + " -- \n" );
+                "      "+res.getString("PAGE")+" " + (index + 1) + " "+res.getString("OF")+" " + numPages + " -- \n" );
             // Output meta-index:
-            out.print( "Index: [ " );
+            out.print( res.getString("INDEX")+": [ " );
             for( int i = 0; i < numPages; i++ ) {
                 int bi = i * perPage;
                 int ei = (i + 1) * perPage - 1;
@@ -244,8 +313,8 @@ public class OutputHTMLStage extends OutputStage {
             "      </table>\n" +
             "    </div>\n" +
             "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
-            "      <i>Published: " + todaysDate + "\n" +
-            "      <div align=\"right\"><small>Generated by</i><br>\n" +
+            "      <i>"+res.getString("PUBLISHED")+": " + todaysDate + "\n" +
+            "      <div align=\"right\"><small>"+res.getString("GENERATED_BY")+"</i><br>\n" +
             "      <a href=\""+Constants.SITE_URL+"\"" +
                 "\">"+Constants.APP_NAME+"</a>" +
                 "</small></div>\n" +
@@ -284,7 +353,7 @@ public class OutputHTMLStage extends OutputStage {
             "<html>\n" +
             "  <head>\n" +
             "    <title>" + publishManager.getAlbumTitle() + 
-            " - Photo: " + imageFilename + "</title>\n" +
+            " - "+res.getString("PHOTO")+": " + imageFilename + "</title>\n" +
             "  </head>\n" +
             "  <body bgcolor=\"#ffffff\">\n" );
         
@@ -293,33 +362,33 @@ public class OutputHTMLStage extends OutputStage {
         String indexPage = "index";
         if( indexPageNum > 0 ) indexPage += indexPageNum;
         indexPage += ".html";
-        out.print( "<td><a href=\"" + indexPage + "\">Back to Album</a></td>\n" );
+        out.print( "<td><a href=\"" + indexPage + "\">"+res.getString("BACK_ALBUM")+"</a></td>\n" );
         
         if( prev != null ) {
             out.print( 
                 "<td width=\"150\"><div align=\"center\"><a href=\"" + prev + 
-                "\">&lt;&lt; Previous &lt;&lt;</a></div></td>\n" );
+                "\">&lt;&lt; "+res.getString("PREVIOUS")+" &lt;&lt;</a></div></td>\n" );
         }
         else {
             out.print( "<td width=\"150\"><div align=\"center\">" +
-                "<font color=\"#999999\">&lt;&lt; Previous &lt;&lt;</font>" +
+                "<font color=\"#999999\">&lt;&lt; "+res.getString("PREVIOUS")+" &lt;&lt;</font>" +
                 "</div></td>\n" );
         }
         
         if( next != null ) {
             out.print( 
                 "<td width=\"150\"><a href=\"" + next + 
-                "\">&gt;&gt; Next &gt;&gt;</a></td>\n" );
+                "\">&gt;&gt; "+res.getString("NEXT1")+" &gt;&gt;</a></td>\n" );
         }
         else {
             out.print(
                 "<td width=\"150\">" +
-                "<font color=\"#999999\">&gt;&gt; Next &gt;&gt;" +
+                "<font color=\"#999999\">&gt;&gt; "+res.getString("NEXT1")+" &gt;&gt;" +
                 "</font></td>\n" );
         }
         
         out.print(
-            "<td>[ Photo " + (index+1) + " of " + numPhotos + " ]</td>\n" );
+            "<td>[ "+res.getString("PHOTO")+" " + (index+1) + " "+res.getString("OF")+" " + numPhotos + " ]</td>\n" );
         
         out.print( "</tr></table>\n" );
         
@@ -341,7 +410,7 @@ public class OutputHTMLStage extends OutputStage {
                 out.print( 
                     "<a href=\"" + imageFilename + "\">" +
                     "<img src=\"resized-" + outImageFilename + 
-                        "\" alt=\"Click to Zoom\">" +
+                        "\" alt=\""+res.getString("CLICK_ZOOM")+"\">" +
                     "</a>" );
             }
             else {
@@ -362,9 +431,9 @@ public class OutputHTMLStage extends OutputStage {
         }
         
         out.print( 
-            "    <div align=\"right\"><small>Generated by\n" +
+            "    <i><div align=\"right\"><small>"+res.getString("GENERATED_BY")+"</i><br>\n" +
             "      <a href=\""+Constants.SITE_URL+"\"" +
-            "\">"+Constants.APP_NAME+"\"</a>" +
+            "\">"+Constants.APP_NAME+"</a>" +
                 "</small></div>\n" +
             "  </body>\n" +
             "</html>\n" );
