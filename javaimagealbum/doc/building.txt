@@ -1,0 +1,116 @@
+<license>
+The contents of this file are subject to the Mozilla Public License 
+Version 1.1 (the "License"); you may not use this file except in 
+compliance with the License.  You may obtain a copy of the License 
+at http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an 
+"AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or 
+implied. See the License for the specific language governing rights 
+and limitations under the License.
+
+The Original Code is Web Photo Publisher.
+
+The Initial Developer of the Original Code is Mark Roth.  Portions 
+created by Mark Roth are Copyright (C) 2003 Mark Roth.  
+All Rights Reserved.
+
+Contributor(s) listed below.
+Mirko Actis Grosso
+</license>
+
+***********************************************************************
+
+The design of the application is done using Net Beans, so don't modify 
+the code auto generated from the IDE.
+
+
+Building Java Image Album from command line
+-------------------------------------------
+
+0. Document Information
+
+This document describes how to build Java Image Album
+
+1. Prerequisites
+
+Java Image Album requires the following prerequisites:
+
+    * Sun JDK 1.4.1 or greater (only Sun's VM is supported at this time -
+      support for other VMs will be added soon once one remaining dependency
+      on Sun's JPEG library is removed).
+
+      http://java.sun.com/j2se/index.jsp
+
+    * Ant 1.5.1 or greater
+
+      http://ant.apache.org/bindownload.cgi
+
+2. Configuring build properties
+
+Before attempting to build Web Photo publisher, first perform the following
+steps:
+
+    * Copy build.properties.sample to build.properties
+
+    * Configure build.properties (NEVER CHECK THIS FILE IN!) to your local
+      environment.
+
+3. Build
+
+Change directories to where you've installed the source code and execute:
+
+    ant dist
+
+4. Running Java Image Album
+
+You can run Java Image Album in any of the following ways:
+
+    * Launch from ant
+      
+      - Change directories to where build.xml is
+      - Execute 'ant run'
+
+    * Launch without ant
+
+      - Change directories to dist
+      - Execute 'java -jar javaimagealbum.jar'
+
+5. Debugging Java Image Album
+
+You can launch Java Image Album in a JPDA-capable debugger by changing
+directories to where build.xml is and executing 'ant debug'.  Then, load
+your favorite IDE and attach to the JPDA process (see output from ant debug
+for details).
+
+Building Java Image Album in Eclipse
+------------------------------------
+
+1. Open New Project
+
+2. Select "Java Project" than Next
+
+3. Give a project name e.g. javaimagealbum
+
+4. Select the path where source files are stored than Finish
+
+Building Java Image Album in NetBeans
+-------------------------------------
+
+0. Rename build.xml in build.xml.correct 
+
+1. Open New Project
+
+2. Select "Java Project from existing source" than Next
+
+3. Give a project name e.g. javaimagealbum
+
+4. Select the path where source files are stored than Finish
+
+5. Close NetBeans
+
+6. A new file build.xml should be created from NetBeans, delete it.
+
+7. Rename build.xml.correct in build.xml
+
+8. Restart NetBeans
