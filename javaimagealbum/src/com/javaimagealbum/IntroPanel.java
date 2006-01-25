@@ -45,20 +45,17 @@ public class IntroPanel
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        tpDescription = new javax.swing.JTextPane();
         pnlTitle = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
+        pnlDescription = new javax.swing.JPanel();
+        tpDescription = new javax.swing.JTextPane();
+        lblSite = new javax.swing.JLabel();
         pnlBottom = new javax.swing.JPanel();
         cbSkipIntro = new javax.swing.JCheckBox();
 
         setLayout(new java.awt.BorderLayout());
 
         setBackground(java.awt.Color.white);
-        tpDescription.setEditable(false);
-        tpDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tpDescription.setText("This program will guide you through the process of publishing your photographs to the web.  The result will be a directory with .html and .jpg / .gif files that you can upload to your current web host.\n\nPress the next button below and follow the steps on each screen.\n\nTo know about new release of this program please go to:\n\nhttp://javaimagealbum.berlios.de");
-        add(tpDescription, java.awt.BorderLayout.CENTER);
-
         pnlTitle.setLayout(new javax.swing.BoxLayout(pnlTitle, javax.swing.BoxLayout.Y_AXIS));
 
         pnlTitle.setBackground(java.awt.Color.white);
@@ -69,6 +66,42 @@ public class IntroPanel
         pnlTitle.add(lblTitle);
 
         add(pnlTitle, java.awt.BorderLayout.NORTH);
+
+        pnlDescription.setLayout(new java.awt.BorderLayout());
+
+        pnlDescription.setBackground(java.awt.Color.white);
+        pnlDescription.setAlignmentX(0.0F);
+        pnlDescription.setMaximumSize(new java.awt.Dimension(132, 25));
+        pnlDescription.setMinimumSize(new java.awt.Dimension(132, 25));
+        pnlDescription.setPreferredSize(new java.awt.Dimension(132, 25));
+        tpDescription.setEditable(false);
+        tpDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
+        tpDescription.setText("This program will guide you through the process of publishing your photographs to the web.  The result will be a directory with .html and .jpg / .gif files that you can upload to your current web host.\n\nPress the next button below and follow the steps on each screen.\n\nTo know about new release of this program please go to:\n");
+        tpDescription.setMinimumSize(new java.awt.Dimension(6, 2));
+        tpDescription.setPreferredSize(new java.awt.Dimension(400, 2));
+        tpDescription.setRequestFocusEnabled(false);
+        pnlDescription.add(tpDescription, java.awt.BorderLayout.CENTER);
+
+        lblSite.setBackground(new java.awt.Color(255, 255, 255));
+        lblSite.setFont(new java.awt.Font("SansSerif", 0, 12));
+        lblSite.setLabelFor(pnlDescription);
+        lblSite.setText("http://javaimagealbum.berlios.de");
+        lblSite.setAlignmentX(0.5F);
+        lblSite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSiteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSiteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSiteMouseExited(evt);
+            }
+        });
+
+        pnlDescription.add(lblSite, java.awt.BorderLayout.SOUTH);
+
+        add(pnlDescription, java.awt.BorderLayout.CENTER);
 
         pnlBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -90,6 +123,18 @@ public class IntroPanel
     }
     // </editor-fold>//GEN-END:initComponents
 
+    private void lblSiteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseExited
+// TODO add your handling code here:
+    }//GEN-LAST:event_lblSiteMouseExited
+
+    private void lblSiteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseEntered
+// TODO add your handling code here:
+    }//GEN-LAST:event_lblSiteMouseEntered
+
+    private void lblSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseClicked
+        /* Add Browser Louncher*/
+    }//GEN-LAST:event_lblSiteMouseClicked
+
     private void cbSkipIntroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSkipIntroActionPerformed
         Settings.getInstance().setProperty( Constants.SKIP_INTRO, 
             "" + cbSkipIntro.isSelected() );
@@ -98,8 +143,10 @@ public class IntroPanel
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox cbSkipIntro;
+    private javax.swing.JLabel lblSite;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBottom;
+    private javax.swing.JPanel pnlDescription;
     private javax.swing.JPanel pnlTitle;
     private javax.swing.JTextPane tpDescription;
     // End of variables declaration//GEN-END:variables

@@ -82,8 +82,7 @@ public class JavaImageAlbum {
         }
         
         // Start main frame:
-        JavaImageAlbumFrame frame = new JavaImageAlbumFrame ( 
-            new PublishManager() );
+        JavaImageAlbumFrame frame = new JavaImageAlbumFrame ();
         
         // Center the frame
         frame.setLocationRelativeTo( null );

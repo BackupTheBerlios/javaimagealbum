@@ -27,6 +27,7 @@
 package com.javaimagealbum;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Allows user to change the order of the files in the list.
@@ -64,6 +65,9 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         cbDescriptionInEmptyPage = new javax.swing.JCheckBox();
         pnlLinkToAlbumIndex = new javax.swing.JPanel();
         cbLinkToAlbumIndex = new javax.swing.JCheckBox();
+        pnlOutLanguage = new javax.swing.JPanel();
+        lblOutLanguage = new javax.swing.JLabel();
+        coOutLanguage = new javax.swing.JComboBox();
         pnlBroom2 = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -138,9 +142,8 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pnlContents.add(pnlAlbumTitleOption, gridBagConstraints);
 
-        pnlCheckboxes.setLayout(new java.awt.GridBagLayout());
-
         pnlCheckboxes.setOpaque(false);
+        pnlCheckboxes.setPreferredSize(new java.awt.Dimension(285, 120));
         pnlDescriptionPage.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         pnlDescriptionPage.setBackground(java.awt.Color.white);
@@ -156,17 +159,13 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
         pnlDescriptionPage.add(cbDescriptionInEmptyPage);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        pnlCheckboxes.add(pnlDescriptionPage, gridBagConstraints);
+        pnlCheckboxes.add(pnlDescriptionPage);
 
         pnlLinkToAlbumIndex.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         pnlLinkToAlbumIndex.setBackground(java.awt.Color.white);
+        pnlLinkToAlbumIndex.setMinimumSize(new java.awt.Dimension(285, 35));
+        pnlLinkToAlbumIndex.setPreferredSize(new java.awt.Dimension(285, 35));
         cbLinkToAlbumIndex.setBackground(java.awt.Color.white);
         cbLinkToAlbumIndex.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbLinkToAlbumIndex.setMnemonic('i');
@@ -180,15 +179,32 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
         pnlLinkToAlbumIndex.add(cbLinkToAlbumIndex);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        pnlCheckboxes.add(pnlLinkToAlbumIndex, gridBagConstraints);
+        pnlCheckboxes.add(pnlLinkToAlbumIndex);
+
+        pnlOutLanguage.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        pnlOutLanguage.setBackground(java.awt.Color.white);
+        pnlOutLanguage.setMinimumSize(new java.awt.Dimension(285, 35));
+        pnlOutLanguage.setPreferredSize(new java.awt.Dimension(285, 35));
+        lblOutLanguage.setBackground(new java.awt.Color(255, 255, 255));
+        lblOutLanguage.setDisplayedMnemonic('m');
+        lblOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));
+        lblOutLanguage.setText("Output Language: ");
+        pnlOutLanguage.add(lblOutLanguage);
+
+        coOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));
+        coOutLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Italian", "English" }));
+        coOutLanguage.setMinimumSize(new java.awt.Dimension(120, 20));
+        coOutLanguage.setPreferredSize(new java.awt.Dimension(120, 20));
+        coOutLanguage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coOutLanguageActionPerformed(evt);
+            }
+        });
+
+        pnlOutLanguage.add(coOutLanguage);
+
+        pnlCheckboxes.add(pnlOutLanguage);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -205,13 +221,13 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
     }
     // </editor-fold>//GEN-END:initComponents
 
+    private void coOutLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coOutLanguageActionPerformed
+        scanAndPersistOptions();
+    }//GEN-LAST:event_coOutLanguageActionPerformed
+
     private void cbDescriptionInEmptyPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDescriptionInEmptyPageActionPerformed
         scanAndPersistOptions();
     }//GEN-LAST:event_cbDescriptionInEmptyPageActionPerformed
-
-    private void cbCaptionPositionActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        scanAndPersistOptions();
-    }                                                 
 
     private void cbLinkToAlbumIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLinkToAlbumIndexActionPerformed
         scanAndPersistOptions();
@@ -221,8 +237,10 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox cbDescriptionInEmptyPage;
     private javax.swing.JCheckBox cbLinkToAlbumIndex;
+    private javax.swing.JComboBox coOutLanguage;
     private javax.swing.JLabel lblAlbumDescription;
     private javax.swing.JLabel lblAlbumTitle;
+    private javax.swing.JLabel lblOutLanguage;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlAlbumTitleOption;
     private javax.swing.JPanel pnlBroom2;
@@ -230,6 +248,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
     private javax.swing.JPanel pnlContents;
     private javax.swing.JPanel pnlDescriptionPage;
     private javax.swing.JPanel pnlLinkToAlbumIndex;
+    private javax.swing.JPanel pnlOutLanguage;
     private javax.swing.JTextArea taAlbumDescription;
     private javax.swing.JTextField tfAlbumTitle;
     private javax.swing.JTextPane tpInstructions;
@@ -285,6 +304,8 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         publishManager.setAlbumDescription( taAlbumDescription.getText() );
         publishManager.setDescriptionInEmptyPage( cbDescriptionInEmptyPage.isSelected() );
         publishManager.setLinkToAlbumIndex( cbLinkToAlbumIndex.isSelected() );
+        //TODO: ComboBox con all'interno il Locale
+//        publishManager.setOutputLanguage( (Locale) coOutLanguage.getSelectedItem() );
         
         publishManager.persistOutputSettings();
     }

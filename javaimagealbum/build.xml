@@ -2,47 +2,83 @@
 
 <!--
   - <license>
-  - The contents of this file are subject to the Mozilla Public License 
-  - Version 1.1 (the "License"); you may not use this file except in 
-  - compliance with the License.  You may obtain a copy of the License 
-  - at http://www.mozilla.org/MPL/
+  - This program is free software; you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License as published by
+  - the Free Software Foundation; either version 2 of the License, or
+  - (at your option) any later version.
   - 
-  - Software distributed under the License is distributed on an 
-  - "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or 
-  - implied. See the License for the specific language governing rights 
-  - and limitations under the License.
+  - This program is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
   - 
-  - The Original Code is Web Photo Publisher.
+  - You should have received a copy of the GNU General Public License
+  - along with this program; if not, write to the Free Software
+  - Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
   - 
-  - The Initial Developer of the Original Code is Mark Roth.  Portions 
-  - created by Mark Roth are Copyright (C) 2003 Mark Roth.  
+  - The Original Code is Java Image Album.
+  - 
+  - The Initial Developer of the Original Code is Mirko Actis Grosso.  Portions 
+  - created by Mirko Actis Grosso are Copyright (C) 2006 Mirko Actis Grosso.  
   - All Rights Reserved.
   - 
   - Contributor(s) listed below.
-  - Mirko Actis Grosso
+  - 
   - </license>
   -->
 
 <!--
   - Main build file for Java Image Album
   -
-  - Author: Mark Roth
+  - Author: Mirko Actis
   -->
 
-<project basedir="." default="dist" name="javaimagealbum">
+<project basedir="." default="dist" name="${PrjName}">
+
+    <description>
+        build project
+    </description>
+
+  <property name="PropFile"         value=  "Prj.properties"/>
+  <property name="BuildFile"        value=  "build.properties"/>
+
+  <target name="propertiesBuild">
+    <property file="${BuildFile}"/>
+    <property name="CurrTag"        value=  "${PrjName}-${PrjVersion}_${IntRel}"/>
+    <property name="jarFullName"    value=  "${jarName}-${PrjVersion}_${IntRel}.jar"/>
+
+    <echo message="PrjName           = ${PrjName}"/>
+    <echo message="PrjVersion        = ${PrjVersion}"/>
+    <echo message="IntRel            = ${IntRel}"/>
+    <echo message="CurrTag           = ${CurrTag}"/>
+    <echo message="LastReleaseBuild  = ${LastRelease}"/>
+    <echo message=""/>
+    <echo message="jarName           = ${jarFullName}"/>
+  </target>
 
   <target name="properties">
-    <property file="build.properties" />
-    <property name="build" value="build" />
-    <property name="src" value="src" />
-    <property name="dist" value="dist" />
-    <property name="PrjName" value="javaimagealbum" />
-    <echo>Compile Project ${PrjName}</echo>
-    <echo>Using ant home ${ant.home}</echo>
+    <property file="${PropFile}"/>
+    <tstamp>
+	    <format property="TODAY" pattern="dd-MM-yyyy HH:mm:ss" locale="en"/>
+    </tstamp>
+
+    <echo message="srcDir            = ${src}"/>
+    <!--echo message="libDir            = ${lib}"/>
+    <echo message="libComp           = ${libComp}"/-->
+    <echo message="buildDir          = ${build}"/>
+    <echo message="distDir           = ${dist}"/>
+    <!--echo message="scriptDir         = ${script}"/>
+    <echo message="configDir         = ${config}"/-->
+    <echo message="JDocDir           = ${JDocDir}"/>
+    <echo message="JDocPackages      = ${JDocPackages}"/>
+    <echo message="excludeFiles      = ${excludeFiles}"/>
+    <echo message="includeFiles      = ${includeFiles}"/>
+    <!--echo message="cvs               = ${cvs}"/-->
+    <echo message="jvm               = ${ant.java.version}"/>
   </target>
   
-  <target name="init" depends="properties,checkproperties" />
-
+  <target name="init" depends="properties,checkproperties,propertiesBuild" />
+  
   <target name="checkproperties" unless="ant.home"> 
     <fail>
       One or more required properties have not been set.  Please
@@ -83,6 +119,14 @@
 
   <target name="dist" depends="compile"
           description="Creates target jar and distribution">
+    <jar basedir="${build}/classes" jarfile="${dist}/${jarFullName}"
+         manifest="${src}/manifest/MANIFEST.MF">
+        <include name="**" />
+    </jar>
+  </target>
+
+  <target name="release" depends="clean,compile,incRelease"
+          description="Creates Relese jar and distribution">
     <jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
          manifest="${src}/manifest/MANIFEST.MF">
         <include name="**" />
@@ -109,5 +153,40 @@
       <!--<jvmarg value="-Xrunjdwp:transport=dt_shmem,server=y,suspend=y"/>-->
     </java>
   </target>
-  
+
+  <target name="incRelease"
+				description="Increment Release">
+    <propertyfile file="${BuildFile}">
+      <entry  key="PrjVersion" default="${PrjVersion}"/>
+      <entry  key="IntRel" default="1" type="int" operation="+" value="1"/>
+      <entry  key="LastRelease" type="date" value="${TODAY}" pattern="dd-MM-yyyy HH:mm:ss"/>
+    </propertyfile>
+  </target>
+
+  <target name="javadoc"
+          depends="compile"
+		      description="Make javadoc" 
+  				if="JDocPackages">
+    <delete dir="${JDoc}"/>
+    <mkdir dir="${JDoc}"/>
+
+    <javadoc
+      destdir="${JDoc}"
+      author="true"
+      version="true"
+      use="true"
+      classpath="${build}"
+      classpathref="base.path"
+      windowtitle="${PrjName}" >
+
+		  <packageset dir="${src}" defaultexcludes="yes">
+		    <include name="${JDocPackages}" />
+		  </packageset>
+
+      <doctitle><![CDATA[<h1>${PrjName} ${PrjVersion}</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; Mirko Actis All Rights Reserved.</i>]]></bottom>
+      <tag name="todo" scope="all" description="To do:" />
+    </javadoc>
+  </target>
+
 </project>

@@ -39,10 +39,8 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     static ResourceBundle res = ResourceFactory.getBundle();
     static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
-
     /** Creates new form JavaImageAlbumFrame */
-    public JavaImageAlbumFrame( PublishManager publishManager ) {
-        this.publishManager = publishManager;
+    public JavaImageAlbumFrame( ) {
         
         initComponents ();
         setIconImage( new javax.swing.ImageIcon(
@@ -217,7 +215,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSideBar;
     // End of variables declaration//GEN-END:variables
 
-    private PublishManager publishManager;
+    private PublishManager publishManager = new PublishManager();
     private int currentPanelIndex = -1;
     private JPanel[] panels = null;
     private JPanel currentPanel = null;
@@ -274,7 +272,9 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         currentPanelIndex = 0;
         try {
             updateButtons();
+            btnCancel.setText( res.getString("CANCEL") );
             changePanel( panels[0], false );
+            publishManager = new PublishManager();
         } catch (CannotChangePanelException e) {
             currentPanelIndex = prevPanelIndex;
             updateButtons();
@@ -306,9 +306,9 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             ( (wizPanel != null) && wizPanel.isSatisfied() ) &&
             ( currentPanelIndex < (panels.length - 1) )
         );
-        btnRestart.setEnabled( 
-                ( currentPanelIndex == (panels.length - 1) ));
         if( publishManager.isGenerationComplete() ) {
+            btnRestart.setEnabled( 
+                ( currentPanelIndex == (panels.length - 1) ));
             btnCancel.setText( res.getString("CLOSE") );
         }
     }

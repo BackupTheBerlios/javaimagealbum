@@ -27,6 +27,8 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
+import com.javaimagealbum.resources.ResourceFactory;
+
 /**
  * Manages the photo publishing operation
  *
@@ -34,6 +36,7 @@ import javax.swing.*;
  * @author  Mirko Actis
  */
 public class PublishManager extends Observable {
+    static ResourceBundle res = ResourceFactory.getBundle();
     
     // Debug flag to display generation timings
     private static final boolean DISPLAY_TIMINGS = false;
@@ -73,6 +76,7 @@ public class PublishManager extends Observable {
     private String captionPosition = Constants.CAPTION_POSITION_BELOW;
     private String captionAlign = Constants.CAPTION_ALIGN_LEFT;
     private boolean showExif = false;
+    private Locale outputLanguage = res.getLocale();
     
     // Keep track of what data is unsaved so we can warn the user
     // if they click Cancel.
@@ -140,6 +144,8 @@ public class PublishManager extends Observable {
         setShowExif( settings.getProperty( 
                 Constants.LINK_TO_ALBUM_INDEX, "true" ).toLowerCase().equals( 
                 "true" ) );
+//        setOutputLanguage( settings.getProperty( 
+//                Constants.OUTPUT_LANGUAGE, res.getLocale().toString() ) );
         setCaptionPosition( settings.getProperty(
             Constants.CAPTION_POSITION, Constants.CAPTION_POSITION_BELOW ) );
         setCaptionAlign( settings.getProperty(
@@ -180,6 +186,8 @@ public class PublishManager extends Observable {
                 "" + getDescriptionInEmptyPage() );
         settings.setProperty( Constants.SHOW_EXIF, 
                 "" + getShowExif() );
+        settings.setProperty( Constants.OUTPUT_LANGUAGE, 
+                "" + getOutputLanguage() );        
         settings.setProperty( Constants.PHOTO_POSITION, 
             getPhotoPosition() );
         settings.setProperty( Constants.CAPTION_POSITION,
@@ -356,6 +364,14 @@ public class PublishManager extends Observable {
         return this.showExif;
     }
     
+    public void setOutputLanguage( Locale outputLanguage ) {
+        this.outputLanguage = outputLanguage;
+    }
+    
+    public Locale getOutputLanguage() {
+        return this.outputLanguage;
+    }
+
     public java.lang.String getPhotoPosition() {
         return photoPosition;
     }
@@ -394,6 +410,7 @@ public class PublishManager extends Observable {
         String linkSummary;
         String exifSummary;
         String detailSummary;
+        String outputLanguageSummary;
         
         if( resizeAll ) {
             sizeSummary = 
@@ -467,6 +484,9 @@ public class PublishManager extends Observable {
             exifSummary = "  <li>Exif information will be printed</li>\n";
         }
 
+        // Create Exif summary:
+        outputLanguageSummary = "  <li>Output language is "+outputLanguage+"</li>\n";
+
         // Create detail page summary:
         detailSummary = "  <li>Detail photos will be " + 
             getPhotoPosition() + " aligned.</li>\n";
@@ -491,6 +511,7 @@ public class PublishManager extends Observable {
             captionsSummary + 
             linkSummary +
             exifSummary +
+            outputLanguageSummary +
             "</font></html>";
     }
     
