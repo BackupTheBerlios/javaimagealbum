@@ -102,7 +102,7 @@ public class LicenseAgreementDialog extends javax.swing.JDialog {
         lblDoNotAgreeDef = new javax.swing.JLabel();
         lblAgreeDef = new javax.swing.JLabel();
 
-        setTitle("Web Photo Publisher License Agreement");
+        setTitle("Java Image Album License Agreement");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {

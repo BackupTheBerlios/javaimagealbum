@@ -17,6 +17,7 @@
  * All Rights Reserved.
  * 
  * Contributor(s) listed below.
+ * Mirko Actis
  * </license>
  */
 
@@ -24,10 +25,14 @@ package com.javaimagealbum;
 
 import java.io.*;
 
+import com.javaimagealbum.exif.ExifHashMap;
+import com.javaimagealbum.exif.ExifReader;
+
 /**
  * Stores information about a photograph to be output.
  *
  * @author  Mark Roth
+ * @author  Mirko Actis
  */
 public class OutputPhoto {
 
@@ -63,6 +68,17 @@ public class OutputPhoto {
      */
     private String detailHTMLFilename;
     
+    /**
+     * The HashMap containing the EXIF information for this photo.
+     */
+    private ExifHashMap exifHashMap;
+    
+    /** 
+     * Set to true if this photo contain EXIF information.
+     * Set to false if not.
+     */
+    private boolean isExif = false;
+    
     /** Creates new OutputPhoto */
     public OutputPhoto( File source, String filename, boolean selected ) {
         this.source = source;
@@ -71,6 +87,19 @@ public class OutputPhoto {
         
         // Attempt to guess the caption, based on the passed-in information.
         this.caption = OutputPhoto.guessCaption( this.source );
+        
+        // Attempt to read EXIF information.
+        try {
+            this.isExif = ExifReader.isExif( this.source );
+            if ( this.isExif ) {
+                exifHashMap = new ExifHashMap(ExifReader.decode( this.source ));
+            }
+        } catch (java.lang.ArrayIndexOutOfBoundsException ex) {
+            // If error occour during EXIF reading set it to false.
+            this.isExif = false;
+        }
+        
+        
     }
     
     public File getSource() {
@@ -116,6 +145,67 @@ public class OutputPhoto {
     public boolean getOutputResized() {
         return this.outputResized;
     }
+
+    /* Start EXIF getter */
+    public boolean isExif() {
+        return this.isExif;
+    }
+    public String getCreationDate() {
+        return this.exifHashMap.getDate(ExifHashMap.CREATION_DATE);
+    }
+
+    public String getDigitizedDate() {
+        return this.exifHashMap.getDate(ExifHashMap.DIGITIZED_DATE);
+    }
+
+    public String getModifiedDate() {
+        return this.exifHashMap.getDate(ExifHashMap.MODIFIED_DATE);
+    }
+
+    public String getCameraType() {
+        return this.exifHashMap.getCameraType();
+    }
+
+    public String getCameraMake() {
+        return this.exifHashMap.getCameraMake();
+    }
+
+    public String getCameraModel() {
+        return this.exifHashMap.getCameraModel();
+    }
+
+    public String getFStop() {
+        return this.exifHashMap.getFStop();
+    }
+
+    public String getExposureProgram() {
+        return this.exifHashMap.getExposureProgram();
+    }
+    
+    public String getLightSource() {
+        return this.exifHashMap.getLightSource();
+    }
+
+    public String getISO() {
+        return this.exifHashMap.getISO();
+    }
+
+    public String getShutterSpeed() {
+        return this.exifHashMap.getShutterSpeed();
+    }
+
+    public String getFlash() {
+        return this.exifHashMap.getFlash();
+    }
+
+    public String getImageHeight() {
+        return this.exifHashMap.getImageHeight();
+    }
+
+    public String getImageWidth() {
+        return this.exifHashMap.getImageWidth();
+    }
+    /* End EXIF getter */
     
     public int hashCode() {
         return source.hashCode();

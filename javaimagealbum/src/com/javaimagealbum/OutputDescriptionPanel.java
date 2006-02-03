@@ -193,7 +193,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         pnlOutLanguage.add(lblOutLanguage);
 
         coOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));
-        coOutLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Italian", "English" }));
+        coOutLanguage.setModel(new javax.swing.DefaultComboBoxModel(new Locale[] { Locale.ITALIAN, Locale.ENGLISH }));
         coOutLanguage.setMinimumSize(new java.awt.Dimension(120, 20));
         coOutLanguage.setPreferredSize(new java.awt.Dimension(120, 20));
         coOutLanguage.addActionListener(new java.awt.event.ActionListener() {
@@ -304,9 +304,8 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         publishManager.setAlbumDescription( taAlbumDescription.getText() );
         publishManager.setDescriptionInEmptyPage( cbDescriptionInEmptyPage.isSelected() );
         publishManager.setLinkToAlbumIndex( cbLinkToAlbumIndex.isSelected() );
-        //TODO: ComboBox con all'interno il Locale
-//        publishManager.setOutputLanguage( (Locale) coOutLanguage.getSelectedItem() );
-        
+        publishManager.setOutputLanguage( (Locale) coOutLanguage.getSelectedItem() );
+
         publishManager.persistOutputSettings();
     }
 }

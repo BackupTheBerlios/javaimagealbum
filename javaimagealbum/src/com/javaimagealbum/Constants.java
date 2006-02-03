@@ -38,8 +38,6 @@ public final class Constants {
     private Constants() {
     }
     
-    // Current version
-    public static final String VERSION = "0.1";
     // Application Name
     public static final String APP_NAME = "Java Image Album";
 

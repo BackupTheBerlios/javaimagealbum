@@ -36,7 +36,7 @@ import com.javaimagealbum.resources.ResourceFactory;
  * @author  Mirko Actis
  */
 public class OutputHTMLStage extends OutputStage {
-    ResourceBundle resOutput;
+    static ResourceBundle resOutput;
 
     /** Current progress */
     int progress = 0;
@@ -44,7 +44,6 @@ public class OutputHTMLStage extends OutputStage {
     /** Creates new OutputHTMLStage */
     public OutputHTMLStage( PublishManager publishManager ) {
         super( publishManager );
-        resOutput = ResourceFactory.getBundle( publishManager.getOutputLanguage() );
     }
 
     /**
@@ -53,6 +52,8 @@ public class OutputHTMLStage extends OutputStage {
     public void generate() {
         setGenerationMessage( "Generating HTML..." );
         
+        resOutput = ResourceFactory.getBundle( publishManager.getOutputLanguage() );
+
         ArrayList photos = publishManager.getPhotoSource().getSelectedPhotos();
         int numPhotos = photos.size();
         
@@ -126,10 +127,14 @@ public class OutputHTMLStage extends OutputStage {
 	            "</title>\n" +
 	            "  </head>\n" +
 	            "  <body bgcolor=\"#ffffff\">\n" );
+            out.print( "<table border=\"0\" cellpadding=\"5\"><tr>\n" );
 	        if( publishManager.getLinkToAlbumIndex() ) {
 	            out.print(
-	                "    <a href=\"../\">&lt; "+resOutput.getString("BACK_ALBUM_INDEX")+"</a><br>\n");
+	                "    <td><a href=\"../\">&lt; "+resOutput.getString("BACK_ALBUM_INDEX")+"</a></td>\n");
 	        }
+            out.print( "<td><a href=\"index.html\">"+resOutput.getString("BACK_ALBUM")+"</a></td>\n" );
+            out.print( "</tr></table>\n" );
+
 	        out.print( 
 	            "    <div align=\"Center\">\n" +
 	            "      <h1>" + publishManager.getAlbumTitle() + "</h1>\n" );
@@ -137,19 +142,15 @@ public class OutputHTMLStage extends OutputStage {
 	            "    <div align=\"Left\">\n" +
 	            "      " + publishManager.getAlbumDescription() + "\n" +
 	            "    </div>\n" +
-	            "    <br>");
+	            "    <br/>");
 	
-	        out.print( 
-	            "      </table>\n" +
-	            "    </div>\n" +
-	            "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
-	            "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
-	            "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i><br>\n" +
-	            "      <a href=\""+Constants.SITE_URL+"\"" +
-	                "\">"+Constants.APP_NAME+"</a>" +
-	                "</small></div>\n" +
-	            "  </body>\n" +
-	            "</html>" );
+            out.print( 
+                    "      </table>\n" +
+                    "    </div>\n" );
+            printFooter( out, todaysDate );
+            out.print( 
+                "  </body>\n" +
+                "</html>" );
 
 	        out.close();
         }
@@ -199,7 +200,7 @@ public class OutputHTMLStage extends OutputStage {
             "  <body bgcolor=\"#ffffff\">\n" );
         if( publishManager.getLinkToAlbumIndex() ) {
             out.print(
-                "    <a href=\"../\">&lt; "+resOutput.getString("BACK_ALBUM_INDEX")+"</a><br>\n");
+                "    <a href=\"../\">&lt; "+resOutput.getString("BACK_ALBUM_INDEX")+"</a><br/>\n");
         }
         out.print( 
             "    <div align=\"Center\">\n" +
@@ -211,14 +212,14 @@ public class OutputHTMLStage extends OutputStage {
 		                "    <div align=\"Center\">\n" +
 	            		"       <a href=\"indexDescription.html\">Album Description</a>\n" + 
 		                "    </div>\n" +
-		                "    <br>");
+		                "    <br/>");
         	} else {
                     // Add Album Description
 	            out.print( 
 	                "    <div align=\"Left\">\n" +
 	                "      " + publishManager.getAlbumDescription() + "\n" +
 	                "    </div>\n" +
-	                "    <br>");
+	                "    <br/>");
         	}
         }
         if( numPages > 1 ) {
@@ -301,7 +302,7 @@ public class OutputHTMLStage extends OutputStage {
                 for( int col = 0; col < emptyCols; col++ ) {
                     out.print(
                         "        <td valign=\"Top\" width=\"" + 
-                                 (100/numCols) + "%\"><br>\n" +
+                                 (100/numCols) + "%\"><br/>\n" +
                         "        </td>\n" );
                 }
             }
@@ -312,18 +313,37 @@ public class OutputHTMLStage extends OutputStage {
 
         out.print( 
             "      </table>\n" +
-            "    </div>\n" +
-            "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
-            "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
-            "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i><br>\n" +
-            "      <a href=\""+Constants.SITE_URL+"\"" +
-                "\">"+Constants.APP_NAME+"</a>" +
-                "</small></div>\n" +
+            "    </div>\n" );
+        printFooter( out, todaysDate );
+        out.print( 
             "  </body>\n" +
             "</html>" );
 
         out.close();
     }
+    
+    private void printFooter ( PrintWriter out, String todaysDate ) {
+//        out.print( 
+//                "      </table>\n" +
+//                "    </div>\n" +
+//                "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
+//                "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
+//                "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i><br/>\n" +
+//                "      <a href=\""+Constants.SITE_URL+"\"" +
+//                    "\">"+Constants.APP_NAME+"</a>" +
+//                    "</small></div>\n" +
+//                "  </body>\n" +
+//                "</html>" );
+        
+        out.print( 
+                "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
+                "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
+                "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i><br/>\n" +
+                "      <a href=\""+Constants.SITE_URL+"\"" +
+                    "\">"+Constants.APP_NAME+"</a>" +
+                    "</small></div>\n");
+    }
+    
 
     private String generateDetailPage( int index, int indexPageNum )
         throws IOException
@@ -367,23 +387,23 @@ public class OutputHTMLStage extends OutputStage {
         
         if( prev != null ) {
             out.print( 
-                "<td width=\"150\"><div align=\"center\"><a href=\"" + prev + 
+                "<td width=\"180\"><div align=\"center\"><a href=\"" + prev + 
                 "\">&lt;&lt; "+resOutput.getString("PREVIOUS")+" &lt;&lt;</a></div></td>\n" );
         }
         else {
-            out.print( "<td width=\"150\"><div align=\"center\">" +
+            out.print( "<td width=\"180\"><div align=\"center\">" +
                 "<font color=\"#999999\">&lt;&lt; "+resOutput.getString("PREVIOUS")+" &lt;&lt;</font>" +
                 "</div></td>\n" );
         }
         
         if( next != null ) {
             out.print( 
-                "<td width=\"150\"><a href=\"" + next + 
+                "<td width=\"180\"><a href=\"" + next + 
                 "\">&gt;&gt; "+resOutput.getString("NEXT1")+" &gt;&gt;</a></td>\n" );
         }
         else {
             out.print(
-                "<td width=\"150\">" +
+                "<td width=\"180\">" +
                 "<font color=\"#999999\">&gt;&gt; "+resOutput.getString("NEXT1")+" &gt;&gt;" +
                 "</font></td>\n" );
         }
@@ -431,8 +451,12 @@ public class OutputHTMLStage extends OutputStage {
             out.print(getCaption(publishManager, caption));        
         }
         
+        if( publishManager.getShowExif() ) {
+            printExifInformation ( outPhoto, out );
+        }
+            
         out.print( 
-            "    <i><div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i><br>\n" +
+            "    <div align=\"right\"><small><i>"+resOutput.getString("GENERATED_BY")+"</i><br/>\n" +
             "      <a href=\""+Constants.SITE_URL+"\"" +
             "\">"+Constants.APP_NAME+"</a>" +
                 "</small></div>\n" +
@@ -447,19 +471,60 @@ public class OutputHTMLStage extends OutputStage {
     private String getCaption (PublishManager publishManager, String caption) {
         String out = null;
         if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_CENTER)) {
-            out = "<div align=\"Center\"><br>\n" + 
-            "    " + caption + "<br></div>\n";
+            out = "<div align=\"Center\"><br/>\n" + 
+            "    " + caption + "<br/></div>\n";
         }
         if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_LEFT)) {
-            out = "<div align=\"Left\"><br>\n" + 
-            "    " + caption + "<br></div>\n";
+            out = "<div align=\"Left\"><br/>\n" + 
+            "    " + caption + "<br/></div>\n";
             }
         if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_RIGHT)) {
-            out = "<div align=\"Right\"><br>\n" + 
-            "    " + caption + "<br></div>\n";
+            out = "<div align=\"Right\"><br/>\n" + 
+            "    " + caption + "<br/></div>\n";
             }
         return out;
 
+    }
+    
+    private void printExifInformation ( OutputPhoto outPhoto, PrintWriter out ) {
+        out.println( "<hr/>\n" );
+        if ( outPhoto.isExif() ) {
+            out.print(
+                    "<table cellpadding=\"2\" cellspacing=\"0\" " +
+                      "border=\"0\" width=\"60%\" align=\"Left\">\n" );
+            out.print( "      <tr><td>Creation Date</td>\n" );
+            out.print( "      <td>"+outPhoto.getCreationDate()+"</td></tr>\n" );
+            out.print( "      <tr><td>Digitized Date</td>\n" );
+            out.print( "      <td>"+outPhoto.getDigitizedDate()+"</td></tr>\n" );
+            out.print( "      <tr><td>Modified Date</td>\n" );
+            out.print( "      <td>"+outPhoto.getModifiedDate()+"</td></tr>\n" );
+            out.print( "      <tr><td>Camera Type</td>\n" );
+            out.print( "      <td>"+outPhoto.getCameraType()+"</td></tr>\n" );
+            out.print( "      <tr><td>Camera Model</td>\n" );
+            out.print( "      <td>"+outPhoto.getCameraModel()+"</td></tr>\n" );
+            out.print( "      <tr><td>Camera Make</td>\n" );
+            out.print( "      <td>"+outPhoto.getCameraMake()+"</td></tr>\n" );
+            out.print( "      <tr><td>FStop</td>\n" );
+            out.print( "      <td>"+outPhoto.getFStop()+"</td></tr>\n" );
+            out.print( "      <tr><td>Exposure Program</td>\n" );
+            out.print( "      <td>"+outPhoto.getExposureProgram()+"</td></tr>\n" );
+            out.print( "      <tr><td>Light Source</td>\n" );
+            out.print( "      <td>"+outPhoto.getLightSource()+"</td></tr>\n" );
+            out.print( "      <tr><td>ISO</td>\n" );
+            out.print( "      <td>"+outPhoto.getISO()+"</td></tr>\n" );
+            out.print( "      <tr><td>Shutter Speed</td>\n" );
+            out.print( "      <td>"+outPhoto.getShutterSpeed()+"</td></tr>\n" );
+            out.print( "      <tr><td>Flash</td>\n" );
+            out.print( "      <td>"+outPhoto.getFlash()+"</td></tr>\n" );
+            out.print( "      <tr><td>Image Height</td>\n" );
+            out.print( "      <td>"+outPhoto.getImageHeight()+"</td>\n" );
+            out.print( "      <tr><td>Image Width</td>\n" );
+            out.print( "      <td>"+outPhoto.getImageWidth()+"</td></tr>\n" );
+            out.print( "</table>\n" );
+        } else {
+            out.println( "No EXIF information in this picture.\n" );
+        }
+//        out.println( "<hr/>\n" );
     }
     
     /**

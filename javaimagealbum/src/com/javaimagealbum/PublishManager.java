@@ -145,7 +145,7 @@ public class PublishManager extends Observable {
                 Constants.LINK_TO_ALBUM_INDEX, "true" ).toLowerCase().equals( 
                 "true" ) );
 //        setOutputLanguage( settings.getProperty( 
-//                Constants.OUTPUT_LANGUAGE, res.getLocale().toString() ) );
+//                Constants.OUTPUT_LANGUAGE ) );
         setCaptionPosition( settings.getProperty(
             Constants.CAPTION_POSITION, Constants.CAPTION_POSITION_BELOW ) );
         setCaptionAlign( settings.getProperty(

@@ -44,7 +44,7 @@
 
   <target name="propertiesBuild">
     <property file="${BuildFile}"/>
-    <property name="CurrTag"        value=  "${PrjName}-${PrjVersion}_${IntRel}"/>
+    <property name="CurrTag"        value=  "${PrjName}-${PrjVersion}.${IntRel}"/>
     <property name="jarFullName"    value=  "${jarName}-${PrjVersion}_${IntRel}.jar"/>
 
     <echo message="PrjName           = ${PrjName}"/>
@@ -95,7 +95,7 @@
 
   <target name="compile" depends="prepare"
           description="Compile the distribution">
-    <javac debug="on" destdir="${build}/classes" srcdir="${src}"/>
+    <javac debug="on" destdir="${build}/classes" srcdir="${src}" verbose="on"/>
     <copy todir="${build}/classes">
       <fileset dir="${src}">
         <include name="**/*.jpg" />
@@ -109,27 +109,45 @@
     </copy>
   </target>
 
-  <target name="jar" depends="compile"
-          description="Creates target jar and distribution">
-    <jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
-         manifest="${src}/manifest/MANIFEST.MF">
-        <include name="**" />
-    </jar>
+  <target name="jar" depends="dist"
+          description="Creates target jar and distribution. Used for NetBeans">
   </target>
 
   <target name="dist" depends="compile"
           description="Creates target jar and distribution">
-    <jar basedir="${build}/classes" jarfile="${dist}/${jarFullName}"
-         manifest="${src}/manifest/MANIFEST.MF">
+    <!--jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
+         manifest="${src}/manifest/MANIFEST.MF"-->
+    <jar basedir="${build}/classes" jarfile="${dist}/${jarFullName}">
         <include name="**" />
+      <manifest>
+        <attribute name="Built-By" value="${user.name}"/>
+        <attribute name="Implementation-Title" value="${PrjName}"/>
+        <attribute name="Main-Class" value="com.javaimagealbum.JavaImageAlbum"/>
+        <attribute name="Implementation-Version" value="${PrjVersion}.${IntRel}"/>
+        <attribute name="Last-Integration" value="${LastRelease}"/>
+        <attribute name="Last-Build" value="${TODAY}"/>
+        <attribute name="Implementation-Vendor" value="Mirko Actis"/>
+        <attribute name="JVM" value="${ant.java.version}"/>
+      </manifest>
     </jar>
   </target>
 
   <target name="release" depends="clean,compile,incRelease"
           description="Creates Relese jar and distribution">
-    <jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
-         manifest="${src}/manifest/MANIFEST.MF">
+    <jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar">
+    <!--jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
+         manifest="${src}/manifest/MANIFEST.MF"-->
         <include name="**" />
+      <manifest>
+        <attribute name="Built-By" value="${user.name}"/>
+        <attribute name="Implementation-Title" value="${PrjName}"/>
+		<attribute name="Main-Class" value="com.javaimagealbum.JavaImageAlbum"/>
+        <attribute name="Implementation-Version" value="${CurrTag}"/>
+        <attribute name="Last-Integration" value="${LastRelease}"/>
+        <attribute name="Last-Build" value="${TODAY}"/>
+        <attribute name="Implementation-Vendor" value="Mirko Actis"/>
+        <attribute name="JVM" value="${ant.java.version}"/>
+      </manifest>
     </jar>
   </target>
 
@@ -141,7 +159,7 @@
 
   <target name="run" depends="dist"
           description="Run Java Image Album">
-    <java jar="${dist}/${PrjName}.jar" fork="yes"/>
+    <java jar="${dist}/${jarFullName}" fork="yes"/>
   </target>
 
   <target name="debug" depends="dist" 
@@ -161,6 +179,14 @@
       <entry  key="IntRel" default="1" type="int" operation="+" value="1"/>
       <entry  key="LastRelease" type="date" value="${TODAY}" pattern="dd-MM-yyyy HH:mm:ss"/>
     </propertyfile>
+  </target>
+
+  <target name="signJar" depends="init,properties"
+				description="Sign the jar for WebStart">
+	<!-- keytool -genkey -alias javaimagealbum -->
+	<signjar jar="${dist}/${PrjName}.jar"
+                alias="javaimagealbum"
+                storepass="javaimagepwd"/>
   </target>
 
   <target name="javadoc"

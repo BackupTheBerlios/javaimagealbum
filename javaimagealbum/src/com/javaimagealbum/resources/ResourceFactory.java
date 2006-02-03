@@ -34,10 +34,11 @@ import java.util.*;
  * @version
  */
 public class ResourceFactory {
-    private static ResourceBundle textBundle = ResourceBundle.getBundle("com.javaimagealbum.resources.Resource");
-    private static ResourceBundle mnemonicBundle =
+    private static final ResourceBundle textBundle = ResourceBundle.getBundle("com.javaimagealbum.resources.Resource");
+    private static final ResourceBundle mnemonicBundle =
         ResourceBundle.getBundle("com.javaimagealbum.resources.MnemonicResource");
-
+    private static ResourceBundle htmlBundle;
+    
     private ResourceFactory() {}
 
     public static ResourceBundle getBundle() {
@@ -45,7 +46,8 @@ public class ResourceFactory {
     }
 
     public static ResourceBundle getBundle(Locale locale) {
-        return ResourceBundle.getBundle("com.javaimagealbum.resources.Resource", locale);
+        htmlBundle = ResourceBundle.getBundle("com.javaimagealbum.resources.Resource", locale ); 
+        return htmlBundle;
     }
 
     public static ResourceBundle getMnemonicBundle() {

@@ -39,6 +39,8 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     static ResourceBundle res = ResourceFactory.getBundle();
     static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
+    private static final Package PACKAGE = JavaImageAlbumFrame.class.getPackage(); 
+
     /** Creates new form JavaImageAlbumFrame */
     public JavaImageAlbumFrame( ) {
         
@@ -49,7 +51,11 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             ).getImage());
         pack ();
         
-        setTitle( getTitle() + " - "+res.getString("VERSION")+" " + Constants.VERSION );
+/*        System.out.println("Mirko Name="+PACKAGE.getName());
+        System.out.println("Mirko Title="+PACKAGE.getImplementationTitle());
+        System.out.println("Mirko Version="+PACKAGE.getImplementationVersion());
+        System.out.println("Mirko Vendor="+PACKAGE.getImplementationVendor()); */
+        setTitle( getTitle() + " - "+res.getString("VERSION")+" " + PACKAGE.getImplementationVersion() );
 
         initPanels();
         nextPanel();
@@ -58,7 +64,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         // Display license agreement if this is the first time.
         boolean licensed = Settings.getInstance().getProperty( 
             Constants.LICENSE_AGREED, "false" ).toLowerCase().equals( 
-            Constants.VERSION );
+            PACKAGE.getImplementationVersion() );
         if( !licensed ) {
             LicenseAgreementDialog dialog = new LicenseAgreementDialog( 
                 this, true );
@@ -66,7 +72,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             dialog.show();
             if( dialog.getAgree() ) {
                 Settings.getInstance().setProperty(
-                    Constants.LICENSE_AGREED, Constants.VERSION );
+                    Constants.LICENSE_AGREED, PACKAGE.getImplementationVersion() );
             }
             else {
                 JOptionPane.showMessageDialog(
@@ -114,7 +120,6 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             }
         });
 
-        getAccessibleContext().setAccessibleName("Java Image Album");
         pnlCurrent.setLayout(new java.awt.GridLayout(1, 1));
 
         pnlCurrent.setBackground(java.awt.Color.white);
@@ -125,6 +130,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         pnlButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         pnlButtons.setBackground(java.awt.Color.white);
+        btnRestart.setMnemonic(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/MnemonicResource").getString("Restart").charAt(0));
         btnRestart.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("RESTART"));
         btnRestart.setActionCommand("res.getString(\"RESTART\")");
         btnRestart.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +141,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
 
         pnlButtons.add(btnRestart);
 
-        btnBack.setMnemonic('b');
+        btnBack.setMnemonic(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/MnemonicResource").getString("Back").charAt(0));
         btnBack.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("BACK"));
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +151,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
 
         pnlButtons.add(btnBack);
 
-        btnNext.setMnemonic('n');
+        btnNext.setMnemonic(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/MnemonicResource").getString("Next").charAt(0));
         btnNext.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("NEXT"));
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +161,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
 
         pnlButtons.add(btnNext);
 
-        btnCancel.setMnemonic('c');
+        btnCancel.setMnemonic(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/MnemonicResource").getString("Cancel").charAt(0));
         btnCancel.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CANCEL"));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

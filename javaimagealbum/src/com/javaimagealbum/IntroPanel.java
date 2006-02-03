@@ -76,7 +76,7 @@ public class IntroPanel
         pnlDescription.setPreferredSize(new java.awt.Dimension(132, 25));
         tpDescription.setEditable(false);
         tpDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tpDescription.setText("This program will guide you through the process of publishing your photographs to the web.  The result will be a directory with .html and .jpg / .gif files that you can upload to your current web host.\n\nPress the next button below and follow the steps on each screen.\n\nTo know about new release of this program please go to:\n");
+        tpDescription.setText("This program will guide you through the process of publishing your photographs to the web.  The result will be a directory with .html and .jpg files that you can upload to your current web host.\n\nPress the next button below and follow the steps on each screen.\n\nTo know about new release of this program please go to:\n");
         tpDescription.setMinimumSize(new java.awt.Dimension(6, 2));
         tpDescription.setPreferredSize(new java.awt.Dimension(400, 2));
         tpDescription.setRequestFocusEnabled(false);
@@ -87,6 +87,11 @@ public class IntroPanel
         lblSite.setLabelFor(pnlDescription);
         lblSite.setText("http://javaimagealbum.berlios.de");
         lblSite.setAlignmentX(0.5F);
+        lblSite.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblSiteMouseMoved(evt);
+            }
+        });
         lblSite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSiteMouseClicked(evt);
@@ -122,6 +127,10 @@ public class IntroPanel
 
     }
     // </editor-fold>//GEN-END:initComponents
+
+    private void lblSiteMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseMoved
+// TODO add your handling code here:
+    }//GEN-LAST:event_lblSiteMouseMoved
 
     private void lblSiteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseExited
 // TODO add your handling code here:
