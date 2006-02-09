@@ -46,7 +46,9 @@ public class ResourceFactory {
     }
 
     public static ResourceBundle getBundle(Locale locale) {
+        //System.out.println("locale="+locale);
         htmlBundle = ResourceBundle.getBundle("com.javaimagealbum.resources.Resource", locale ); 
+        //System.out.println("htmlBundle="+htmlBundle.getLocale());
         return htmlBundle;
     }
 

@@ -305,7 +305,8 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         publishManager.setDescriptionInEmptyPage( cbDescriptionInEmptyPage.isSelected() );
         publishManager.setLinkToAlbumIndex( cbLinkToAlbumIndex.isSelected() );
         publishManager.setOutputLanguage( (Locale) coOutLanguage.getSelectedItem() );
-
+        //System.out.println("Language selected="+((Locale)coOutLanguage.getSelectedItem()));
+        
         publishManager.persistOutputSettings();
     }
 }

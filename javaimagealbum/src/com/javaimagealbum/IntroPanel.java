@@ -22,6 +22,8 @@
 
 package com.javaimagealbum;
 
+import com.javaimagealbum.util.BrowserControl;
+
 /**
  * Introduces the user to the program
  *
@@ -49,7 +51,9 @@ public class IntroPanel
         lblTitle = new javax.swing.JLabel();
         pnlDescription = new javax.swing.JPanel();
         tpDescription = new javax.swing.JTextPane();
-        lblSite = new javax.swing.JLabel();
+        pnlButtons = new javax.swing.JPanel();
+        btnWebSite = new javax.swing.JButton();
+        btnMailingList = new javax.swing.JButton();
         pnlBottom = new javax.swing.JPanel();
         cbSkipIntro = new javax.swing.JCheckBox();
 
@@ -62,7 +66,7 @@ public class IntroPanel
         lblTitle.setFont(new java.awt.Font("SansSerif", 1, 14));
         lblTitle.setForeground(new java.awt.Color(0, 153, 153));
         lblTitle.setText("Java Image Album");
-        lblTitle.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(3, 3, 3, 3)));
+        lblTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         pnlTitle.add(lblTitle);
 
         add(pnlTitle, java.awt.BorderLayout.NORTH);
@@ -82,29 +86,26 @@ public class IntroPanel
         tpDescription.setRequestFocusEnabled(false);
         pnlDescription.add(tpDescription, java.awt.BorderLayout.CENTER);
 
-        lblSite.setBackground(new java.awt.Color(255, 255, 255));
-        lblSite.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblSite.setLabelFor(pnlDescription);
-        lblSite.setText("http://javaimagealbum.berlios.de");
-        lblSite.setAlignmentX(0.5F);
-        lblSite.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                lblSiteMouseMoved(evt);
-            }
-        });
-        lblSite.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlButtons.setBackground(java.awt.Color.white);
+        btnWebSite.setText("Web Site");
+        btnWebSite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSiteMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblSiteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblSiteMouseExited(evt);
+                btnWebSiteMouseClicked(evt);
             }
         });
 
-        pnlDescription.add(lblSite, java.awt.BorderLayout.SOUTH);
+        pnlButtons.add(btnWebSite);
+
+        btnMailingList.setText("Mailing List");
+        btnMailingList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMailingListMouseClicked(evt);
+            }
+        });
+
+        pnlButtons.add(btnMailingList);
+
+        pnlDescription.add(pnlButtons, java.awt.BorderLayout.SOUTH);
 
         add(pnlDescription, java.awt.BorderLayout.CENTER);
 
@@ -125,24 +126,15 @@ public class IntroPanel
 
         add(pnlBottom, java.awt.BorderLayout.SOUTH);
 
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void lblSiteMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseMoved
-// TODO add your handling code here:
-    }//GEN-LAST:event_lblSiteMouseMoved
+    private void btnMailingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailingListMouseClicked
+        BrowserControl.displayURL("http://developer.berlios.de/mail/?group_id=5725");
+    }//GEN-LAST:event_btnMailingListMouseClicked
 
-    private void lblSiteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseExited
-// TODO add your handling code here:
-    }//GEN-LAST:event_lblSiteMouseExited
-
-    private void lblSiteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseEntered
-// TODO add your handling code here:
-    }//GEN-LAST:event_lblSiteMouseEntered
-
-    private void lblSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSiteMouseClicked
-        /* Add Browser Louncher*/
-    }//GEN-LAST:event_lblSiteMouseClicked
+    private void btnWebSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWebSiteMouseClicked
+        BrowserControl.displayURL("http://javaimagealbum.berlios.de");
+    }//GEN-LAST:event_btnWebSiteMouseClicked
 
     private void cbSkipIntroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSkipIntroActionPerformed
         Settings.getInstance().setProperty( Constants.SKIP_INTRO, 
@@ -151,10 +143,12 @@ public class IntroPanel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMailingList;
+    private javax.swing.JButton btnWebSite;
     private javax.swing.JCheckBox cbSkipIntro;
-    private javax.swing.JLabel lblSite;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBottom;
+    private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlDescription;
     private javax.swing.JPanel pnlTitle;
     private javax.swing.JTextPane tpDescription;

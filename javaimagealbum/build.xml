@@ -33,7 +33,7 @@
   - Author: Mirko Actis
   -->
 
-<project basedir="." default="dist" name="${PrjName}">
+<project basedir="." default="dist" name="Java Image Album">
 
     <description>
         build project
