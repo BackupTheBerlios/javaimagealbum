@@ -42,7 +42,7 @@ import com.javaimagealbum.resources.ResourceFactory;
  */
 public class LicenseAgreementDialog extends javax.swing.JDialog {
     static ResourceBundle res = ResourceFactory.getBundle();
-    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
+//    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     /** Location of the license file */
     private static final String LICENSE_FILE = "/license.txt";

@@ -26,7 +26,6 @@
 
 package com.javaimagealbum;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -256,28 +255,11 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
     private PublishManager publishManager;
 //    private File selectedDirectory;
-    private static ArrayList photoPositions = new ArrayList();
-    static {
-        photoPositions.add( Constants.PHOTO_POSITION_LEFT );
-        photoPositions.add( Constants.PHOTO_POSITION_CENTER );
-        photoPositions.add( Constants.PHOTO_POSITION_RIGHT );
-    }
-    private static ArrayList captionPositions = new ArrayList();
-    static {
-        captionPositions.add( Constants.CAPTION_POSITION_BELOW );
-        captionPositions.add( Constants.CAPTION_POSITION_ABOVE );
-    }
-    private static ArrayList captionAlign = new ArrayList();
-    static {
-        captionAlign.add( Constants.CAPTION_ALIGN_LEFT);
-        captionAlign.add( Constants.CAPTION_ALIGN_CENTER);
-        captionAlign.add( Constants.CAPTION_ALIGN_RIGHT);
-    }
     
     /** Returns true if all required data was filled in for this panel.
      */
     public boolean isSatisfied() {
-        return publishManager.getOutputDirectory() != null;
+        return true;
     }
     
     /** 

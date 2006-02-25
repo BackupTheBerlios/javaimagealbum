@@ -529,7 +529,7 @@ public class PublishManager extends Observable {
         generationSuccessful = false;
         
         if( generationThread != null ) {
-            stopGeneration( "Aborted." );
+            stopGeneration( res.getString("ABORTED") );
         }
         
         // First, create the directory if it doesn't exist.
@@ -592,7 +592,7 @@ public class PublishManager extends Observable {
                 
                 generating = false;
                 if( stopGeneration ) {
-                    setGenerationMessage( "Aborted." );
+                    setGenerationMessage( res.getString("ABORTED") );
                     new Thread() {
                         public void run() {
                             if( errorMessage == null ) {
@@ -608,7 +608,7 @@ public class PublishManager extends Observable {
                     }.start();
                 }
                 else{
-                    generationMessage = "Done!";
+                    generationMessage = res.getString("DONE");
                     // Photos are secure.
                     unsavedPhotos = false;
                     everGeneratedPhotos = true;

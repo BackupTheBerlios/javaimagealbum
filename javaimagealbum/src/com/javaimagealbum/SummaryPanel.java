@@ -23,7 +23,10 @@
 package com.javaimagealbum;
 
 import java.util.*;
+
 import javax.swing.*;
+
+import com.javaimagealbum.resources.ResourceFactory;
 
 /**
  * Allows user to change the order of the files in the list.
@@ -35,6 +38,8 @@ public class SummaryPanel
     extends javax.swing.JPanel 
     implements WizardPanel, Observer
 {
+    static ResourceBundle res = ResourceFactory.getBundle();
+    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     /** Creates new form ReorderFilesPanel */
     public SummaryPanel(PublishManager publishManager) {
@@ -65,8 +70,8 @@ public class SummaryPanel
         setBackground(java.awt.Color.white);
         lblTitle.setFont(new java.awt.Font("SansSerif", 1, 14));
         lblTitle.setForeground(new java.awt.Color(0, 153, 153));
-        lblTitle.setText("Summary");
-        lblTitle.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(3, 3, 3, 3)));
+        lblTitle.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("SUMMARY"));
+        lblTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         add(lblTitle, java.awt.BorderLayout.NORTH);
 
         pnlContents.setLayout(new java.awt.GridBagLayout());
@@ -94,8 +99,9 @@ public class SummaryPanel
         pnlContents.add(epSummary, gridBagConstraints);
 
         btnGenerate.setFont(new java.awt.Font("SansSerif", 0, 12));
-        btnGenerate.setMnemonic('g');
-        btnGenerate.setText("Generate");
+        btnGenerate.setMnemonic(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/MnemonicResource").getString("Generate").charAt(0));
+        btnGenerate.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("GENERATE"));
+        btnGenerate.setActionCommand(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("GENERATE"));
         btnGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -108,7 +114,7 @@ public class SummaryPanel
         pnlContents.add(btnGenerate, gridBagConstraints);
 
         lblProgressMessage.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblProgressMessage.setText("Progress");
+        lblProgressMessage.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("PROGRESS"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
@@ -125,18 +131,17 @@ public class SummaryPanel
 
         add(pnlContents, java.awt.BorderLayout.CENTER);
 
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
   private void jButton1ActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     if( publishManager.isGenerating() ) {
-        btnGenerate.setText( "Generate" );
-        btnGenerate.setMnemonic( 'g' );
-        publishManager.stopGeneration( "Generation aborted." );
+        btnGenerate.setText( res.getString("GENERATE") );
+        btnGenerate.setMnemonic( resM.getString("Generate").charAt(0) );
+        publishManager.stopGeneration( res.getString("GENERATION_ABORTED") );
     }
     else {
-        btnGenerate.setText( "Abort Generation" );
-        btnGenerate.setMnemonic( 'a' );
+        btnGenerate.setText( res.getString("ABORT_GENERATION") );
+        btnGenerate.setMnemonic( resM.getString("Abort").charAt(0) );
         publishManager.startGeneration();
     }
   }//GEN-LAST:event_jButton1ActionPerformed
@@ -183,13 +188,13 @@ public class SummaryPanel
         pbProgress.setValue( progress );
         
         if( !publishManager.isGenerating() ) {
-            btnGenerate.setText( "Generate" );
-            btnGenerate.setMnemonic( 'g' );
+            btnGenerate.setText( res.getString("GENERATE") );
+            btnGenerate.setMnemonic( resM.getString("Generate").charAt(0) );
         }
         
         if( publishManager.isGenerationComplete() ) {
-            btnGenerate.setText( "Regenerate" );
-            btnGenerate.setMnemonic( 'r' );
+            btnGenerate.setText( res.getString("REGENERATE") );
+            btnGenerate.setMnemonic( resM.getString("Regenerate").charAt(0) );
         }
     }
     
@@ -207,9 +212,9 @@ public class SummaryPanel
     {
         if( publishManager.isGenerating() ) {
             int result = JOptionPane.showConfirmDialog( this, 
-                "Would you like to stop publishing photos and go " +
-                (forwardDirection ? "forward" : "back") + "?", 
-                "Generation in Progress",
+                res.getString("STOP_PUBLISHING") +
+                (forwardDirection ? res.getString("GO_FORWARD") : res.getString("GO_BACK")) + "?", 
+                res.getString("GENERATION_IN_PROGRESS"),
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE );
                 
@@ -217,7 +222,7 @@ public class SummaryPanel
                 throw new CannotChangePanelException();
             }
             else {
-                publishManager.stopGeneration( "Generation aborted." );
+                publishManager.stopGeneration( res.getString("GENERATION_ABORTED") );
             }
         }
     }

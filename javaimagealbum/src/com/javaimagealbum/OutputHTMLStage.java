@@ -210,7 +210,7 @@ public class OutputHTMLStage extends OutputStage {
                     // Create link to Description Page
 	            out.print(
 		                "    <div align=\"Center\">\n" +
-	            		"       <a href=\"indexDescription.html\">Album Description</a>\n" + 
+	            		"       <a href=\"indexDescription.html\">"+resOutput.getString("ALBUM_DESCRIPTION")+"</a>\n" + 
 		                "    </div>\n" +
 		                "    <br/>");
         	} else {
@@ -419,6 +419,7 @@ public class OutputHTMLStage extends OutputStage {
             Constants.CAPTION_POSITION_ABOVE ) ) 
         {
             out.print(getCaption(publishManager, caption));        
+            out.println( "<BR>\n" );
         }
         out.print( "<div align=\"" + 
             publishManager.getPhotoPosition() + "\">" );
@@ -448,6 +449,7 @@ public class OutputHTMLStage extends OutputStage {
         if( publishManager.getCaptionPosition().equals( 
             Constants.CAPTION_POSITION_BELOW ) ) 
         {
+            out.println( "<BR>\n" );
             out.print(getCaption(publishManager, caption));        
         }
         

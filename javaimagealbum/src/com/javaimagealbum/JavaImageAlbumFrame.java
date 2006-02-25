@@ -37,7 +37,7 @@ import com.javaimagealbum.resources.ResourceFactory;
  */
 public class JavaImageAlbumFrame extends javax.swing.JFrame {
     static ResourceBundle res = ResourceFactory.getBundle();
-    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
+//    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     private static final Package PACKAGE = JavaImageAlbumFrame.class.getPackage(); 
 
