@@ -27,6 +27,7 @@
 package com.javaimagealbum;
 
 import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * Allows user to change the order of the files in the list.
@@ -76,7 +77,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         lblTitle.setFont(new java.awt.Font("SansSerif", 1, 14));
         lblTitle.setForeground(new java.awt.Color(0, 153, 153));
         lblTitle.setText("Output Options");
-        lblTitle.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(3, 3, 3, 3)));
+        lblTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         add(lblTitle, java.awt.BorderLayout.NORTH);
 
         pnlContents.setLayout(new java.awt.GridBagLayout());
@@ -126,7 +127,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         taAlbumDescription.setRows(4);
         taAlbumDescription.setText("Description");
         taAlbumDescription.setToolTipText("");
-        taAlbumDescription.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
+        taAlbumDescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         taAlbumDescription.setCaretPosition(6);
         taAlbumDescription.setMargin(new java.awt.Insets(1, 5, 2, 4));
         taAlbumDescription.setMinimumSize(new java.awt.Dimension(11, 21));
@@ -192,7 +193,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         pnlOutLanguage.add(lblOutLanguage);
 
         coOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));
-        coOutLanguage.setModel(new javax.swing.DefaultComboBoxModel(new Locale[] { Locale.ITALIAN, Locale.ENGLISH }));
+        coOutLanguage.setModel(new DefaultComboBoxModel( Constants.listLocaleForOutput ));
         coOutLanguage.setMinimumSize(new java.awt.Dimension(120, 20));
         coOutLanguage.setPreferredSize(new java.awt.Dimension(120, 20));
         coOutLanguage.addActionListener(new java.awt.event.ActionListener() {
@@ -217,8 +218,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
         add(pnlContents, java.awt.BorderLayout.CENTER);
 
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     private void coOutLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coOutLanguageActionPerformed
         scanAndPersistOptions();

@@ -23,6 +23,7 @@
 package com.javaimagealbum;
 
 import java.awt.Dimension;
+import java.util.Locale;
 
 /**
  * Various constants for Web Photo Publisher
@@ -90,4 +91,8 @@ public final class Constants {
         new Dimension( THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT );
     public static final String UNLIMITED_THUMBNAILS = "unlimited";
     
+    // Localization constant:
+    public static final Locale[] listLocaleForOutput = new Locale[] { Locale.ITALIAN, Locale.ENGLISH, new Locale("ru") };
+    //public static final Locale[] listLocaleForOutput = new Locale[] { Locale.ITALIAN, Locale.ENGLISH };
+    //new javax.swing.DefaultComboBoxModel(new Locale[] { Locale.ITALIAN, Locale.ENGLISH })    
 }

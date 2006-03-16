@@ -50,11 +50,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             "/com/javaimagealbum/images/icon.png")
             ).getImage());
         pack ();
-        
-/*        System.out.println("Mirko Name="+PACKAGE.getName());
-        System.out.println("Mirko Title="+PACKAGE.getImplementationTitle());
-        System.out.println("Mirko Version="+PACKAGE.getImplementationVersion());
-        System.out.println("Mirko Vendor="+PACKAGE.getImplementationVendor()); */
+
         setTitle( getTitle() + " - "+res.getString("VERSION")+" " + PACKAGE.getImplementationVersion() );
 
         initPanels();
@@ -114,6 +110,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Java Image Album");
         setBackground(java.awt.Color.white);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 exitForm(evt);
@@ -123,7 +120,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         pnlCurrent.setLayout(new java.awt.GridLayout(1, 1));
 
         pnlCurrent.setBackground(java.awt.Color.white);
-        pnlCurrent.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
+        pnlCurrent.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pnlCurrent.setPreferredSize(new java.awt.Dimension(600, 400));
         getContentPane().add(pnlCurrent, java.awt.BorderLayout.CENTER);
 
@@ -186,8 +183,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
 
         getContentPane().add(pnlSideBar, java.awt.BorderLayout.WEST);
 
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         restartPanel();

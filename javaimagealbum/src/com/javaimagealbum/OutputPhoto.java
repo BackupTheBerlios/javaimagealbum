@@ -205,6 +205,10 @@ public class OutputPhoto {
     public String getImageWidth() {
         return this.exifHashMap.getImageWidth();
     }
+
+    public String getAllExif() {
+        return this.exifHashMap.toString();
+    }
     /* End EXIF getter */
     
     public int hashCode() {

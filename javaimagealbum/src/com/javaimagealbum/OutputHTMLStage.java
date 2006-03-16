@@ -522,6 +522,8 @@ public class OutputHTMLStage extends OutputStage {
             out.print( "      <td>"+outPhoto.getImageHeight()+"</td>\n" );
             out.print( "      <tr><td>Image Width</td>\n" );
             out.print( "      <td>"+outPhoto.getImageWidth()+"</td></tr>\n" );
+            out.print( "      <tr><td>Log info</td>\n" );
+            out.print( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
             out.print( "</table>\n" );
         } else {
             out.println( "No EXIF information in this picture.\n" );
