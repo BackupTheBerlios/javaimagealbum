@@ -76,14 +76,6 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
                         res.getString("THANKS_FOR"),
                         res.getString("LICENSE_REFUSED"),
                         JOptionPane.INFORMATION_MESSAGE );
-//                JOptionPane.showMessageDialog(
-//                    this, 
-//                    "Thank you for downloading Java Image Album.\n\n" +
-//                    "To use this software you must agree to the license\n" +
-//                    "agreement.  To do so, simply start Java Image Album\n" +
-//                    "again, and click \"I Agree\" when prompted.",
-//                    "License Agreement Refused", 
-//                    JOptionPane.INFORMATION_MESSAGE );
                 System.exit( 1 );
             }
         }
@@ -427,7 +419,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog( null,
             "Your startup script is out of date.\n" + 
             "Please update your startup script to execute the following:\n\n" +
-            "  java -jar webphotopublish.jar\n\n" +
+            "  java -jar javaimagealbum.jar\n\n" +
             "Thank you, and sorry for the inconvenience.",
             "Please Update Startup Script",
             JOptionPane.ERROR_MESSAGE );

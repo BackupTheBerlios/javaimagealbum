@@ -80,14 +80,14 @@ public class IntroPanel
         pnlDescription.setPreferredSize(new java.awt.Dimension(132, 25));
         tpDescription.setEditable(false);
         tpDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tpDescription.setText("This program will guide you through the process of publishing your photographs to the web.  The result will be a directory with .html and .jpg files that you can upload to your current web host.\n\nPress the next button below and follow the steps on each screen.\n\nTo know about new release of this program please go to:\n");
+        tpDescription.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("INTRO_PANEL_DESCRIPTION"));
         tpDescription.setMinimumSize(new java.awt.Dimension(6, 2));
         tpDescription.setPreferredSize(new java.awt.Dimension(400, 2));
         tpDescription.setRequestFocusEnabled(false);
         pnlDescription.add(tpDescription, java.awt.BorderLayout.CENTER);
 
         pnlButtons.setBackground(java.awt.Color.white);
-        btnWebSite.setText("Web Site");
+        btnWebSite.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("WEB_SITE"));
         btnWebSite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnWebSiteMouseClicked(evt);
@@ -96,7 +96,7 @@ public class IntroPanel
 
         pnlButtons.add(btnWebSite);
 
-        btnMailingList.setText("Mailing List");
+        btnMailingList.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("MAILING_LIST"));
         btnMailingList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMailingListMouseClicked(evt);
@@ -115,7 +115,7 @@ public class IntroPanel
         cbSkipIntro.setBackground(java.awt.Color.white);
         cbSkipIntro.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbSkipIntro.setMnemonic('d');
-        cbSkipIntro.setText("Don't Show Intro Panel Next Time");
+        cbSkipIntro.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("DONT_SHOW_INTRO"));
         cbSkipIntro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSkipIntroActionPerformed(evt);

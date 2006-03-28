@@ -124,7 +124,7 @@ public class PickOutputPanel
         pnlControls.setBackground(java.awt.Color.white);
         btnRefresh.setFont(new java.awt.Font("SansSerif", 0, 12));
         btnRefresh.setMnemonic('r');
-        btnRefresh.setText("Refresh Folder");
+        btnRefresh.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("REFRESH_FOLDER"));
         btnRefresh.setToolTipText("Refresh the contents of the selected folder.");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +136,7 @@ public class PickOutputPanel
 
         btnBrowse.setFont(new java.awt.Font("SansSerif", 0, 12));
         btnBrowse.setMnemonic('w');
-        btnBrowse.setText("Browse...");
+        btnBrowse.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("BROWSE"));
         btnBrowse.setToolTipText("Browse for folders");
         btnBrowse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +148,7 @@ public class PickOutputPanel
 
         btnCreateFolder.setFont(new java.awt.Font("SansSerif", 0, 12));
         btnCreateFolder.setMnemonic('c');
-        btnCreateFolder.setText("Create New Folder...");
+        btnCreateFolder.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CREATE_NEW_FOLDER"));
         btnCreateFolder.setToolTipText("Create a new folder inside selected folder");
         btnCreateFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -495,7 +495,7 @@ public class PublishManager extends Observable {
             getCaptionAlign() + ".</li>\n";
         
         return
-            "<html><font face=\"SansSerif,Arial,Helvetica\">\n" +
+            "<html><font face=\"SansSerif,Arial,Helvetica\" size=2>\n" +
             "An HTML photo album will be created as follows:\n" +
             "<ul>\n" +
             "  <li>There will be a total of " + photoCount + 

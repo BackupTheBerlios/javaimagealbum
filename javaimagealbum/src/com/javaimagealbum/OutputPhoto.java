@@ -148,7 +148,7 @@ public class OutputPhoto {
 
     /* Start EXIF getter */
     public boolean isExif() {
-        return this.isExif;
+        return ((this.isExif) && (exifHashMap.size()>0));
     }
     public String getCreationDate() {
         return this.exifHashMap.getDate(ExifHashMap.CREATION_DATE);
@@ -172,6 +172,10 @@ public class OutputPhoto {
 
     public String getCameraModel() {
         return this.exifHashMap.getCameraModel();
+    }
+
+    public String getFirmwareVersion() {
+        return this.exifHashMap.getFirmwareVersion();
     }
 
     public String getFStop() {

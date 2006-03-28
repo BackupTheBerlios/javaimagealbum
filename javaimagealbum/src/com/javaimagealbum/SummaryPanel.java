@@ -89,6 +89,7 @@ public class SummaryPanel
         pnlContents.add(tpInstructions, gridBagConstraints);
 
         epSummary.setEditable(false);
+        epSummary.setFont(new java.awt.Font("Monospaced", 0, 10));
         epSummary.setContentType("text/html");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;

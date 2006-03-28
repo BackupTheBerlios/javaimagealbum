@@ -76,7 +76,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         setFont(new java.awt.Font("SansSerif", 0, 12));
         lblTitle.setFont(new java.awt.Font("SansSerif", 1, 14));
         lblTitle.setForeground(new java.awt.Color(0, 153, 153));
-        lblTitle.setText("Output Options");
+        lblTitle.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("OUTPUT_OPTIONS"));
         lblTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         add(lblTitle, java.awt.BorderLayout.NORTH);
 
@@ -85,7 +85,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         pnlContents.setBackground(java.awt.Color.white);
         tpInstructions.setEditable(false);
         tpInstructions.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tpInstructions.setText("Now, choose from the following options for your generated pages:");
+        tpInstructions.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("OUTPUT_DESCRIPTIN_PANEL_DESCRIPTION"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -99,7 +99,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         lblAlbumTitle.setDisplayedMnemonic('t');
         lblAlbumTitle.setFont(new java.awt.Font("SansSerif", 0, 12));
         lblAlbumTitle.setLabelFor(tfAlbumTitle);
-        lblAlbumTitle.setText("Album Title:");
+        lblAlbumTitle.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("ALBUM_TITLE"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
@@ -119,7 +119,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
         lblAlbumDescription.setDisplayedMnemonic('t');
         lblAlbumDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblAlbumDescription.setText("Album Description:");
+        lblAlbumDescription.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("ALBUM_DESCRIPTION"));
         pnlAlbumTitleOption.add(lblAlbumDescription, new java.awt.GridBagConstraints());
 
         taAlbumDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
@@ -142,6 +142,8 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pnlContents.add(pnlAlbumTitleOption, gridBagConstraints);
 
+        pnlCheckboxes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
         pnlCheckboxes.setOpaque(false);
         pnlCheckboxes.setPreferredSize(new java.awt.Dimension(285, 120));
         pnlDescriptionPage.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
@@ -150,7 +152,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         cbDescriptionInEmptyPage.setBackground(java.awt.Color.white);
         cbDescriptionInEmptyPage.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbDescriptionInEmptyPage.setMnemonic('o');
-        cbDescriptionInEmptyPage.setText("Create description page before images index.");
+        cbDescriptionInEmptyPage.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CREATE_DESCRIPTION_PAGE"));
         cbDescriptionInEmptyPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDescriptionInEmptyPageActionPerformed(evt);
@@ -169,7 +171,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         cbLinkToAlbumIndex.setBackground(java.awt.Color.white);
         cbLinkToAlbumIndex.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbLinkToAlbumIndex.setMnemonic('i');
-        cbLinkToAlbumIndex.setText("Include a link to parent folder for album index");
+        cbLinkToAlbumIndex.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LINK_TO_PARENT_FOLDER"));
         cbLinkToAlbumIndex.setToolTipText("Select this option if you plan on uploading more\nthan one photo album to your account.  A link\nto the parent folder will be included in the output.");
         cbLinkToAlbumIndex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +191,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         lblOutLanguage.setBackground(new java.awt.Color(255, 255, 255));
         lblOutLanguage.setDisplayedMnemonic('m');
         lblOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblOutLanguage.setText("Output Language: ");
+        lblOutLanguage.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("OUTPUT_LANGUAGE"));
         pnlOutLanguage.add(lblOutLanguage);
 
         coOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));

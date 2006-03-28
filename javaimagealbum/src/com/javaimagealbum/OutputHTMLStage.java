@@ -506,6 +506,8 @@ public class OutputHTMLStage extends OutputStage {
             out.print( "      <td>"+outPhoto.getCameraModel()+"</td></tr>\n" );
             out.print( "      <tr><td>Camera Make</td>\n" );
             out.print( "      <td>"+outPhoto.getCameraMake()+"</td></tr>\n" );
+            out.print( "      <tr><td>Firmware Version</td>\n" );
+            out.print( "      <td>"+outPhoto.getFirmwareVersion()+"</td></tr>\n" );
             out.print( "      <tr><td>FStop</td>\n" );
             out.print( "      <td>"+outPhoto.getFStop()+"</td></tr>\n" );
             out.print( "      <tr><td>Exposure Program</td>\n" );

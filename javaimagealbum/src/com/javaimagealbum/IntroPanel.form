@@ -80,7 +80,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="12" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="This program will guide you through the process of publishing your photographs to the web.  The result will be a directory with .html and .jpg files that you can upload to your current web host.&#xa;&#xa;Press the next button below and follow the steps on each screen.&#xa;&#xa;To know about new release of this program please go to:&#xa;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="com/javaimagealbum/resources/Resource.properties" key="INTRO_PANEL_DESCRIPTION" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[6, 2]"/>
             </Property>
@@ -111,7 +113,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnWebSite">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Web Site"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="com/javaimagealbum/resources/Resource.properties" key="WEB_SITE" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnWebSiteMouseClicked"/>
@@ -119,7 +123,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnMailingList">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Mailing List"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="com/javaimagealbum/resources/Resource.properties" key="MAILING_LIST" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnMailingListMouseClicked"/>
@@ -154,7 +160,9 @@
               <Font name="SansSerif" size="12" style="0"/>
             </Property>
             <Property name="mnemonic" type="int" value="100"/>
-            <Property name="text" type="java.lang.String" value="Don&apos;t Show Intro Panel Next Time"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="com/javaimagealbum/resources/Resource.properties" key="DONT_SHOW_INTRO" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSkipIntroActionPerformed"/>

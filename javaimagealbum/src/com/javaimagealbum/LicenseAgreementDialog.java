@@ -65,14 +65,14 @@ public class LicenseAgreementDialog extends javax.swing.JDialog {
         }
         catch( IOException e ) {
             JOptionPane.showMessageDialog( null, 
-                "No license file found.  Aborting.", 
-                "No License Found", JOptionPane.ERROR_MESSAGE );
+                res.getString("NO_LICENSE_FOUND_ABORTING"), 
+                res.getString("NO_LICENSE_FOUND"), JOptionPane.ERROR_MESSAGE );
             System.exit( 1 );
         }
         catch( NullPointerException e ) {
             JOptionPane.showMessageDialog( null, 
-                "No license file found.  Aborting.", 
-                "No License Found", JOptionPane.ERROR_MESSAGE );
+                res.getString("NO_LICENSE_FOUND_ABORTING"), 
+                res.getString("NO_LICENSE_FOUND"), JOptionPane.ERROR_MESSAGE );
             System.exit( 1 );
         }
     }

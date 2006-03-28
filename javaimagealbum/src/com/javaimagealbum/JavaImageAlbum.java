@@ -51,12 +51,6 @@ public class JavaImageAlbum {
                     res.getString("MessageDialog1")+
                     "Reason: " + e.getMessage(),
                     "Warning", JOptionPane.WARNING_MESSAGE );
-//            JOptionPane.showMessageDialog( null, 
-//                "WebPhotoPublish could not retrieve your \n" +
-//                "settings / preferences.  You may continue, \n" +
-//                "but some features may not be as convenient. \n" +
-//                "Reason: " + e.getMessage(),
-//                "Warning", JOptionPane.WARNING_MESSAGE );
             e.printStackTrace();
         }
         
@@ -73,11 +67,6 @@ public class JavaImageAlbum {
                     ".\n" +
                     res.getString("MessageDialog2P2"),
                     "Warning", JOptionPane.ERROR_MESSAGE );
-//            JOptionPane.showMessageDialog( null,
-//                "Could not set look and feel to " + lookAndFeel +
-//                ".\n" +
-//                "The default look and feel will be used instead.",
-//                "Warning", JOptionPane.ERROR_MESSAGE );
             e.printStackTrace();
         }
         

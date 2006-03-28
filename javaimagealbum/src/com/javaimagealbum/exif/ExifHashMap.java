@@ -59,6 +59,10 @@ public class ExifHashMap extends HashMap {
         return getString(ExifConstants.CAMERA_TYPE);
     }
 
+    public String getFirmwareVersion() {
+        return getString(ExifConstants.FIRMWARE_VERSION);
+    }
+
     public String getShutterSpeed() {
         Rational rat = (Rational) getObject(ExifConstants.SHUTTER_SPEED);
         if (rat == null)

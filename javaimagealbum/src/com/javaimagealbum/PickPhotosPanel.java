@@ -89,7 +89,7 @@ public class PickPhotosPanel
         pnlContents.setBackground(java.awt.Color.white);
         tpInstructions.setEditable(false);
         tpInstructions.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tpInstructions.setText("Choose the folder containing all the pictures you want to publish.  To expand a folder, double-click on it.");
+        tpInstructions.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("PICK_PHOTOS_PANEL_DESCRIPTION"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -121,7 +121,7 @@ public class PickPhotosPanel
         pnlControls.setBackground(java.awt.Color.white);
         btnRefresh.setFont(new java.awt.Font("SansSerif", 0, 12));
         btnRefresh.setMnemonic('r');
-        btnRefresh.setText("Refresh Folder");
+        btnRefresh.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("REFRESH_FOLDER"));
         btnRefresh.setToolTipText("Refresh the contents of the selected folder.");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +133,7 @@ public class PickPhotosPanel
 
         btnBrowse.setFont(new java.awt.Font("SansSerif", 0, 12));
         btnBrowse.setMnemonic('w');
-        btnBrowse.setText("Browse...");
+        btnBrowse.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("BROWSE1"));
         btnBrowse.setToolTipText("Browse for folders");
         btnBrowse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
