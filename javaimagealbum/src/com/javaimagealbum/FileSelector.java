@@ -49,6 +49,7 @@ public class FileSelector
      * @param directoriesOnly If true, only directories will be displayed.
      */
     public FileSelector( boolean directoriesOnly ) {
+    	super();
         this.directoriesOnly = directoriesOnly;
         initComponents();
     }
@@ -463,7 +464,7 @@ public class FileSelector
 
     
     /** Test it out */
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
         FileSelector fs = new FileSelector( true );
         JFrame f = new JFrame();
         f.setSize( 640, 480 );

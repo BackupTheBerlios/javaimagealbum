@@ -399,9 +399,9 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         if( publishManager.isUnsavedPhotos() ) {
             Toolkit.getDefaultToolkit().beep();
             int result = JOptionPane.showConfirmDialog( this,
-                "No output has been generated yet.\n\n" +
-                "Are you sure you want to exit?",
-                "Nothing Generated", 
+                res.getString("NO_OUTPUT_GENERATED") +
+                res.getString("ARE_YOU_SURE_EXIT"),
+                res.getString("NOTHING_GENERATED"),
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE );
             if( result == JOptionPane.NO_OPTION ) {

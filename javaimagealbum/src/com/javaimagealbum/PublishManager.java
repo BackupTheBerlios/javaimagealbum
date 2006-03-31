@@ -484,7 +484,7 @@ public class PublishManager extends Observable {
             exifSummary = "  <li>Exif information will be printed</li>\n";
         }
 
-        // Create Exif summary:
+        // Output Language summary:
         outputLanguageSummary = "  <li>Output language is "+outputLanguage+"</li>\n";
 
         // Create detail page summary:
@@ -512,6 +512,7 @@ public class PublishManager extends Observable {
             linkSummary +
             exifSummary +
             outputLanguageSummary +
+            "</ul>\n" +
             "</font></html>";
     }
     

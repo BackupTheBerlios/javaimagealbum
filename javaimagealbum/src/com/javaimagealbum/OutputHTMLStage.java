@@ -113,7 +113,7 @@ public class OutputHTMLStage extends OutputStage {
 	        SimpleDateFormat sdf = new SimpleDateFormat( resOutput.getString("DATE_FORMAT") );
 	        String todaysDate = sdf.format( new Date() );
 	        
-	        String indexFilename = "indexDEscription";
+	        String indexFilename = "indexDescription";
 	        indexFilename += ".html";
 	
 	        File outputDirectory = publishManager.getOutputDirectory();
@@ -192,7 +192,7 @@ public class OutputHTMLStage extends OutputStage {
             "  <head>\n" +
             "    <title>" + publishManager.getAlbumTitle() );
         if( numPages > 1 ) {
-            out.print( " - Page " + (index + 1) + " of " + numPages );
+            out.print( " - " + resOutput.getString("PAGE") + " " + (index + 1) + " " + resOutput.getString("OF") + " " + numPages );
         }
         out.print(
             "</title>\n" +

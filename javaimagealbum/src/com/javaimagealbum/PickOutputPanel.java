@@ -123,7 +123,7 @@ public class PickOutputPanel
 
         pnlControls.setBackground(java.awt.Color.white);
         btnRefresh.setFont(new java.awt.Font("SansSerif", 0, 12));
-        btnRefresh.setMnemonic('r');
+        btnRefresh.setMnemonic(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/MnemonicResource").getString("Refresh_Folder").charAt(0));
         btnRefresh.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("REFRESH_FOLDER"));
         btnRefresh.setToolTipText("Refresh the contents of the selected folder.");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +135,7 @@ public class PickOutputPanel
         pnlControls.add(btnRefresh);
 
         btnBrowse.setFont(new java.awt.Font("SansSerif", 0, 12));
-        btnBrowse.setMnemonic('w');
+        btnBrowse.setMnemonic(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/MnemonicResource").getString("Browse").charAt(0));
         btnBrowse.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("BROWSE"));
         btnBrowse.setToolTipText("Browse for folders");
         btnBrowse.addActionListener(new java.awt.event.ActionListener() {

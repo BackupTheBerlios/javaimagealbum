@@ -91,8 +91,8 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         setFont(new java.awt.Font("SansSerif", 0, 12));
         lblTitle.setFont(new java.awt.Font("SansSerif", 1, 14));
         lblTitle.setForeground(new java.awt.Color(0, 153, 153));
-        lblTitle.setText("Output Options");
-        lblTitle.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(3, 3, 3, 3)));
+        lblTitle.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("OUTPUT_OPTIONS1"));
+        lblTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         add(lblTitle, java.awt.BorderLayout.NORTH);
 
         pnlContents.setLayout(new java.awt.GridBagLayout());
@@ -100,7 +100,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         pnlContents.setBackground(java.awt.Color.white);
         tpInstructions.setEditable(false);
         tpInstructions.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tpInstructions.setText("Now, choose from the following options for your generated pages:");
+        tpInstructions.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("OUTPUT_OPTIONS_PANEL_DESCRIPTION"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -113,7 +113,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         pnlOutputColumnsOption.setBackground(java.awt.Color.white);
         lblColumns.setDisplayedMnemonic('n');
         lblColumns.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblColumns.setText("Number of columns of photos in album table:");
+        lblColumns.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("NUMBER_OF_COLUMS"));
         pnlOutputColumnsOption.add(lblColumns);
 
         tfColumns.setColumns(2);
@@ -136,7 +136,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         lblThumbnailsPerPage.setDisplayedMnemonic('m');
         lblThumbnailsPerPage.setFont(new java.awt.Font("SansSerif", 0, 12));
         lblThumbnailsPerPage.setLabelFor(coThumbnailsPerPage);
-        lblThumbnailsPerPage.setText("Maximum number of thumbnails per page:");
+        lblThumbnailsPerPage.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("MAX_THUMBNAILS"));
         pnlThumbnailCountOption.add(lblThumbnailsPerPage);
 
         coThumbnailsPerPage.setBackground(java.awt.Color.lightGray);
@@ -162,7 +162,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbSaveCaptions.setBackground(java.awt.Color.white);
         cbSaveCaptions.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbSaveCaptions.setMnemonic('c');
-        cbSaveCaptions.setText("Remember my captions");
+        cbSaveCaptions.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("REMEMBER_CAPTIONS"));
         cbSaveCaptions.setToolTipText("Store captions in text files in source folder");
         cbSaveCaptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +185,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbResizeAll.setBackground(java.awt.Color.white);
         cbResizeAll.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbResizeAll.setMnemonic('o');
-        cbResizeAll.setText("Resize all output photos to");
+        cbResizeAll.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("RESIZE_PHOTOS"));
         cbResizeAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbResizeAllActionPerformed(evt);
@@ -206,7 +206,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         pnlResizeOption.add(tfResizeWidth);
 
         lblBy.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblBy.setText("by");
+        lblBy.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("BY"));
         pnlResizeOption.add(lblBy);
 
         tfResizeHeight.setFont(new java.awt.Font("SansSerif", 0, 12));
@@ -234,7 +234,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbResizePortraits.setBackground(java.awt.Color.white);
         cbResizePortraits.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbResizePortraits.setMnemonic('p');
-        cbResizePortraits.setText("Resize Portrait Photos to");
+        cbResizePortraits.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("RESIZE_PORTRAIT"));
         cbResizePortraits.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbResizePortraitsActionPerformed(evt);
@@ -249,7 +249,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         pnlPortraitResizeOption.add(tfResizePortraitsWidth);
 
         lblBy2.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblBy2.setText("by");
+        lblBy2.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("BY"));
         pnlPortraitResizeOption.add(lblBy2);
 
         tfResizePortraitsHeight.setFont(new java.awt.Font("SansSerif", 0, 12));
@@ -271,7 +271,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbFullSize.setBackground(java.awt.Color.white);
         cbFullSize.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbFullSize.setMnemonic('h');
-        cbFullSize.setText("Publish and link to full-size photos as well");
+        cbFullSize.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LINK_FULL_SIZE"));
         cbFullSize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFullSizeActionPerformed(evt);
@@ -294,7 +294,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbShowExif.setBackground(java.awt.Color.white);
         cbShowExif.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbShowExif.setMnemonic('i');
-        cbShowExif.setText("Print EXIF pictures informatio");
+        cbShowExif.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("PRINT_EXIF"));
         cbShowExif.setToolTipText("Select this option if you whant to have EXIF information printed in your web page.");
         cbShowExif.setPreferredSize(new java.awt.Dimension(269, 25));
         cbShowExif.addActionListener(new java.awt.event.ActionListener() {
@@ -321,11 +321,11 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
 
         pnlDetailPages.setLayout(new java.awt.GridBagLayout());
 
-        pnlDetailPages.setBorder(new javax.swing.border.TitledBorder(null, "Detail Pages", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 12)));
+        pnlDetailPages.setBorder(javax.swing.BorderFactory.createTitledBorder(null, java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("DETAIL_PAGE"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 12)));
         pnlDetailPages.setFont(new java.awt.Font("SansSerif", 0, 12));
         pnlDetailPages.setOpaque(false);
         lblCaptionPosition.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblCaptionPosition.setText("Caption Position:");
+        lblCaptionPosition.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CAPTION_POSITION"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
@@ -347,7 +347,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         pnlDetailPages.add(cbCaptionPosition, gridBagConstraints);
 
         lblCaptionAlign.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblCaptionAlign.setText("Caption Align:");
+        lblCaptionAlign.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CAPTION_ALIGN"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
@@ -363,7 +363,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         pnlDetailPages.add(cbCaptionAlign, gridBagConstraints);
 
         lblPhotoPosition.setFont(new java.awt.Font("SansSerif", 0, 12));
-        lblPhotoPosition.setText("Photo Position:");
+        lblPhotoPosition.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("PHOTO_POSITION"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
@@ -405,8 +405,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
 
         add(pnlContents, java.awt.BorderLayout.CENTER);
 
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     private void cbPhotoPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPhotoPositionActionPerformed
         scanAndPersistOptions();

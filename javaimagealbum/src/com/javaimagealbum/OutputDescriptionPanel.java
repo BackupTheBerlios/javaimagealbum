@@ -167,7 +167,7 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
         pnlLinkToAlbumIndex.setBackground(java.awt.Color.white);
         pnlLinkToAlbumIndex.setMinimumSize(new java.awt.Dimension(285, 35));
-        pnlLinkToAlbumIndex.setPreferredSize(new java.awt.Dimension(285, 35));
+        pnlLinkToAlbumIndex.setPreferredSize(new java.awt.Dimension(340, 35));
         cbLinkToAlbumIndex.setBackground(java.awt.Color.white);
         cbLinkToAlbumIndex.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbLinkToAlbumIndex.setMnemonic('i');

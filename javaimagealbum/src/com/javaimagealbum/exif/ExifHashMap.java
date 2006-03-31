@@ -106,11 +106,19 @@ public class ExifHashMap extends HashMap {
     }
 
     public String getImageWidth() {
-        return "" + getInt(ExifConstants.IMAGE_WIDTH);
+        String out = "";
+        if (getInt(ExifConstants.IMAGE_WIDTH) > 0) {
+            out += getInt(ExifConstants.IMAGE_WIDTH);
+        }
+        return out ;
     }
 
     public String getImageHeight() {
-        return "" + getInt(ExifConstants.IMAGE_HEIGHT);
+        String out = "";
+        if (getInt(ExifConstants.IMAGE_HEIGHT) > 0) {
+            out += getInt(ExifConstants.IMAGE_HEIGHT);
+        }
+        return out ;
     }
 
     public Image getThumbnail() {
