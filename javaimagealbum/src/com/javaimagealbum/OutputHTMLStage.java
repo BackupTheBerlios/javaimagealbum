@@ -219,12 +219,12 @@ public class OutputHTMLStage extends OutputStage {
 	                "    <div align=\"Left\">\n" +
 	                "      " + publishManager.getAlbumDescription() + "\n" +
 	                "    </div>\n" +
-	                "    <br/>");
+	                "    <br/>\n");
         	}
         }
         if( numPages > 1 ) {
             out.print(
-                "      <hr>\n" +
+                "      <hr/>\n" +
                 "      "+resOutput.getString("PAGE")+" " + (index + 1) + " "+resOutput.getString("OF")+" " + numPages + " -- \n" );
             // Output meta-index:
             out.print( resOutput.getString("INDEX")+": [ " );
@@ -246,7 +246,7 @@ public class OutputHTMLStage extends OutputStage {
             }
             out.print( 
                 " ]\n" + 
-                "<hr>\n" );
+                "      <hr/>\n" );
         }
         out.print(
             "      <table cellpadding=\"2\" cellspacing=\"0\" " +
@@ -419,7 +419,7 @@ public class OutputHTMLStage extends OutputStage {
             Constants.CAPTION_POSITION_ABOVE ) ) 
         {
             out.print(getCaption(publishManager, caption));        
-            out.println( "<BR>\n" );
+            out.println( "<br/>\n" );
         }
         out.print( "<div align=\"" + 
             publishManager.getPhotoPosition() + "\">" );
@@ -449,7 +449,7 @@ public class OutputHTMLStage extends OutputStage {
         if( publishManager.getCaptionPosition().equals( 
             Constants.CAPTION_POSITION_BELOW ) ) 
         {
-            out.println( "<BR>\n" );
+            out.println( "<br/>\n" );
             out.print(getCaption(publishManager, caption));        
         }
         

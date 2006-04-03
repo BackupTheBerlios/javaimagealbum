@@ -332,11 +332,11 @@ public class OutputPhoto {
     
     // Modifiers (not yet implemented):
     
-    private void rotateCW() {
+    public void rotateCW() {
         // XXX - to be implemented
     }
     
-    private void rotateCCW() {
+    public void rotateCCW() {
         // XXX - to be implemented
     }
     

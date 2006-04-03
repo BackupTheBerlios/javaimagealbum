@@ -79,7 +79,7 @@ public class SummaryPanel
         pnlContents.setBackground(java.awt.Color.white);
         tpInstructions.setEditable(false);
         tpInstructions.setFont(new java.awt.Font("SansSerif", 0, 12));
-        tpInstructions.setText("JavaImageAlbum is now ready to generate your photo album.  Just click the Generate button below to start generating the output.  The following settings will be used:");
+        tpInstructions.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("SUMMARY_PANEL_DESCRIPTION"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -89,7 +89,6 @@ public class SummaryPanel
         pnlContents.add(tpInstructions, gridBagConstraints);
 
         epSummary.setEditable(false);
-        epSummary.setFont(new java.awt.Font("Monospaced", 0, 10));
         epSummary.setContentType("text/html");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;

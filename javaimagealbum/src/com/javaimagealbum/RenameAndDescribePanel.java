@@ -369,7 +369,7 @@ implements WizardPanel, TableModelListener, ListSelectionListener
             ArrayList photoList = source.getPhotos();
             OutputPhoto ophoto = (OutputPhoto)photoList.get( index );
             // XXX - to be implemented
-            //ophoto.rotateCW();
+            ophoto.rotateCW();
             updatePreview();
         }
     }//GEN-LAST:event_btnRotateCWActionPerformed
@@ -381,7 +381,7 @@ implements WizardPanel, TableModelListener, ListSelectionListener
             ArrayList photoList = source.getPhotos();
             OutputPhoto ophoto = (OutputPhoto)photoList.get( index );
             // XXX - to be implemented
-            //ophoto.rotateCCW();
+            ophoto.rotateCCW();
             updatePreview();
         }
     }//GEN-LAST:event_btnRotateCCWActionPerformed
@@ -441,15 +441,12 @@ implements WizardPanel, TableModelListener, ListSelectionListener
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearAll;
-    private javax.swing.JButton btnClearAll1;
     private javax.swing.JButton btnDown;
     private javax.swing.JButton btnRotateCCW;
     private javax.swing.JButton btnRotateCW;
     private javax.swing.JButton btnSelectAll;
-    private javax.swing.JButton btnSelectAll1;
     private javax.swing.JButton btnUp;
     private javax.swing.JCheckBox cbAutoPreview;
-    private javax.swing.JCheckBox cbAutoPreview1;
     private javax.swing.JLabel lblChangeOrder;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlContents;
@@ -458,7 +455,6 @@ implements WizardPanel, TableModelListener, ListSelectionListener
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlModifiers;
     private javax.swing.JPanel pnlOptions;
-    private javax.swing.JPanel pnlOptions1;
     private javax.swing.JPanel pnlPreview;
     private javax.swing.JPanel pnlTop;
     private javax.swing.JPanel pnlUpDownButtons;

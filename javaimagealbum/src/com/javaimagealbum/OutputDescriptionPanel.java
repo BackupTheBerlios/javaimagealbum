@@ -117,9 +117,10 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         pnlAlbumTitleOption.add(tfAlbumTitle, gridBagConstraints);
         tfAlbumTitle.getAccessibleContext().setAccessibleName("Album Title");
 
-        lblAlbumDescription.setDisplayedMnemonic('t');
+        lblAlbumDescription.setDisplayedMnemonic('d');
         lblAlbumDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
         lblAlbumDescription.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("ALBUM_DESCRIPTION"));
+        lblAlbumDescription.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         pnlAlbumTitleOption.add(lblAlbumDescription, new java.awt.GridBagConstraints());
 
         taAlbumDescription.setFont(new java.awt.Font("SansSerif", 0, 12));

@@ -102,7 +102,7 @@ public class LicenseAgreementDialog extends javax.swing.JDialog {
         lblDoNotAgreeDef = new javax.swing.JLabel();
         lblAgreeDef = new javax.swing.JLabel();
 
-        setTitle("Java Image Album License Agreement");
+        setTitle(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LICENSE_AGREEMENT_TITLE"));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -112,7 +112,7 @@ public class LicenseAgreementDialog extends javax.swing.JDialog {
 
         pnlDialog.setLayout(new java.awt.BorderLayout());
 
-        pnlDialog.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
+        pnlDialog.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pnlButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         btnNoAgree.setFont(new java.awt.Font("SansSerif", 0, 12));
@@ -217,8 +217,7 @@ public class LicenseAgreementDialog extends javax.swing.JDialog {
         getContentPane().add(pnlDialog, java.awt.BorderLayout.CENTER);
 
         pack();
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgreeActionPerformed
         agree = true;
