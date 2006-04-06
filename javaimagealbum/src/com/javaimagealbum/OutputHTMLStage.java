@@ -284,7 +284,7 @@ public class OutputHTMLStage extends OutputStage {
                                            "\">" +
                                            "<img src=\"" + thumbnail + 
                                            "\" alt=\"" + caption + 
-                                           "\"></a>\n" + 
+                                           "\"/></a>\n" + 
                     "                    </center>\n" + 
                     "                  </td>\n" + 
                     "                </tr>\n" +
@@ -340,7 +340,7 @@ public class OutputHTMLStage extends OutputStage {
                 "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
                 "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i><br/>\n" +
                 "      <a href=\""+Constants.SITE_URL+"\"" +
-                    "\">"+Constants.APP_NAME+"</a>" +
+                    "/>"+Constants.APP_NAME+"</a>" +
                     "</small></div>\n");
     }
     
@@ -432,16 +432,16 @@ public class OutputHTMLStage extends OutputStage {
                 out.print( 
                     "<a href=\"" + imageFilename + "\">" +
                     "<img src=\"resized-" + outImageFilename + 
-                        "\" alt=\""+resOutput.getString("CLICK_ZOOM")+"\">" +
+                        "\" alt=\""+resOutput.getString("CLICK_ZOOM")+"\"/>" +
                     "</a>" );
             }
             else {
                 out.print( 
-                    "<img src=\"resized-" + outImageFilename + "\">" );
+                    "<img src=\"resized-" + outImageFilename + "\"/>" );
             }
         }
         else {
-            out.print( "<img src=\"" + outImageFilename + "\">" );
+            out.print( "<img src=\"" + outImageFilename + "\"/>" );
         }
         
         out.println( "</div>\n" );
@@ -460,7 +460,7 @@ public class OutputHTMLStage extends OutputStage {
         out.print( 
             "    <div align=\"right\"><small><i>"+resOutput.getString("GENERATED_BY")+"</i><br/>\n" +
             "      <a href=\""+Constants.SITE_URL+"\"" +
-            "\">"+Constants.APP_NAME+"</a>" +
+            "/>"+Constants.APP_NAME+"</a>" +
                 "</small></div>\n" +
             "  </body>\n" +
             "</html>\n" );

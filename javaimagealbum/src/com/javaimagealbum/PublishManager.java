@@ -142,8 +142,9 @@ public class PublishManager extends Observable {
                 Constants.DESCRIPTION_IN_EMPTY_PAGE, "true" ).toLowerCase().equals( 
                 "true" ) );
         setShowExif( settings.getProperty( 
-                Constants.LINK_TO_ALBUM_INDEX, "true" ).toLowerCase().equals( 
+                Constants.SHOW_EXIF, "true" ).toLowerCase().equals( 
                 "true" ) );
+// TODO: ADD persist options
 //        setOutputLanguage( settings.getProperty( 
 //                Constants.OUTPUT_LANGUAGE ) );
         setCaptionPosition( settings.getProperty(
