@@ -42,7 +42,11 @@ public class PickPhotosPanel
     extends javax.swing.JPanel 
     implements WizardPanel, ItemListener
 {
-    static ResourceBundle res = ResourceFactory.getBundle();
+
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	static ResourceBundle res = ResourceFactory.getBundle();
 //    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     /** Creates new form PickFilesPanel */

@@ -29,7 +29,7 @@ import java.util.Locale;
  * Various constants for Web Photo Publisher
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public final class Constants {
 

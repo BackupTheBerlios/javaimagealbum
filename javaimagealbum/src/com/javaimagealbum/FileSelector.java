@@ -40,7 +40,10 @@ public class FileSelector
     implements ItemSelectable
 {
 
-    /** True if only directories are to be displayed. */
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	/** True if only directories are to be displayed. */
     private boolean directoriesOnly;
     
     /** 

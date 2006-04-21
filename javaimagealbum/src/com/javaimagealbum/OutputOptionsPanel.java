@@ -1,21 +1,21 @@
 /*
  * <license>
- * The contents of this file are subject to the Mozilla Public License 
- * Version 1.1 (the "License"); you may not use this file except in 
- * compliance with the License.  You may obtain a copy of the License 
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License
  * at http://www.mozilla.org/MPL/
- * 
- * Software distributed under the License is distributed on an 
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or 
- * implied. See the License for the specific language governing rights 
+ *
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing rights
  * and limitations under the License.
- * 
+ *
  * The Original Code is Web Photo Publisher.
- * 
- * The Initial Developer of the Original Code is Mark Roth.  Portions 
- * created by Mark Roth are Copyright (C) 2003 Mark Roth.  
+ *
+ * The Initial Developer of the Original Code is Mark Roth.  Portions
+ * created by Mark Roth are Copyright (C) 2003 Mark Roth.
  * All Rights Reserved.
- * 
+ *
  * Contributor(s) listed below.
  * </license>
  */
@@ -31,15 +31,17 @@ import javax.swing.*;
  * @author  Mark Roth
  * @author  Mirko Actis
  */
-public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPanel
-{
-
+public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPanel {
+    
+    /** Default serial version */
+    private static final long serialVersionUID = 1L;
+    
     /** Creates new form ReorderFilesPanel */
     public OutputOptionsPanel(PublishManager publishManager) {
         this.publishManager = publishManager;
-        initComponents ();
+        initComponents();
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -355,6 +357,12 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
 
         cbCaptionAlign.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbCaptionAlign.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Left", "Center", "Right" }));
+        cbCaptionAlign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCaptionAlignActionPerformed(evt);
+            }
+        });
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -406,50 +414,50 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         add(pnlContents, java.awt.BorderLayout.CENTER);
 
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void cbCaptionAlignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCaptionAlignActionPerformed
+        scanAndPersistOptions();
+    }//GEN-LAST:event_cbCaptionAlignActionPerformed
+    
     private void cbPhotoPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPhotoPositionActionPerformed
         scanAndPersistOptions();
     }//GEN-LAST:event_cbPhotoPositionActionPerformed
-
-    private void cbCaptionPositionActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    
+    private void cbCaptionPositionActionPerformed(java.awt.event.ActionEvent evt) {
         scanAndPersistOptions();
-    }                                                 
-
-    private void cbCaptionAlignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCaptionPositionActionPerformed
-        scanAndPersistOptions();
-    }//GEN-LAST:event_cbCaptionPositionActionPerformed
-
+    }
+    
     private void cbShowExifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowExifActionPerformed
         scanAndPersistOptions();
     }//GEN-LAST:event_cbShowExifActionPerformed
-
+    
     private void cbFullSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFullSizeActionPerformed
         scanAndPersistOptions();
     }//GEN-LAST:event_cbFullSizeActionPerformed
-
+    
     private void cbSaveCaptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveCaptionsActionPerformed
         scanAndPersistOptions();
     }//GEN-LAST:event_cbSaveCaptionsActionPerformed
-
+    
   private void tfResizeHeightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfResizeHeightKeyReleased
-    tfResizePortraitsWidth.setText( tfResizeHeight.getText() );
+      tfResizePortraitsWidth.setText( tfResizeHeight.getText() );
   }//GEN-LAST:event_tfResizeHeightKeyReleased
-
+  
   private void tfResizeWidthKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfResizeWidthKeyReleased
-    tfResizePortraitsHeight.setText( tfResizeWidth.getText() );
+      tfResizePortraitsHeight.setText( tfResizeWidth.getText() );
   }//GEN-LAST:event_tfResizeWidthKeyReleased
-
+  
   private void cbResizePortraitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbResizePortraitsActionPerformed
       enableComponents();
-    scanAndPersistOptions();
+      scanAndPersistOptions();
   }//GEN-LAST:event_cbResizePortraitsActionPerformed
-
+  
   private void cbResizeAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbResizeAllActionPerformed
       enableComponents();
-    scanAndPersistOptions();
+      scanAndPersistOptions();
   }//GEN-LAST:event_cbResizeAllActionPerformed
-
-
+  
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbCaptionAlign;
     private javax.swing.JComboBox cbCaptionPosition;
@@ -487,7 +495,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private javax.swing.JTextField tfResizeWidth;
     private javax.swing.JTextPane tpInstructions;
     // End of variables declaration//GEN-END:variables
-
+    
     private PublishManager publishManager;
 //    private File selectedDirectory;
     private static ArrayList photoPositions = new ArrayList();
@@ -501,14 +509,15 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         captionPositions.add( Constants.CAPTION_POSITION_BELOW );
         captionPositions.add( Constants.CAPTION_POSITION_ABOVE );
     }
-    private static ArrayList captionAlign = new ArrayList();
+    private static ArrayList captionAligns = new ArrayList();
     static {
-        captionAlign.add( Constants.CAPTION_ALIGN_LEFT);
-        captionAlign.add( Constants.CAPTION_ALIGN_CENTER);
-        captionAlign.add( Constants.CAPTION_ALIGN_RIGHT);
+        captionAligns.add( Constants.CAPTION_ALIGN_LEFT);
+        captionAligns.add( Constants.CAPTION_ALIGN_CENTER);
+        captionAligns.add( Constants.CAPTION_ALIGN_RIGHT);
     }
     
-    /** Returns true if all required data was filled in for this panel.
+    /** 
+     * Returns true if all required data was filled in for this panel.
      */
     public boolean isSatisfied() {
         return publishManager.getOutputDirectory() != null;
@@ -524,75 +533,79 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         tfResizePortraitsHeight.setEnabled( resizeAll & resizePortraits );
         cbFullSize.setEnabled( resizeAll );
     }
-
-    /** 
+    
+    /**
      * Called when the panel is shown to the user
      */
     public void showPanel() {
         tfColumns.setText( "" + publishManager.getOutputColumns() );
-        coThumbnailsPerPage.setSelectedItem( 
-            publishManager.getThumbnailsPerPage() );
+        coThumbnailsPerPage.setSelectedItem(
+                publishManager.getThumbnailsPerPage() );
         cbResizeAll.setSelected( publishManager.getResizeAll() );
         tfResizeWidth.setText( "" + publishManager.getResizeAllWidth() );
         tfResizeHeight.setText( "" + publishManager.getResizeAllHeight() );
         cbResizePortraits.setSelected( publishManager.getResizePortraits() );
-        tfResizePortraitsWidth.setText( "" + 
-            publishManager.getResizePortraitsWidth() );
-        tfResizePortraitsHeight.setText( "" + 
-            publishManager.getResizePortraitsHeight() );
+        tfResizePortraitsWidth.setText( "" +
+                publishManager.getResizePortraitsWidth() );
+        tfResizePortraitsHeight.setText( "" +
+                publishManager.getResizePortraitsHeight() );
         cbSaveCaptions.setSelected( publishManager.getStoreCaptions() );
         cbFullSize.setSelected( publishManager.getPublishFullSize() );
         cbShowExif.setSelected( publishManager.getShowExif() );
         String photoPosition = publishManager.getPhotoPosition();
         String captionPosition = publishManager.getCaptionPosition();
-        cbPhotoPosition.setSelectedIndex( photoPositions.indexOf( 
-            photoPosition ) );
+        cbPhotoPosition.setSelectedIndex( photoPositions.indexOf(
+                photoPosition ) );
         cbCaptionPosition.setSelectedIndex( captionPositions.indexOf(
-            captionPosition ) );
+                captionPosition ) );
         String captionAlign = publishManager.getCaptionAlign();
-        cbCaptionAlign.setSelectedIndex( captionAlign.indexOf(
+        cbCaptionAlign.setSelectedIndex( captionAligns.indexOf(
                 captionAlign ) );
         enableComponents();
     }
-
-    /** 
+    
+    /**
      * Called when the panel is hidden from the user
      */
-    public void hidePanel(boolean forwardDirection) 
-//        throws CannotChangePanelException 
+    public void hidePanel(boolean forwardDirection)
+//        throws CannotChangePanelException
     {
         scanAndPersistOptions();
     }
     
     private void scanAndPersistOptions() {
-        publishManager.setOutputColumns( 
-            Integer.parseInt( tfColumns.getText() ) );
-        publishManager.setThumbnailsPerPage( 
-            coThumbnailsPerPage.getSelectedItem().toString() );
+        publishManager.setOutputColumns(
+                Integer.parseInt( tfColumns.getText() ) );
+        publishManager.setThumbnailsPerPage(
+                coThumbnailsPerPage.getSelectedItem().toString() );
         publishManager.setResizeAll( cbResizeAll.isSelected() );
-        publishManager.setResizeAllWidth( 
-            Integer.parseInt( tfResizeWidth.getText() ) );
-        publishManager.setResizeAllHeight( 
-            Integer.parseInt( tfResizeHeight.getText() ) );
+        publishManager.setResizeAllWidth(
+                Integer.parseInt( tfResizeWidth.getText() ) );
+        publishManager.setResizeAllHeight(
+                Integer.parseInt( tfResizeHeight.getText() ) );
         publishManager.setResizePortraits( cbResizePortraits.isSelected() );
-        publishManager.setResizePortraitsWidth( 
-            Integer.parseInt( tfResizePortraitsWidth.getText() ) );
-        publishManager.setResizePortraitsHeight( 
-            Integer.parseInt( tfResizePortraitsHeight.getText() ) );
+        publishManager.setResizePortraitsWidth(
+                Integer.parseInt( tfResizePortraitsWidth.getText() ) );
+        publishManager.setResizePortraitsHeight(
+                Integer.parseInt( tfResizePortraitsHeight.getText() ) );
         publishManager.setStoreCaptions( cbSaveCaptions.isSelected() );
         publishManager.setPublishFullSize( cbFullSize.isSelected() );
         publishManager.setShowExif( cbShowExif.isSelected() );
-        publishManager.setPhotoPosition( (String)photoPositions.get( 
-            cbPhotoPosition.getSelectedIndex() ) );
-        publishManager.setCaptionPosition( (String)captionPositions.get( 
-            cbCaptionPosition.getSelectedIndex() ) );
-        publishManager.setCaptionAlign( (String)captionAlign.get( 
+        publishManager.setPhotoPosition( (String)photoPositions.get(
+                cbPhotoPosition.getSelectedIndex() ) );
+        publishManager.setCaptionPosition( (String)captionPositions.get(
+                cbCaptionPosition.getSelectedIndex() ) );
+        publishManager.setCaptionAlign( (String)captionAligns.get(
                 cbCaptionAlign.getSelectedIndex() ) );
         
         publishManager.persistOutputSettings();
     }
-
+    
     private class ThumbnailsComboBoxModel extends DefaultComboBoxModel {
+        
+        /** Default serial version */
+        private static final long serialVersionUID = 1L;
+        
         public int getSize() {
             return 8;
         }
@@ -601,13 +614,11 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
             String result;
             if( param == 0 ) {
                 result = "unlimited";
-            }
-            else {
+            } else {
                 int cols = 4;
                 try {
                     cols = Integer.parseInt( tfColumns.getText() );
-                }
-                catch( NumberFormatException e ) {
+                } catch( NumberFormatException e ) {
                     // pretend it's 4.
                     cols = 4;
                 }
@@ -618,4 +629,3 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         
     }
 }
-

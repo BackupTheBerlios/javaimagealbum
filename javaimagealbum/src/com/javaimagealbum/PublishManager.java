@@ -33,7 +33,7 @@ import com.javaimagealbum.resources.ResourceFactory;
  * Manages the photo publishing operation
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class PublishManager extends Observable {
     static ResourceBundle res = ResourceFactory.getBundle();

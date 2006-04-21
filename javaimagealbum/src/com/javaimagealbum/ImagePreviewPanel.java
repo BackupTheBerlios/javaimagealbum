@@ -31,10 +31,13 @@ import java.util.*;
  * Panel that displays a preview of an image
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class ImagePreviewPanel extends javax.swing.JPanel {
 
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
     /** Creates new form PreviewPanel */
     public ImagePreviewPanel() {
         initComponents ();

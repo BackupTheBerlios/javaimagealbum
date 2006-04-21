@@ -26,12 +26,10 @@ package com.javaimagealbum.resources;
 
 import java.util.*;
 
-
 /**
  * Static class used to get ResourceBundles for the Java Image Album project.
  *
- * @author  Mirko
- * @version
+ * @author  Mirko Actis Grosso
  */
 public class ResourceFactory {
     private static final ResourceBundle textBundle = ResourceBundle.getBundle("com.javaimagealbum.resources.Resource");

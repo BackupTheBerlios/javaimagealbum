@@ -38,10 +38,13 @@ import com.javaimagealbum.resources.ResourceFactory;
  * be queried with getAgree().
  *
  * @author  mroth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class LicenseAgreementDialog extends javax.swing.JDialog {
-    static ResourceBundle res = ResourceFactory.getBundle();
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	static ResourceBundle res = ResourceFactory.getBundle();
 //    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     /** Location of the license file */

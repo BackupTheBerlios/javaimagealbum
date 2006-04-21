@@ -35,7 +35,7 @@ import javax.imageio.stream.FileImageInputStream;
  * Various GUI Utility methods.
  *
  * @author  mroth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public final class GUIUtils {
 
@@ -56,9 +56,9 @@ public final class GUIUtils {
      *   image is landscape.
      * @param thumbHeightLandscape The height of the thumbnail if
      *   the image is landscape.
-     * @param thumbWidthPortait The width of the thumbnail if the
+     * @param thumbWidthPortrait The width of the thumbnail if the
      *   image is portait.
-     * @param thumbHeightPortait The height of the thumbnail if the
+     * @param thumbHeightPortrait The height of the thumbnail if the
      *   image is portait.
      * @param forceSize If true, the thumbnail is forced to the 
      *   desired size, even if the image is smaller.  Else, the
@@ -67,8 +67,10 @@ public final class GUIUtils {
     public static BufferedImage createThumbnail( 
         BufferedImage inImage, 
         BufferedImage outImage,
-        int thumbWidthLandscape, int thumbHeightLandscape,
-        int thumbWidthPortrait, int thumbHeightPortrait,
+        int thumbWidthLandscape, 
+        int thumbHeightLandscape,
+        int thumbWidthPortrait, 
+        int thumbHeightPortrait,
         boolean forceSize ) 
     {
         // Draw image, centered if necessary:
@@ -295,7 +297,7 @@ public final class GUIUtils {
      * Saves an image to a file.  The file must be a JPG.
      *
      * @param outFile The file to save to.
-     * @param inImage The BufferedImage to save to the file.
+     * @param image The BufferedImage to save to the file.
      */
     public static void saveImageToFile( File outFile, BufferedImage image ) 
         throws IOException

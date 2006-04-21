@@ -28,13 +28,16 @@ import com.javaimagealbum.util.BrowserControl;
  * Introduces the user to the program
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class IntroPanel 
     extends javax.swing.JPanel 
     implements WizardPanel
 {
 
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
     /** Creates new form IntroPanel */
     public IntroPanel() {
         initComponents ();

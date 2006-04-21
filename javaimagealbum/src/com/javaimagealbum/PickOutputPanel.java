@@ -36,13 +36,17 @@ import java.awt.*;
  * Allows user to change the order of the files in the list.
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class PickOutputPanel 
     extends javax.swing.JPanel 
     implements WizardPanel, ItemListener
 {
-    static ResourceBundle res = ResourceFactory.getBundle();
+
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	static ResourceBundle res = ResourceFactory.getBundle();
 //    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     /** Creates new form ReorderFilesPanel */

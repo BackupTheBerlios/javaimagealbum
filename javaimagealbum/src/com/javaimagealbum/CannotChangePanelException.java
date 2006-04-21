@@ -30,6 +30,9 @@ package com.javaimagealbum;
  */
 public class CannotChangePanelException extends Exception {
 
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
     /**
      * Creates new <code>CannotChangePanelException</code> without 
      * detail message.

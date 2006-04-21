@@ -18,11 +18,14 @@ import javax.swing.SwingUtilities;
 /**
  *
  * @author  mroth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class ZoomFrame extends javax.swing.JFrame {
     
-    /** Creates new form ZoomFrame */
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	/** Creates new form ZoomFrame */
     public ZoomFrame() {
         initComponents();
         setIconImage( new javax.swing.ImageIcon(

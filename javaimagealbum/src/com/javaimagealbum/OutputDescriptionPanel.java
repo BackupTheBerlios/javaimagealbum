@@ -32,12 +32,15 @@ import javax.swing.DefaultComboBoxModel;
 /**
  * Allows user to change the order of the files in the list.
  *
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class OutputDescriptionPanel extends javax.swing.JPanel implements WizardPanel
 {
 
-    /** Creates new form ReorderFilesPanel */
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	/** Creates new form ReorderFilesPanel */
     public OutputDescriptionPanel(PublishManager publishManager) {
         this.publishManager = publishManager;
         initComponents ();

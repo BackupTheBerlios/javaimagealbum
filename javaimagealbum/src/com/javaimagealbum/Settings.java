@@ -28,7 +28,7 @@ import java.io.*;
  * Persistent Settings for Java Image Album.
  *
  * @author  mroth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public final class Settings 
     extends PersistentSettings 
@@ -51,7 +51,7 @@ public final class Settings
      * Initializes Settings object.  This should be called at
      * program initialization.  
      * 
-     * @param IOException Thrown if settings file exists, but 
+     * @throws IOException Thrown if settings file exists, but 
      *   could not be retrieved.
      */
     public static void init() 

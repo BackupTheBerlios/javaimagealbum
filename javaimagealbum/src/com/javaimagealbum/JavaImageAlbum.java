@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
  * Main entry point for Java Image Album.
  *
  * @author  mroth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
 */
 public class JavaImageAlbum {
     static ResourceBundle res = ResourceFactory.getBundle();

@@ -1,21 +1,21 @@
 /*
  * <license>
- * The contents of this file are subject to the Mozilla Public License 
- * Version 1.1 (the "License"); you may not use this file except in 
- * compliance with the License.  You may obtain a copy of the License 
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License
  * at http://www.mozilla.org/MPL/
- * 
- * Software distributed under the License is distributed on an 
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or 
- * implied. See the License for the specific language governing rights 
+ *
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing rights
  * and limitations under the License.
- * 
+ *
  * The Original Code is Web Photo Publisher.
- * 
- * The Initial Developer of the Original Code is Mark Roth.  Portions 
- * created by Mark Roth are Copyright (C) 2003 Mark Roth.  
+ *
+ * The Initial Developer of the Original Code is Mark Roth.  Portions
+ * created by Mark Roth are Copyright (C) 2003 Mark Roth.
  * All Rights Reserved.
- * 
+ *
  * Contributor(s) listed below.
  * </license>
  */
@@ -36,41 +36,43 @@ import com.javaimagealbum.resources.ResourceFactory;
  * @author  Mirko Actis
  */
 public class JavaImageAlbumFrame extends javax.swing.JFrame {
+    /** Default serial version */
+    private static final long serialVersionUID = 1L;
+    
     static ResourceBundle res = ResourceFactory.getBundle();
 //    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
-
-    private static final Package PACKAGE = JavaImageAlbumFrame.class.getPackage(); 
-
+    
+    private static final Package PACKAGE = JavaImageAlbumFrame.class.getPackage();
+    
     /** Creates new form JavaImageAlbumFrame */
     public JavaImageAlbumFrame( ) {
         
-        initComponents ();
+        initComponents();
         setIconImage( new javax.swing.ImageIcon(
-            getClass().getResource(
-            "/com/javaimagealbum/images/icon.png")
-            ).getImage());
-        pack ();
-
+                getClass().getResource(
+                "/com/javaimagealbum/images/icon.png")
+                ).getImage());
+        pack();
+        
         setTitle( getTitle() + " - "+res.getString("VERSION")+" " + PACKAGE.getImplementationVersion() );
-
+        
         initPanels();
         nextPanel();
         startButtonUpdaterThread();
         
         // Display license agreement if this is the first time.
-        boolean licensed = Settings.getInstance().getProperty( 
-            Constants.LICENSE_AGREED, "false" ).toLowerCase().equals( 
-            PACKAGE.getImplementationVersion() );
+        boolean licensed = Settings.getInstance().getProperty(
+                Constants.LICENSE_AGREED, "false" ).toLowerCase().equals(
+                PACKAGE.getImplementationVersion() );
         if( !licensed ) {
-            LicenseAgreementDialog dialog = new LicenseAgreementDialog( 
-                this, true );
+            LicenseAgreementDialog dialog = new LicenseAgreementDialog(
+                    this, true );
             dialog.setLocationRelativeTo( null );
             dialog.show();
             if( dialog.getAgree() ) {
                 Settings.getInstance().setProperty(
-                    Constants.LICENSE_AGREED, PACKAGE.getImplementationVersion() );
-            }
-            else {
+                        Constants.LICENSE_AGREED, PACKAGE.getImplementationVersion() );
+            } else {
                 JOptionPane.showMessageDialog(
                         this,
                         res.getString("THANKS_FOR"),
@@ -80,7 +82,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             }
         }
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -176,28 +178,28 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         getContentPane().add(pnlSideBar, java.awt.BorderLayout.WEST);
 
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         restartPanel();
     }//GEN-LAST:event_btnRestartActionPerformed
-
+    
   private void btnCancelActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
       exit();
   }//GEN-LAST:event_btnCancelActionPerformed
-
+  
   private void btnBackActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
       backPanel();
   }//GEN-LAST:event_btnBackActionPerformed
-
+  
   private void btnNextActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
       nextPanel();
   }//GEN-LAST:event_btnNextActionPerformed
-
-    /** Exit the Application */
+  
+  /** Exit the Application */
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
         exit();
     }//GEN-LAST:event_exitForm
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCancel;
@@ -208,7 +210,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCurrent;
     private javax.swing.JPanel pnlSideBar;
     // End of variables declaration//GEN-END:variables
-
+    
     private PublishManager publishManager = new PublishManager();
     private int currentPanelIndex = -1;
     private JPanel[] panels = null;
@@ -216,8 +218,8 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     
     // Create all panels
     private void initPanels() {
-        boolean skipIntro = Settings.getInstance().getProperty( 
-            Constants.SKIP_INTRO, "false" ).toLowerCase().equals( "true" );
+        boolean skipIntro = Settings.getInstance().getProperty(
+                Constants.SKIP_INTRO, "false" ).toLowerCase().equals( "true" );
         
         panels = new JPanel[7];
         panels[0] = new IntroPanel();
@@ -235,15 +237,14 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
                 panels[i-1] = tmp[i];
             }
         }
-
+        
         currentPanelIndex = -1;
     }
     
     // Advance to the next panel
     private void nextPanel() {
-        if( (currentPanel == null) || 
-            ((WizardPanel)currentPanel).isSatisfied() ) 
-        {
+        if( (currentPanel == null) ||
+                ((WizardPanel)currentPanel).isSatisfied() ) {
             int prevPanelIndex = currentPanelIndex;
             try {
                 currentPanelIndex++;
@@ -252,8 +253,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
                 }
                 updateButtons();
                 changePanel( panels[currentPanelIndex], true );
-            }
-            catch( CannotChangePanelException e ) {
+            } catch( CannotChangePanelException e ) {
                 currentPanelIndex = prevPanelIndex;
                 updateButtons();
             }
@@ -285,8 +285,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             }
             updateButtons();
             changePanel( panels[currentPanelIndex], false );
-        }
-        catch( CannotChangePanelException e ) {
+        } catch( CannotChangePanelException e ) {
             currentPanelIndex = prevPanelIndex;
             updateButtons();
         }
@@ -296,21 +295,19 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     private void updateButtons() {
         WizardPanel wizPanel = (WizardPanel)currentPanel;
         btnBack.setEnabled( currentPanelIndex > 0 );
-        btnNext.setEnabled( 
-            ( (wizPanel != null) && wizPanel.isSatisfied() ) &&
-            ( currentPanelIndex < (panels.length - 1) )
-        );
+        btnNext.setEnabled(
+                ( (wizPanel != null) && wizPanel.isSatisfied() ) &&
+                ( currentPanelIndex < (panels.length - 1) )
+                );
         if( publishManager.isGenerationComplete() ) {
-            btnRestart.setEnabled( 
-                ( currentPanelIndex == (panels.length - 1) ));
             btnCancel.setText( res.getString("CLOSE") );
         }
+        btnRestart.setEnabled( ( currentPanelIndex != 0 ));
     }
     
     // Change the current panel selection
-    private void changePanel( JPanel panel, boolean forwardDirection ) 
-        throws CannotChangePanelException
-    {
+    private void changePanel( JPanel panel, boolean forwardDirection )
+    throws CannotChangePanelException {
         if( currentPanel != null ) {
             if( currentPanel instanceof WizardPanel ) {
                 ((WizardPanel)currentPanel).hidePanel( forwardDirection );
@@ -319,13 +316,13 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
             pnlCurrent.remove( currentPanel );
         }
         currentPanel = panel;
-        pnlCurrent.add (panel);
+        pnlCurrent.add(panel);
         panel.setVisible( true );
         if( panel instanceof WizardPanel ) {
             ((WizardPanel)panel).showPanel();
         }
-   }
-
+    }
+    
     // Starts a thread that continuously updates the status
     // of the buttons
     private void startButtonUpdaterThread() {
@@ -334,8 +331,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
                 while( true ) {
                     try {
                         Thread.sleep( 250 );
-                    }
-                    catch( InterruptedException e ) {
+                    } catch( InterruptedException e ) {
                     }
                     updateButtons();
                 }
@@ -352,18 +348,17 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         // First, verify that we don't have any unsaved captions (that
         // the user might want to save)
         if( publishManager.isUnsavedCaptions() &&
-            publishManager.getStoreCaptions() ) 
-        {
+                publishManager.getStoreCaptions() ) {
             Toolkit.getDefaultToolkit().beep();
             int result = JOptionPane.showConfirmDialog( this,
-                "You have edited captions for one or more photos,\n" +
-                "and you have indicated that you would like them\n" +
-                "to be remembered.\n\n" +
-                "Would you like to save them before exiting?\n" +
-                "(Select Cancel if you don't want to exit)",
-                "Unsaved Captions",
-                JOptionPane.YES_NO_CANCEL_OPTION, 
-                JOptionPane.QUESTION_MESSAGE );
+                    "You have edited captions for one or more photos,\n" +
+                    "and you have indicated that you would like them\n" +
+                    "to be remembered.\n\n" +
+                    "Would you like to save them before exiting?\n" +
+                    "(Select Cancel if you don't want to exit)",
+                    "Unsaved Captions",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE );
             
             if( result == JOptionPane.YES_OPTION ) {
                 publishManager.saveCaptions();
@@ -371,24 +366,23 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
                 // Check if they are still unsaved.
                 if( publishManager.isUnsavedCaptions() ) {
                     result = JOptionPane.showConfirmDialog( this,
-                        "One or more captions could not be saved.\n" +
-                        "Do you want to exit anyway?",
-                        "Warning - Could Not Save Captions",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE );
+                            "One or more captions could not be saved.\n" +
+                            "Do you want to exit anyway?",
+                            "Warning - Could Not Save Captions",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE );
                     if( result == JOptionPane.NO_OPTION ) {
                         dontExit = true;
                     }
                 }
-            }
-            else if( result == JOptionPane.CANCEL_OPTION ) {
+            } else if( result == JOptionPane.CANCEL_OPTION ) {
                 dontExit = true;
             }
         }
         
         return dontExit;
     }
-   
+    
     /**
      * Check to see if we shouldn't exit because the user has unsaved
      * photos.
@@ -399,11 +393,11 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         if( publishManager.isUnsavedPhotos() ) {
             Toolkit.getDefaultToolkit().beep();
             int result = JOptionPane.showConfirmDialog( this,
-                res.getString("NO_OUTPUT_GENERATED") +
-                res.getString("ARE_YOU_SURE_EXIT"),
-                res.getString("NOTHING_GENERATED"),
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE );
+                    res.getString("NO_OUTPUT_GENERATED") +
+                    res.getString("ARE_YOU_SURE_EXIT"),
+                    res.getString("NOTHING_GENERATED"),
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE );
             if( result == JOptionPane.NO_OPTION ) {
                 dontExit = true;
             }
@@ -417,25 +411,25 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
      */
     public static void main( String[] args ) {
         JOptionPane.showMessageDialog( null,
-            "Your startup script is out of date.\n" + 
-            "Please update your startup script to execute the following:\n\n" +
-            "  java -jar javaimagealbum.jar\n\n" +
-            "Thank you, and sorry for the inconvenience.",
-            "Please Update Startup Script",
-            JOptionPane.ERROR_MESSAGE );
+                "Your startup script is out of date.\n" +
+                "Please update your startup script to execute the following:\n\n" +
+                "  java -jar javaimagealbum.jar\n\n" +
+                "Thank you, and sorry for the inconvenience.",
+                "Please Update Startup Script",
+                JOptionPane.ERROR_MESSAGE );
         System.exit( 1 );
     }
     
     private void exit() {
         boolean dontExit = false;
-
+        
         dontExit = checkDontExitUnsavedCaptions();
         dontExit = dontExit || checkDontExitUnsavedPhotos();
-
+        
         if( !dontExit ) {
             // If we haven't found a reason not to exit, then exit.
             System.exit( 0 );
         }
     }
-
+    
 }

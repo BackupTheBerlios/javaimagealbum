@@ -27,7 +27,7 @@ import java.io.*;
 import java.util.*;
 import java.awt.image.*;
 
-// XXX - Change from querying PublishManager to passing in settings
+// TODO: - Change from querying PublishManager to passing in settings
 // in constructor.
 
 /**

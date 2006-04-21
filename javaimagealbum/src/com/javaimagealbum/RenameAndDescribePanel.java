@@ -43,12 +43,15 @@ extends javax.swing.JPanel
 implements WizardPanel, TableModelListener, ListSelectionListener
 {
 
-    /** Creates new form RenameAndDescribePanel */
+    /** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	/** Creates new form RenameAndDescribePanel */
     public RenameAndDescribePanel( PublishManager publishManager ) {
         this.publishManager = publishManager;
         initComponents ();
         
-        // XXX - pnlModifiers not complete yet
+        // TODO: - pnlModifiers not complete yet
         pnlModifiers.setVisible( false );
         
         // Read default setting for auto preview checkbox:
@@ -368,7 +371,7 @@ implements WizardPanel, TableModelListener, ListSelectionListener
             PhotoSource source = publishManager.getPhotoSource();
             ArrayList photoList = source.getPhotos();
             OutputPhoto ophoto = (OutputPhoto)photoList.get( index );
-            // XXX - to be implemented
+            // TODO: - to be implemented
             ophoto.rotateCW();
             updatePreview();
         }
@@ -380,7 +383,7 @@ implements WizardPanel, TableModelListener, ListSelectionListener
             PhotoSource source = publishManager.getPhotoSource();
             ArrayList photoList = source.getPhotos();
             OutputPhoto ophoto = (OutputPhoto)photoList.get( index );
-            // XXX - to be implemented
+            // TODO: - to be implemented
             ophoto.rotateCCW();
             updatePreview();
         }
@@ -587,7 +590,10 @@ implements WizardPanel, TableModelListener, ListSelectionListener
     }
     
     private class PhotoCaptionTableModel extends AbstractTableModel {
-        private String[] columnNames = {
+        /** Default serial version */
+    	private static final long serialVersionUID = 1L;
+    	
+		private String[] columnNames = {
             " ", "Output Filename", "Caption" };
         private Class[] columnClasses = {
             Boolean.class, String.class, String.class

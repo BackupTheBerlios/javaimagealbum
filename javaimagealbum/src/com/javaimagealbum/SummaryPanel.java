@@ -32,13 +32,17 @@ import com.javaimagealbum.resources.ResourceFactory;
  * Allows user to change the order of the files in the list.
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class SummaryPanel 
     extends javax.swing.JPanel 
     implements WizardPanel, Observer
 {
-    static ResourceBundle res = ResourceFactory.getBundle();
+
+	/** Default serial version */
+	private static final long serialVersionUID = 1L;
+	
+	static ResourceBundle res = ResourceFactory.getBundle();
     static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     /** Creates new form ReorderFilesPanel */

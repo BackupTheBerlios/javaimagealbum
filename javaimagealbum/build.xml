@@ -45,15 +45,18 @@
   <target name="propertiesBuild">
     <property file="${BuildFile}"/>
     <property name="CurrTag"        value=  "${PrjName}-${PrjVersion}.${IntRel}"/>
-    <property name="jarFullName"    value=  "${jarName}-${PrjVersion}_${IntRel}.jar"/>
+    <property name="jarFullName"    value=  "${PrjName}-${PrjVersion}_${IntRel}.jar"/>
+    <property name="CurrRel"        value=  "${PrjVersion}.${IntRel}"/>
 
     <echo message="PrjName           = ${PrjName}"/>
     <echo message="PrjVersion        = ${PrjVersion}"/>
     <echo message="IntRel            = ${IntRel}"/>
+    <echo message="CurrRel           = ${CurrRel}"/>
     <echo message="CurrTag           = ${CurrTag}"/>
     <echo message="LastReleaseBuild  = ${LastRelease}"/>
     <echo message=""/>
-    <echo message="jarName           = ${jarFullName}"/>
+    <echo message="jarFullName       = ${jarFullName}"/>
+    <echo message="jarName           = ${jarName}"/>
   </target>
 
   <target name="properties">
@@ -69,7 +72,7 @@
     <echo message="distDir           = ${dist}"/>
     <!--echo message="scriptDir         = ${script}"/>
     <echo message="configDir         = ${config}"/-->
-    <echo message="JDocDir           = ${JDocDir}"/>
+    <echo message="JDocDir           = ${JDoc}"/>
     <echo message="JDocPackages      = ${JDocPackages}"/>
     <echo message="excludeFiles      = ${excludeFiles}"/>
     <echo message="includeFiles      = ${includeFiles}"/>
@@ -123,7 +126,7 @@
         <attribute name="Built-By" value="${user.name}"/>
         <attribute name="Implementation-Title" value="${PrjName}"/>
         <attribute name="Main-Class" value="com.javaimagealbum.JavaImageAlbum"/>
-        <attribute name="Implementation-Version" value="${PrjVersion}.${IntRel}"/>
+        <attribute name="Implementation-Version" value="${CurrRel}"/>
         <attribute name="Last-Integration" value="${LastRelease}"/>
         <attribute name="Last-Build" value="${TODAY}"/>
         <attribute name="Implementation-Vendor" value="Mirko Actis"/>
@@ -134,7 +137,7 @@
 
   <target name="release" depends="clean,compile,incRelease"
           description="Creates Relese jar and distribution">
-    <jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar">
+    <jar basedir="${build}/classes" jarfile="${dist}/${jarName}">
     <!--jar basedir="${build}/classes" jarfile="${dist}/${PrjName}.jar"
          manifest="${src}/manifest/MANIFEST.MF"-->
         <include name="**" />
@@ -142,7 +145,7 @@
         <attribute name="Built-By" value="${user.name}"/>
         <attribute name="Implementation-Title" value="${PrjName}"/>
 		<attribute name="Main-Class" value="com.javaimagealbum.JavaImageAlbum"/>
-        <attribute name="Implementation-Version" value="${CurrTag}"/>
+        <attribute name="Implementation-Version" value="${CurrRel}"/>
         <attribute name="Last-Integration" value="${LastRelease}"/>
         <attribute name="Last-Build" value="${TODAY}"/>
         <attribute name="Implementation-Vendor" value="Mirko Actis"/>
@@ -164,7 +167,7 @@
 
   <target name="debug" depends="dist" 
           description="Debug Java Image Album (JPDA)">
-    <java jar="${dist}/${PrjName}.jar" fork="yes">
+    <java jar="${dist}/${jarFullName}" fork="yes">
       <jvmarg value="-Xdebug"/>
       <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y"/>
       <!-- Alternative that works faster on Windows -->
@@ -184,9 +187,10 @@
   <target name="signJar" depends="init,properties"
 				description="Sign the jar for WebStart">
 	<!-- keytool -genkey -alias javaimagealbum -->
-	<signjar jar="${dist}/${PrjName}.jar"
+	<signjar jar="${dist}/${jarName}"
                 alias="javaimagealbum"
-                storepass="javaimagepwd"/>
+                storepass="javaimagealbumpasswd"
+				keystore="keystore/.keystore"/>
   </target>
 
   <target name="javadoc"
@@ -202,7 +206,6 @@
       version="true"
       use="true"
       classpath="${build}"
-      classpathref="base.path"
       windowtitle="${PrjName}" >
 
 		  <packageset dir="${src}" defaultexcludes="yes">
@@ -210,8 +213,8 @@
 		  </packageset>
 
       <doctitle><![CDATA[<h1>${PrjName} ${PrjVersion}</h1>]]></doctitle>
-      <bottom><![CDATA[<i>Copyright &#169; Mirko Actis All Rights Reserved.</i>]]></bottom>
-      <tag name="todo" scope="all" description="To do:" />
+      <bottom><![CDATA[<i>Copyright &#169; Mirko Actis Grosso All Rights Reserved.</i>]]></bottom>
+      <!--tag name="TODO:" scope="all" description="To do:" /-->
     </javadoc>
   </target>
 

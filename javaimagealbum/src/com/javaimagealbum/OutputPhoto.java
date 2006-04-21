@@ -17,7 +17,7 @@
  * All Rights Reserved.
  * 
  * Contributor(s) listed below.
- * Mirko Actis
+ * Mirko Actis Grosso
  * </license>
  */
 
@@ -32,7 +32,7 @@ import com.javaimagealbum.exif.ExifReader;
  * Stores information about a photograph to be output.
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class OutputPhoto {
 
@@ -333,11 +333,11 @@ public class OutputPhoto {
     // Modifiers (not yet implemented):
     
     public void rotateCW() {
-        // XXX - to be implemented
+        // TODO: - to be implemented
     }
     
     public void rotateCCW() {
-        // XXX - to be implemented
+        // TODO: - to be implemented
     }
     
 }

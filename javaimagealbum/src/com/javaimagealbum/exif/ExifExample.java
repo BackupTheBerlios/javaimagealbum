@@ -48,38 +48,41 @@ import javax.swing.KeyStroke;
 import javax.swing.BoxLayout;
 
 public class ExifExample extends JFrame implements ActionListener {
+    /** Default serial version */
+    private static final long serialVersionUID = 1L;
+    
     public ExifExample() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 runOnClose();
             }
         });
-
+        
         jLabel = new JLabel();
         jLabel.setHorizontalAlignment(JLabel.CENTER);
         jLabel.setPreferredSize(new Dimension(200, 200));
-
+        
         textArea = new JTextArea(10, 40);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setEditable(false);
-
+        
         JScrollPane areaScrollPane = new JScrollPane(textArea);
         areaScrollPane
                 .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         areaScrollPane
                 .setBorder(BorderFactory.createEmptyBorder(6, 10, 10, 10));
-
+        
         Container contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-
+        
         contentPane.add(jLabel);
         contentPane.add(areaScrollPane);
-
+        
         // -- Create Menu Bar -- //
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-
+        
         // File Menu
         JMenu menu = new JMenu("File");
         JMenuItem menuItem = new JMenuItem("Open Image");
@@ -88,26 +91,26 @@ public class ExifExample extends JFrame implements ActionListener {
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
                 ActionEvent.CTRL_MASK));
         menu.add(menuItem);
-
+        
         menuItem = new JMenuItem("Quit");
         menuItem.setActionCommand("quit");
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
                 ActionEvent.CTRL_MASK));
         menu.add(menuItem);
-
+        
         menuBar.add(menu);
-
+        
         pack();
         show();
     }
-
+    
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("open")) {
             JFileChooser fc = new JFileChooser(cwd);
             fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int retValue = fc.showOpenDialog(this);
-
+            
             if (retValue == JFileChooser.APPROVE_OPTION) {
                 File imageFile = fc.getSelectedFile();
                 cwd = fc.getSelectedFile().getParentFile();
@@ -117,7 +120,7 @@ public class ExifExample extends JFrame implements ActionListener {
             runOnClose();
         }
     }
-
+    
     private void openImage(File f) {
         if (ExifReader.isExif(f)) {
             ExifHashMap hashMap = new ExifHashMap(ExifReader.decode(f));
@@ -162,20 +165,20 @@ public class ExifExample extends JFrame implements ActionListener {
             textArea.setText("");
         }
     }
-
+    
     private void runOnClose() {
         System.exit(0);
     }
-
+    
     public static void main(String[] args) {
         new ExifExample();
     }
-
+    
     private File cwd = new File(System.getProperty("user.dir"));
-
+    
     private JLabel jLabel;
-
+    
     private JTextArea textArea;
-
+    
     private String newLine = System.getProperty("line.separator");
 }
