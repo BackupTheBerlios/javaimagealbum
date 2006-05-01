@@ -157,7 +157,7 @@
   <target name="clean" depends="init" 
           description="Cleans all generated files">
     <delete dir="${build}"/>
-    <delete dir="${dist}"/>
+    <delete file="${dist}/${jarFullName}"/>
   </target>
 
   <target name="run" depends="dist"
