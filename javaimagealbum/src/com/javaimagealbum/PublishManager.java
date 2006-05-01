@@ -66,6 +66,7 @@ public class PublishManager extends Observable {
     private int resizePortraitsWidth = 480;
     private int resizePortraitsHeight = 640;
     private boolean storeCaptions = false;
+    private boolean storeDescriptions = false;
     private boolean publishFullSize = false;
 //    private boolean generationComplete = false;
     private int outputColumns = 4;
@@ -82,6 +83,10 @@ public class PublishManager extends Observable {
     // if they click Cancel.
     // Set to true if the user changed one or more captions.
     private boolean unsavedCaptions = false;
+    // Keep track of what data is unsaved so we can warn the user
+    // if they click Cancel.
+    // Set to true if the user change title or description.
+    private boolean unsavedDescriptions = false;
     // Set to true if the program thinks the user has the intent to 
     // generate more photos but hasn't yet.
     private boolean unsavedPhotos = false;
@@ -109,10 +114,10 @@ public class PublishManager extends Observable {
     
     private void loadOutputSettings() {
         Settings settings = Settings.getInstance();
-        setAlbumTitle( settings.getProperty( Constants.ALBUM_TITLE, 
-            "Photos" ) );
-        setAlbumDescription( settings.getProperty( Constants.ALBUM_DESCRIPTION, 
-        "" ) );
+//        setAlbumTitle( settings.getProperty( Constants.ALBUM_TITLE, 
+//            "Photos" ) );
+//        setAlbumDescription( settings.getProperty( Constants.ALBUM_DESCRIPTION, 
+//        "" ) );
         setOutputColumns( Integer.parseInt(
             settings.getProperty( Constants.OUTPUT_COLUMNS, "4" ) ) );
         setThumbnailsPerPage( settings.getProperty( 
@@ -134,6 +139,8 @@ public class PublishManager extends Observable {
         setPublishFullSize( settings.getProperty( Constants.PUBLISH_FULL_SIZE,
             "false" ).toLowerCase().equals( "true" ) );
         setStoreCaptions( settings.getProperty( Constants.STORE_CAPTIONS,
+            "true" ).toLowerCase().equals( "true" ) );
+        setStoreDescriptions( settings.getProperty( Constants.STORE_DESCRIPTIONS,
             "true" ).toLowerCase().equals( "true" ) );
         setLinkToAlbumIndex( settings.getProperty( 
             Constants.LINK_TO_ALBUM_INDEX, "true" ).toLowerCase().equals( 
@@ -157,10 +164,10 @@ public class PublishManager extends Observable {
     
     public void persistOutputSettings() {
         Settings settings = Settings.getInstance();
-        settings.setProperty( Constants.ALBUM_TITLE, 
-            getAlbumTitle() );
-        settings.setProperty( Constants.ALBUM_DESCRIPTION, 
-            getAlbumDescription() );
+//        settings.setProperty( Constants.ALBUM_TITLE, 
+//            getAlbumTitle() );
+//        settings.setProperty( Constants.ALBUM_DESCRIPTION, 
+//            getAlbumDescription() );
         settings.setProperty( Constants.OUTPUT_COLUMNS,
             "" + getOutputColumns() );
         settings.setProperty( Constants.THUMBNAILS_PER_PAGE,
@@ -181,6 +188,8 @@ public class PublishManager extends Observable {
             "" + getPublishFullSize() );
         settings.setProperty( Constants.STORE_CAPTIONS,
             "" + getStoreCaptions() );
+        settings.setProperty( Constants.STORE_DESCRIPTIONS,
+            "" + getStoreDescriptions() );
         settings.setProperty( Constants.LINK_TO_ALBUM_INDEX, 
             "" + getLinkToAlbumIndex() );
         settings.setProperty( Constants.DESCRIPTION_IN_EMPTY_PAGE, 
@@ -209,6 +218,20 @@ public class PublishManager extends Observable {
      */
     public boolean isUnsavedCaptions() {
         return this.unsavedCaptions;
+    }
+    
+    /**
+     * Set to true if Description is changed
+     */
+    public void setUnsavedDescriptions( boolean unsavedDescriptions ) {
+        this.unsavedDescriptions = unsavedDescriptions;
+    }
+    
+    /**
+     * Returns true if Description is changed
+     */
+    public boolean isUnsavedDescriptions() {
+        return this.unsavedDescriptions;
     }
     
     /**
@@ -341,6 +364,14 @@ public class PublishManager extends Observable {
         return this.storeCaptions;
     }
     
+    public void setStoreDescriptions( boolean storeDescriptions ) {
+        this.storeDescriptions = storeDescriptions;
+    }
+    
+    public boolean getStoreDescriptions() {
+        return this.storeDescriptions;
+    }
+    
     public void setLinkToAlbumIndex( boolean linkToAlbumIndex ) {
         this.linkToAlbumIndex = linkToAlbumIndex;
     }
@@ -407,9 +438,10 @@ public class PublishManager extends Observable {
         
         String thumbnailSummary;
         String sizeSummary;
-        String captionsSummary;
-        String linkSummary;
-        String exifSummary;
+        String captionsSummary = "";
+        String descriptionsSummary = "";
+        String linkSummary = "";
+        String exifSummary = "";
         String detailSummary;
         String outputLanguageSummary;
         
@@ -443,8 +475,11 @@ public class PublishManager extends Observable {
                 "  <li>Captions will be saved as .txt files in " +
                 "the " + sourceDir + " folder.</li>\n";
         }
-        else {
-            captionsSummary = "";
+
+        if( storeDescriptions ) {
+            descriptionsSummary =
+                "  <li>Title and Description will be saved as .txt files in " +
+                "the " + sourceDir + " folder.</li>\n";
         }
 
         // Construct thumbnail pages summary:
@@ -473,14 +508,12 @@ public class PublishManager extends Observable {
             " of thumbnails.</li>\n";
             
         // Create link summary:
-        linkSummary = "";
         if( linkToAlbumIndex ) {
             linkSummary = "  <li>A link will be generated to the parent " +
                 "Album Index folder</li>\n";
         }
 
         // Create Exif summary:
-        exifSummary = "";
         if( showExif ) {
             exifSummary = "  <li>Exif information will be printed</li>\n";
         }
@@ -544,6 +577,10 @@ public class PublishManager extends Observable {
                 if( storeCaptions ) {
                     stages.addElement( 
                         new OutputCaptionsStage( PublishManager.this ) );
+                }
+                if( storeDescriptions ) {
+                    stages.addElement( 
+                        new OutputDescriptionStage( PublishManager.this ) );
                 }
                 stages.addElement( 
                     new OutputPhotosStage( PublishManager.this ) );
@@ -689,4 +726,11 @@ public class PublishManager extends Observable {
         stage.generate();
     }
     
+    /**
+     * Save descriptions now - don't wait until generation time.
+     */
+    public void saveDescriptions() {
+        OutputDescriptionStage stage = new OutputDescriptionStage( this );
+        stage.generate();
+    }
 }

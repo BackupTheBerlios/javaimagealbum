@@ -235,9 +235,17 @@ public class OutputHTMLStage extends OutputStage {
                 String pageName = "index";
                 if( i > 0 ) pageName += i;
                 pageName += ".html";
-                if( i != index ) out.print( "<a href=\"" + pageName + "\">" );
+                if( i == index ) {
+                    out.print( "<b>" );
+                } else {
+                    out.print( "<a href=\"" + pageName + "\">" );
+                }
                 out.print( "" + (bi+1) + "-" + (ei+1) );
-                if( i != index ) out.print( "</a>" );
+                if( i == index ) {
+                    out.print( "</b>" );
+                } else {
+                    out.print( "</a>" );
+                }
                 if( (i < (numPages-1) ) ) {
                     out.print( " | " );
                 }

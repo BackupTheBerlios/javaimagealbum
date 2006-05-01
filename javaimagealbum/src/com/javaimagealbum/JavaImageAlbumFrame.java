@@ -33,7 +33,7 @@ import com.javaimagealbum.resources.ResourceFactory;
  * Main frame for web photo publisher
  *
  * @author  Mark Roth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class JavaImageAlbumFrame extends javax.swing.JFrame {
     /** Default serial version */
@@ -102,7 +102,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         lblSideBar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Java Image Album");
+        setTitle(Constants.APP_NAME);
         setBackground(java.awt.Color.white);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -385,6 +385,50 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     
     /**
      * Check to see if we shouldn't exit because the user has unsaved
+     * Title or Description.
+     */
+    private boolean checkDontExitUnsavedDescriptions() {
+        boolean dontExit = false;
+        // First, verify that we don't have any unsaved descriptions (that
+        // the user might want to save)
+        if( publishManager.isUnsavedDescriptions() &&
+                publishManager.getStoreDescriptions() ) {
+            Toolkit.getDefaultToolkit().beep();
+            int result = JOptionPane.showConfirmDialog( this,
+                    "You have edited Title or Description,\n" +
+                    "and you have indicated that you would like them\n" +
+                    "to be remembered.\n\n" +
+                    "Would you like to save them before exiting?\n" +
+                    "(Select Cancel if you don't want to exit)",
+                    "Unsaved Descriptionss",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE );
+            
+            if( result == JOptionPane.YES_OPTION ) {
+                publishManager.saveDescriptions();
+                
+                // Check if they are still unsaved.
+                if( publishManager.isUnsavedDescriptions() ) {
+                    result = JOptionPane.showConfirmDialog( this,
+                            "Title or Description could not be saved.\n" +
+                            "Do you want to exit anyway?",
+                            "Warning - Could Not Save Title or Description",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE );
+                    if( result == JOptionPane.NO_OPTION ) {
+                        dontExit = true;
+                    }
+                }
+            } else if( result == JOptionPane.CANCEL_OPTION ) {
+                dontExit = true;
+            }
+        }
+        
+        return dontExit;
+    }
+    
+    /**
+     * Check to see if we shouldn't exit because the user has unsaved
      * photos.
      */
     private boolean checkDontExitUnsavedPhotos() {
@@ -424,6 +468,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         boolean dontExit = false;
         
         dontExit = checkDontExitUnsavedCaptions();
+        dontExit = dontExit || checkDontExitUnsavedDescriptions();
         dontExit = dontExit || checkDontExitUnsavedPhotos();
         
         if( !dontExit ) {

@@ -57,6 +57,7 @@ public class IntroPanel
         pnlButtons = new javax.swing.JPanel();
         btnWebSite = new javax.swing.JButton();
         btnMailingList = new javax.swing.JButton();
+        btnSubmitBug = new javax.swing.JButton();
         pnlBottom = new javax.swing.JPanel();
         cbSkipIntro = new javax.swing.JCheckBox();
 
@@ -108,6 +109,15 @@ public class IntroPanel
 
         pnlButtons.add(btnMailingList);
 
+        btnSubmitBug.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("SUBMIT_BUG"));
+        btnSubmitBug.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSubmitBugMouseClicked(evt);
+            }
+        });
+
+        pnlButtons.add(btnSubmitBug);
+
         pnlDescription.add(pnlButtons, java.awt.BorderLayout.SOUTH);
 
         add(pnlDescription, java.awt.BorderLayout.CENTER);
@@ -119,6 +129,7 @@ public class IntroPanel
         cbSkipIntro.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbSkipIntro.setMnemonic('d');
         cbSkipIntro.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("DONT_SHOW_INTRO"));
+        cbSkipIntro.setEnabled(false);
         cbSkipIntro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSkipIntroActionPerformed(evt);
@@ -131,12 +142,16 @@ public class IntroPanel
 
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSubmitBugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitBugMouseClicked
+        BrowserControl.displayURL(Constants.HOSTING_URL);
+    }//GEN-LAST:event_btnSubmitBugMouseClicked
+
     private void btnMailingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailingListMouseClicked
-        BrowserControl.displayURL("http://developer.berlios.de/mail/?group_id=5725");
+        BrowserControl.displayURL(Constants.MAIL_LIST);
     }//GEN-LAST:event_btnMailingListMouseClicked
 
     private void btnWebSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWebSiteMouseClicked
-        BrowserControl.displayURL("http://javaimagealbum.berlios.de");
+        BrowserControl.displayURL(Constants.SUBMIT_BUG);
     }//GEN-LAST:event_btnWebSiteMouseClicked
 
     private void cbSkipIntroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSkipIntroActionPerformed
@@ -147,6 +162,7 @@ public class IntroPanel
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMailingList;
+    private javax.swing.JButton btnSubmitBug;
     private javax.swing.JButton btnWebSite;
     private javax.swing.JCheckBox cbSkipIntro;
     private javax.swing.JLabel lblTitle;

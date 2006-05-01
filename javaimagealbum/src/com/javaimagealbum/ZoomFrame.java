@@ -23,9 +23,9 @@ import javax.swing.SwingUtilities;
 public class ZoomFrame extends javax.swing.JFrame {
     
     /** Default serial version */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 	
-	/** Creates new form ZoomFrame */
+    /** Creates new form ZoomFrame */
     public ZoomFrame() {
         initComponents();
         setIconImage( new javax.swing.ImageIcon(
@@ -129,6 +129,7 @@ public class ZoomFrame extends javax.swing.JFrame {
     
     /** Exit the Application */
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
+        this.dispose();
     }//GEN-LAST:event_exitForm
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -170,9 +171,10 @@ public class ZoomFrame extends javax.swing.JFrame {
                                     lblImage.setIcon(imageIcon);
                                 }
                             });
-                    }
-                    catch(IOException e) {
+                    } catch(IOException e) {
                         lblImage.setText("Image not found.");
+                    } catch (OutOfMemoryError e){
+                        lblImage.setText("Image too big. Out of Java heap space.");
                     }
                 }
             }.start();

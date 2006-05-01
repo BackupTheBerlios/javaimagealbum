@@ -593,7 +593,7 @@ implements WizardPanel, TableModelListener, ListSelectionListener
         /** Default serial version */
     	private static final long serialVersionUID = 1L;
     	
-		private String[] columnNames = {
+	private String[] columnNames = {
             " ", "Output Filename", "Caption" };
         private Class[] columnClasses = {
             Boolean.class, String.class, String.class

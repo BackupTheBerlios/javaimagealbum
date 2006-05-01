@@ -26,6 +26,7 @@
 
 package com.javaimagealbum;
 
+import java.io.File;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 
@@ -44,6 +45,8 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
     public OutputDescriptionPanel(PublishManager publishManager) {
         this.publishManager = publishManager;
         initComponents ();
+        publishManager.setAlbumTitle( OutputDescriptionStage.loadTitle(publishManager.getPhotoSource().getSourceDir()) );
+        publishManager.setAlbumDescription( OutputDescriptionStage.loadDescription(publishManager.getPhotoSource().getSourceDir()) );
     }
 
     /** This method is called from within the constructor to
@@ -111,6 +114,12 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
         tfAlbumTitle.setFont(new java.awt.Font("SansSerif", 0, 12));
         tfAlbumTitle.setText("Photos");
+        tfAlbumTitle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfAlbumTitleKeyPressed(evt);
+            }
+        });
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -136,6 +145,12 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         taAlbumDescription.setMargin(new java.awt.Insets(1, 5, 2, 4));
         taAlbumDescription.setMinimumSize(new java.awt.Dimension(11, 21));
         taAlbumDescription.setPreferredSize(new java.awt.Dimension(440, 100));
+        taAlbumDescription.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                taAlbumDescriptionKeyPressed(evt);
+            }
+        });
+
         pnlAlbumTitleOption.add(taAlbumDescription, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -225,6 +240,16 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         add(pnlContents, java.awt.BorderLayout.CENTER);
 
     }// </editor-fold>//GEN-END:initComponents
+
+    private void taAlbumDescriptionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_taAlbumDescriptionKeyPressed
+        publishManager.setUnsavedDescriptions(true);
+        scanAndPersistOptions();
+    }//GEN-LAST:event_taAlbumDescriptionKeyPressed
+
+    private void tfAlbumTitleKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAlbumTitleKeyPressed
+        publishManager.setUnsavedDescriptions(true);
+        scanAndPersistOptions();
+    }//GEN-LAST:event_tfAlbumTitleKeyPressed
 
     private void coOutLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coOutLanguageActionPerformed
         scanAndPersistOptions();

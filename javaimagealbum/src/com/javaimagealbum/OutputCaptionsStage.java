@@ -52,6 +52,7 @@ public class OutputCaptionsStage extends OutputStage {
         int numPhotos = photos.size();
 
         try {
+            // Save description and title
             for( int index = 0; !isStopGeneration() && (index < numPhotos); 
                 index++ ) 
             {
@@ -66,6 +67,7 @@ public class OutputCaptionsStage extends OutputStage {
                 String caption = outPhoto.getCaption();
                 updateCaption( captionFile, caption );
             }
+            
             // All captions are secure.
             publishManager.setUnsavedCaptions( false );
         }
