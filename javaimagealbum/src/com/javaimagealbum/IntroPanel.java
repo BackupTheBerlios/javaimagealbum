@@ -50,75 +50,136 @@ public class IntroPanel
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        pnlTitle = new javax.swing.JPanel();
+        java.awt.GridBagConstraints gridBagConstraints;
+
         lblTitle = new javax.swing.JLabel();
         pnlDescription = new javax.swing.JPanel();
         tpDescription = new javax.swing.JTextPane();
-        pnlButtons = new javax.swing.JPanel();
+        pnlNavigation = new javax.swing.JPanel();
+        lblWebSite = new javax.swing.JLabel();
         btnWebSite = new javax.swing.JButton();
-        btnMailingList = new javax.swing.JButton();
+        lblSubmitBug = new javax.swing.JLabel();
         btnSubmitBug = new javax.swing.JButton();
+        lblMailingList = new javax.swing.JLabel();
+        btnMailingList = new javax.swing.JButton();
         pnlBottom = new javax.swing.JPanel();
         cbSkipIntro = new javax.swing.JCheckBox();
 
         setLayout(new java.awt.BorderLayout());
 
         setBackground(java.awt.Color.white);
-        pnlTitle.setLayout(new javax.swing.BoxLayout(pnlTitle, javax.swing.BoxLayout.Y_AXIS));
-
-        pnlTitle.setBackground(java.awt.Color.white);
         lblTitle.setFont(new java.awt.Font("SansSerif", 1, 14));
         lblTitle.setForeground(new java.awt.Color(0, 153, 153));
         lblTitle.setText("Java Image Album");
         lblTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
-        pnlTitle.add(lblTitle);
-
-        add(pnlTitle, java.awt.BorderLayout.NORTH);
+        add(lblTitle, java.awt.BorderLayout.NORTH);
 
         pnlDescription.setLayout(new java.awt.BorderLayout());
 
         pnlDescription.setBackground(java.awt.Color.white);
         pnlDescription.setAlignmentX(0.0F);
-        pnlDescription.setMaximumSize(new java.awt.Dimension(132, 25));
+        pnlDescription.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         pnlDescription.setMinimumSize(new java.awt.Dimension(132, 25));
-        pnlDescription.setPreferredSize(new java.awt.Dimension(132, 25));
+        pnlDescription.setPreferredSize(new java.awt.Dimension(544, 200));
         tpDescription.setEditable(false);
         tpDescription.setFont(new java.awt.Font("SansSerif", 0, 12));
         tpDescription.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("INTRO_PANEL_DESCRIPTION"));
-        tpDescription.setMinimumSize(new java.awt.Dimension(6, 2));
-        tpDescription.setPreferredSize(new java.awt.Dimension(400, 2));
+        tpDescription.setAlignmentX(0.0F);
+        tpDescription.setMinimumSize(new java.awt.Dimension(544, 100));
+        tpDescription.setPreferredSize(new java.awt.Dimension(544, 100));
         tpDescription.setRequestFocusEnabled(false);
-        pnlDescription.add(tpDescription, java.awt.BorderLayout.CENTER);
+        pnlDescription.add(tpDescription, java.awt.BorderLayout.NORTH);
 
-        pnlButtons.setBackground(java.awt.Color.white);
+        pnlNavigation.setLayout(new java.awt.GridBagLayout());
+
+        pnlNavigation.setBackground(java.awt.Color.white);
+        pnlNavigation.setAlignmentX(0.0F);
+        pnlNavigation.setFont(new java.awt.Font("SansSerif", 0, 12));
+        pnlNavigation.setPreferredSize(new java.awt.Dimension(544, 70));
+        lblWebSite.setFont(new java.awt.Font("SansSerif", 0, 12));
+        lblWebSite.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblWebSite.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LBL_WEB_SITE"));
+        lblWebSite.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblWebSite.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        lblWebSite.setMinimumSize(new java.awt.Dimension(275, 23));
+        lblWebSite.setPreferredSize(new java.awt.Dimension(500, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        pnlNavigation.add(lblWebSite, gridBagConstraints);
+
         btnWebSite.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("WEB_SITE"));
+        btnWebSite.setMaximumSize(new java.awt.Dimension(90, 23));
+        btnWebSite.setMinimumSize(new java.awt.Dimension(90, 23));
+        btnWebSite.setPreferredSize(new java.awt.Dimension(90, 23));
         btnWebSite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnWebSiteMouseClicked(evt);
             }
         });
 
-        pnlButtons.add(btnWebSite);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        pnlNavigation.add(btnWebSite, gridBagConstraints);
 
-        btnMailingList.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("MAILING_LIST"));
-        btnMailingList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMailingListMouseClicked(evt);
-            }
-        });
-
-        pnlButtons.add(btnMailingList);
+        lblSubmitBug.setFont(new java.awt.Font("SansSerif", 0, 12));
+        lblSubmitBug.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSubmitBug.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LBL_SUBMIT_BUG"));
+        lblSubmitBug.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblSubmitBug.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        lblSubmitBug.setMinimumSize(new java.awt.Dimension(275, 23));
+        lblSubmitBug.setPreferredSize(new java.awt.Dimension(500, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        pnlNavigation.add(lblSubmitBug, gridBagConstraints);
 
         btnSubmitBug.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("SUBMIT_BUG"));
+        btnSubmitBug.setMaximumSize(new java.awt.Dimension(90, 23));
+        btnSubmitBug.setMinimumSize(new java.awt.Dimension(90, 23));
+        btnSubmitBug.setPreferredSize(new java.awt.Dimension(90, 23));
         btnSubmitBug.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSubmitBugMouseClicked(evt);
             }
         });
 
-        pnlButtons.add(btnSubmitBug);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        pnlNavigation.add(btnSubmitBug, gridBagConstraints);
 
-        pnlDescription.add(pnlButtons, java.awt.BorderLayout.SOUTH);
+        lblMailingList.setFont(new java.awt.Font("SansSerif", 0, 12));
+        lblMailingList.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblMailingList.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LBL_MAILING_LIST"));
+        lblMailingList.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblMailingList.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        lblMailingList.setMinimumSize(new java.awt.Dimension(275, 23));
+        lblMailingList.setPreferredSize(new java.awt.Dimension(500, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        pnlNavigation.add(lblMailingList, gridBagConstraints);
+
+        btnMailingList.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("MAILING_LIST"));
+        btnMailingList.setMaximumSize(new java.awt.Dimension(90, 23));
+        btnMailingList.setMinimumSize(new java.awt.Dimension(90, 23));
+        btnMailingList.setPreferredSize(new java.awt.Dimension(90, 23));
+        btnMailingList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMailingListMouseClicked(evt);
+            }
+        });
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        pnlNavigation.add(btnMailingList, gridBagConstraints);
+
+        pnlDescription.add(pnlNavigation, java.awt.BorderLayout.CENTER);
 
         add(pnlDescription, java.awt.BorderLayout.CENTER);
 
@@ -129,7 +190,6 @@ public class IntroPanel
         cbSkipIntro.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbSkipIntro.setMnemonic('d');
         cbSkipIntro.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("DONT_SHOW_INTRO"));
-        cbSkipIntro.setEnabled(false);
         cbSkipIntro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSkipIntroActionPerformed(evt);
@@ -165,11 +225,13 @@ public class IntroPanel
     private javax.swing.JButton btnSubmitBug;
     private javax.swing.JButton btnWebSite;
     private javax.swing.JCheckBox cbSkipIntro;
+    private javax.swing.JLabel lblMailingList;
+    private javax.swing.JLabel lblSubmitBug;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblWebSite;
     private javax.swing.JPanel pnlBottom;
-    private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlDescription;
-    private javax.swing.JPanel pnlTitle;
+    private javax.swing.JPanel pnlNavigation;
     private javax.swing.JTextPane tpDescription;
     // End of variables declaration//GEN-END:variables
 

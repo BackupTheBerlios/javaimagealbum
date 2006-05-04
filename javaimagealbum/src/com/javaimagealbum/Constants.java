@@ -45,7 +45,7 @@ public final class Constants {
     public static final String SITE_URL = "http://javaimagealbum.berlios.de/";
     public static final String HOSTING_URL = "http://developer.berlios.de/javaimagealbum/";
     public static final String MAIL_LIST = "http://developer.berlios.de/mail/?group_id=5725";
-    public static final String SUBMIT_BUG = "http://javaimagealbum.berlios.de/";
+    public static final String SUBMIT_BUG = "http://developer.berlios.de/bugs/?group_id=5725";
 
     // Settings Constants:
     

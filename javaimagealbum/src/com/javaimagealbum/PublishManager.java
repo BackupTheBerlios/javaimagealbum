@@ -639,9 +639,8 @@ public class PublishManager extends Observable {
                             }
                             Toolkit.getDefaultToolkit().beep();
                             JOptionPane.showMessageDialog( null, 
-                                "Your photos were not published for the " +
-                                "following reason:\n\n " + errorMessage, 
-                                "Could not publish photos", 
+                                res.getString("NOT_PUBLISH_REASON") + errorMessage, 
+                                res.getString("COULD_NOT_PUBLISH"), 
                                 JOptionPane.ERROR_MESSAGE );
                         }
                     }.start();

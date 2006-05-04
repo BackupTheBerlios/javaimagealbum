@@ -33,7 +33,7 @@ import com.javaimagealbum.resources.ResourceFactory;
  * Generates all HTML output files.
  *
  * @author  mroth
- * @author  Mirko Actis
+ * @author  Mirko Actis Grosso
  */
 public class OutputHTMLStage extends OutputStage {
     static ResourceBundle resOutput;
@@ -92,7 +92,7 @@ public class OutputHTMLStage extends OutputStage {
             updateProgress();
             setGenerationMessage( "Generating Index HTML Pages..." );
             
-            for( int i = 0; i < numPages; i++ ) {
+            for( int i = 0 ; i < numPages; i++ ) {
                 generateThumbnailPage( i, perPage, numPages );
             }
         } catch( IOException e ) {
@@ -200,19 +200,23 @@ public class OutputHTMLStage extends OutputStage {
             out.print(
                     "    <a href=\"../\">&lt; "+resOutput.getString("BACK_ALBUM_INDEX")+"</a><br/>\n");
         }
+        out.print("<br/>\n");
+        
         out.print(
                 "    <div align=\"Center\">\n" +
                 "      <h1>" + publishManager.getAlbumTitle() + "</h1>\n" );
+        
+        // Manage description page
         if (publishManager.getAlbumDescription().length() > 0) {
             if (publishManager.getDescriptionInEmptyPage()) {
                 // Create link to Description Page
                 out.print(
-                        "    <div align=\"Center\">\n" +
+                        "    <div align=\"Left\">\n" +
                         "       <a href=\"indexDescription.html\">"+resOutput.getString("ALBUM_DESCRIPTION")+"</a>\n" +
                         "    </div>\n" +
-                        "    <br/>");
-            } else {
-                // Add Album Description
+                        "    <br/>\n");
+            } else if (index == 0) {
+                // Add Album Description in first Thumbnail page
                 out.print(
                         "    <div align=\"Left\">\n" +
                         "      " + publishManager.getAlbumDescription() + "\n" +
@@ -220,6 +224,7 @@ public class OutputHTMLStage extends OutputStage {
                         "    <br/>\n");
             }
         }
+        
         if( numPages > 1 ) {
             out.print(
                     "      <hr/>\n" +
@@ -328,9 +333,9 @@ public class OutputHTMLStage extends OutputStage {
     }
     
     /**
-     * Print page Footer
+     * Print page footer
      */
-    private void printFooter( PrintWriter out, String todaysDate ) {    
+    private void printFooter( PrintWriter out, String todaysDate ) {
         out.print(
                 "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
                 "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
@@ -339,7 +344,6 @@ public class OutputHTMLStage extends OutputStage {
                 "/>"+Constants.APP_NAME+"</a>" +
                 "</small></div>\n");
     }
-    
     
     /**
      * Generate detail pages

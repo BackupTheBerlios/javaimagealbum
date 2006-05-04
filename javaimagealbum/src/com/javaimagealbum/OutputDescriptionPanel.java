@@ -163,15 +163,23 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
 
         pnlCheckboxes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        pnlCheckboxes.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        pnlCheckboxes.setMinimumSize(new java.awt.Dimension(300, 120));
         pnlCheckboxes.setOpaque(false);
-        pnlCheckboxes.setPreferredSize(new java.awt.Dimension(285, 120));
+        pnlCheckboxes.setPreferredSize(new java.awt.Dimension(544, 126));
         pnlDescriptionPage.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         pnlDescriptionPage.setBackground(java.awt.Color.white);
+        pnlDescriptionPage.setMaximumSize(new java.awt.Dimension(300, 25));
+        pnlDescriptionPage.setMinimumSize(new java.awt.Dimension(300, 25));
+        pnlDescriptionPage.setPreferredSize(new java.awt.Dimension(544, 30));
         cbDescriptionInEmptyPage.setBackground(java.awt.Color.white);
         cbDescriptionInEmptyPage.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbDescriptionInEmptyPage.setMnemonic('o');
         cbDescriptionInEmptyPage.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CREATE_DESCRIPTION_PAGE"));
+        cbDescriptionInEmptyPage.setMaximumSize(new java.awt.Dimension(300, 25));
+        cbDescriptionInEmptyPage.setMinimumSize(new java.awt.Dimension(300, 25));
+        cbDescriptionInEmptyPage.setPreferredSize(new java.awt.Dimension(544, 20));
         cbDescriptionInEmptyPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDescriptionInEmptyPageActionPerformed(evt);
@@ -185,13 +193,17 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         pnlLinkToAlbumIndex.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         pnlLinkToAlbumIndex.setBackground(java.awt.Color.white);
-        pnlLinkToAlbumIndex.setMinimumSize(new java.awt.Dimension(285, 35));
-        pnlLinkToAlbumIndex.setPreferredSize(new java.awt.Dimension(340, 35));
+        pnlLinkToAlbumIndex.setMaximumSize(new java.awt.Dimension(300, 25));
+        pnlLinkToAlbumIndex.setMinimumSize(new java.awt.Dimension(300, 25));
+        pnlLinkToAlbumIndex.setPreferredSize(new java.awt.Dimension(544, 30));
         cbLinkToAlbumIndex.setBackground(java.awt.Color.white);
         cbLinkToAlbumIndex.setFont(new java.awt.Font("SansSerif", 0, 12));
         cbLinkToAlbumIndex.setMnemonic('i');
         cbLinkToAlbumIndex.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LINK_TO_PARENT_FOLDER"));
         cbLinkToAlbumIndex.setToolTipText("Select this option if you plan on uploading more\nthan one photo album to your account.  A link\nto the parent folder will be included in the output.");
+        cbLinkToAlbumIndex.setMaximumSize(new java.awt.Dimension(300, 25));
+        cbLinkToAlbumIndex.setMinimumSize(new java.awt.Dimension(300, 25));
+        cbLinkToAlbumIndex.setPreferredSize(new java.awt.Dimension(544, 20));
         cbLinkToAlbumIndex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbLinkToAlbumIndexActionPerformed(evt);
@@ -205,12 +217,14 @@ public class OutputDescriptionPanel extends javax.swing.JPanel implements Wizard
         pnlOutLanguage.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         pnlOutLanguage.setBackground(java.awt.Color.white);
-        pnlOutLanguage.setMinimumSize(new java.awt.Dimension(285, 35));
-        pnlOutLanguage.setPreferredSize(new java.awt.Dimension(285, 35));
+        pnlOutLanguage.setMaximumSize(new java.awt.Dimension(300, 25));
+        pnlOutLanguage.setMinimumSize(new java.awt.Dimension(300, 25));
+        pnlOutLanguage.setPreferredSize(new java.awt.Dimension(544, 30));
         lblOutLanguage.setBackground(new java.awt.Color(255, 255, 255));
         lblOutLanguage.setDisplayedMnemonic('m');
         lblOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));
         lblOutLanguage.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("OUTPUT_LANGUAGE"));
+        lblOutLanguage.setMaximumSize(new java.awt.Dimension(400, 16));
         pnlOutLanguage.add(lblOutLanguage);
 
         coOutLanguage.setFont(new java.awt.Font("SansSerif", 0, 12));

@@ -42,9 +42,9 @@ import com.javaimagealbum.resources.ResourceFactory;
  */
 public class LicenseAgreementDialog extends javax.swing.JDialog {
     /** Default serial version */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 	
-	static ResourceBundle res = ResourceFactory.getBundle();
+    static ResourceBundle res = ResourceFactory.getBundle();
 //    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
 
     /** Location of the license file */
