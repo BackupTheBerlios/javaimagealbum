@@ -143,7 +143,7 @@ public class OutputHTMLStage extends OutputStage {
             out.print(
                     "      </table>\n" +
                     "    </div>\n" );
-            printFooter( out, todaysDate );
+            printDetailFooter( out );
             out.print(
                     "  </body>\n" +
                     "</html>" );
@@ -324,7 +324,7 @@ public class OutputHTMLStage extends OutputStage {
         out.print(
                 "      </table>\n" +
                 "    </div>\n" );
-        printFooter( out, todaysDate );
+        printThumbnailFooter( out, todaysDate );
         out.print(
                 "  </body>\n" +
                 "</html>" );
@@ -333,15 +333,26 @@ public class OutputHTMLStage extends OutputStage {
     }
     
     /**
-     * Print page footer
+     * Print Thunbnail page footer
      */
-    private void printFooter( PrintWriter out, String todaysDate ) {
+    private void printThumbnailFooter( PrintWriter out, String todaysDate ) {
         out.print(
                 "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
                 "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
-                "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i><br/>\n" +
-                "      <a href=\""+Constants.SITE_URL+"\"" +
-                "/>"+Constants.APP_NAME+"</a>" +
+                "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i>\n" +
+                "      <a href=\""+Constants.SITE_URL+"\"/>"+Constants.APP_NAME+"</a><br/>" + 
+                resOutput.getString("VERSION") + " " + Settings.getInstance().getProperty( Constants.LICENSE_AGREED ) +
+                "</small></div>\n");
+    }
+    
+    /**
+     * Print Detail page footer
+     */
+    private void printDetailFooter( PrintWriter out ) {
+        out.print(
+                "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i>\n" +
+                "      <a href=\""+Constants.SITE_URL+"\"/>"+Constants.APP_NAME+"</a><br/>" + 
+                resOutput.getString("VERSION") + " " + Settings.getInstance().getProperty( Constants.LICENSE_AGREED ) +
                 "</small></div>\n");
     }
     
@@ -453,14 +464,11 @@ public class OutputHTMLStage extends OutputStage {
             printExifInformation( outPhoto, out );
         }
         
+        printDetailFooter( out );;
         out.print(
-                "    <div align=\"right\"><small><i>"+resOutput.getString("GENERATED_BY")+"</i><br/>\n" +
-                "      <a href=\""+Constants.SITE_URL+"\"" +
-                "/>"+Constants.APP_NAME+"</a>" +
-                "</small></div>\n" +
                 "  </body>\n" +
                 "</html>\n" );
-        
+
         out.close();
         
         return pageFilename;

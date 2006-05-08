@@ -141,12 +141,12 @@ public class FileSelector
                     found = child;
                 }
             }
-            if( found != null ) {
-                path = path.pathByAddingChild( found );
-                node = found;
+            if( found == null ) {
+                break;
             }
             else {
-                break;
+                path = path.pathByAddingChild( found );
+                node = found;
             }
         }
         trFileTree.setSelectionPath( path );

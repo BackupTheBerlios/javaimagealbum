@@ -38,6 +38,7 @@ public class CannotChangePanelException extends Exception {
      * detail message.
      */
     public CannotChangePanelException() {
+    	super();
     }
 
 

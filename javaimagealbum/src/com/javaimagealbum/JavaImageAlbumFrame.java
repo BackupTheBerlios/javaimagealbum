@@ -40,9 +40,6 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     private static final long serialVersionUID = 1L;
     
     static ResourceBundle res = ResourceFactory.getBundle();
-//    static ResourceBundle resM = ResourceFactory.getMnemonicBundle();
-    
-    private static final Package PACKAGE = JavaImageAlbumFrame.class.getPackage();
     
     /** Creates new form JavaImageAlbumFrame */
     public JavaImageAlbumFrame( ) {
@@ -54,7 +51,8 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
                 ).getImage());
         pack();
         
-        setTitle( getTitle() + " - "+res.getString("VERSION")+" " + PACKAGE.getImplementationVersion() );
+        String version = JavaImageAlbumFrame.class.getPackage().getImplementationVersion();
+        setTitle( getTitle() + " - "+res.getString("VERSION")+" " + version );
         
         initPanels();
         nextPanel();
@@ -63,15 +61,15 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         // Display license agreement if this is the first time.
         boolean licensed = Settings.getInstance().getProperty(
                 Constants.LICENSE_AGREED, "false" ).toLowerCase().equals(
-                PACKAGE.getImplementationVersion() );
+                version );
         if( !licensed ) {
             LicenseAgreementDialog dialog = new LicenseAgreementDialog(
                     this, true );
             dialog.setLocationRelativeTo( null );
             dialog.show();
             if( dialog.getAgree() ) {
-                Settings.getInstance().setProperty(
-                        Constants.LICENSE_AGREED, PACKAGE.getImplementationVersion() );
+                Settings.getInstance().setProperty( 
+                        Constants.LICENSE_AGREED, version );
             } else {
                 JOptionPane.showMessageDialog(
                         this,
@@ -216,7 +214,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
     private JPanel[] panels = null;
     private JPanel currentPanel = null;
     
-    // Create all panels
+    /** Create all panels */
     private void initPanels() {
         boolean skipIntro = Settings.getInstance().getProperty(
                 Constants.SKIP_INTRO, "false" ).toLowerCase().equals( "true" );
@@ -241,7 +239,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         currentPanelIndex = -1;
     }
     
-    // Advance to the next panel
+    /** Advance to the next panel */
     private void nextPanel() {
         if( (currentPanel == null) ||
                 ((WizardPanel)currentPanel).isSatisfied() ) {
@@ -260,7 +258,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         }
     }
     
-    // Go to first panel
+    /** Go to first panel */
     private void restartPanel() {
         int prevPanelIndex = currentPanelIndex;
         currentPanelIndex = 0;
@@ -275,7 +273,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         }
     }
     
-    // Go back one panel
+    /** Go back one panel */
     private void backPanel() {
         int prevPanelIndex = currentPanelIndex;
         try {
@@ -291,7 +289,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         }
     }
     
-    // Update the buttons based on the panel index
+    /** Update the buttons based on the panel index */
     private void updateButtons() {
         WizardPanel wizPanel = (WizardPanel)currentPanel;
         btnBack.setEnabled( currentPanelIndex > 0 );
@@ -305,7 +303,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         btnRestart.setEnabled( ( currentPanelIndex != 0 ));
     }
     
-    // Change the current panel selection
+    /** Change the current panel selection */
     private void changePanel( JPanel panel, boolean forwardDirection )
     throws CannotChangePanelException {
         if( currentPanel != null ) {
@@ -323,8 +321,10 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         }
     }
     
-    // Starts a thread that continuously updates the status
-    // of the buttons
+    /**
+     * Starts a thread that continuously updates the status
+     * of the buttons
+     */
     private void startButtonUpdaterThread() {
         new Thread() {
             public void run() {
@@ -464,6 +464,9 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         System.exit( 1 );
     }
     
+    /**
+     * Verify if there are some unsaved data and exit
+     */
     private void exit() {
         boolean dontExit = false;
         

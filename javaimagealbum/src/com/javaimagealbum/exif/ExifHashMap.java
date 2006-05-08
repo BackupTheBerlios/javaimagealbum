@@ -67,21 +67,23 @@ public class ExifHashMap extends HashMap {
     }
     
     public String getShutterSpeed() {
-        Rational rat = (Rational) getObject(ExifConstants.SHUTTER_SPEED);
-        if (rat == null)
+        final Rational rat = (Rational) getObject(ExifConstants.SHUTTER_SPEED);
+        if (rat == null) {
             return "";
+        }
         return rat.getFraction();
     }
     
     public String getFStop() {
-        Rational rat = (Rational) getObject(ExifConstants.F_NUMBER);
-        if (rat == null)
+        final Rational rat = (Rational) getObject(ExifConstants.F_NUMBER);
+        if (rat == null) {
             return "";
+        }
         return "" + rat.getDoubleValue();
     }
     
     public String getExposureProgram() {
-        int programNumber = getInt(ExifConstants.EXPOSURE_PROGRAM);
+        final int programNumber = getInt(ExifConstants.EXPOSURE_PROGRAM);
         switch (programNumber) {
             case 1:
                 return "Manual Mode";
@@ -133,7 +135,7 @@ public class ExifHashMap extends HashMap {
     }
     
     public String getFlash() {
-        int flash = getInt(ExifConstants.FLASH);
+        final int flash = getInt(ExifConstants.FLASH);
         switch (flash) {
             case 0:
                 return "No Flash";
@@ -178,7 +180,7 @@ public class ExifHashMap extends HashMap {
         return "";
     }
     
-    public String getDate(int dateType) {
+    public String getDate( final int dateType ) {
         String dateTime;
         if (dateType == DIGITIZED_DATE) {
             dateTime = getString(ExifConstants.DIGITIZED_DATE);
@@ -192,8 +194,9 @@ public class ExifHashMap extends HashMap {
         
         ArrayList dateParts = new ArrayList();
         // perlUtil.split(dateParts, "/[: ]/", dateTime);
-        if (dateParts.size() != 6)
+        if (dateParts.size() != 6) {
             return dateTime;
+        }
         
         int mNum = getAInt(dateParts, 1) - 1;
         String month = "Month " + mNum;

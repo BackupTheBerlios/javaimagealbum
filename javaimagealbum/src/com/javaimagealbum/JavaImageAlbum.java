@@ -22,7 +22,6 @@
 
 package com.javaimagealbum;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 import javax.swing.*;
 
 import com.javaimagealbum.resources.*;
@@ -39,8 +38,6 @@ import java.util.ResourceBundle;
 public class JavaImageAlbum {
     static ResourceBundle res = ResourceFactory.getBundle();
     
-    private static final Package PACKAGE = JavaImageAlbumFrame.class.getPackage();
-    
     /**
      * @param args the command line arguments \n -v : show version information \n -h : show help
      */
@@ -50,7 +47,7 @@ public class JavaImageAlbum {
             if (args.length > 0) {
                 for(int i = 0;i < args.length;i++) {
                     if (args[i].equalsIgnoreCase("-v")) {
-                        System.out.println( Constants.APP_NAME + " " + res.getString("VERSION")+" " + PACKAGE.getImplementationVersion() );
+                        System.out.println( Constants.APP_NAME + " " + res.getString("VERSION")+" " + JavaImageAlbumFrame.class.getPackage().getImplementationVersion() );
                         System.out.println( "For more information see: ");
                         System.out.println( "Web Site: " + Constants.SITE_URL );
                         System.out.println( "Mailing List: " + Constants.MAIL_LIST );

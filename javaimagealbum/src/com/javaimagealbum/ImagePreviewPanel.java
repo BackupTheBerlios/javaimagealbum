@@ -40,6 +40,7 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
 	
     /** Creates new form PreviewPanel */
     public ImagePreviewPanel() {
+    	super();
         initComponents ();
         startPreviewThread();
     }
@@ -133,10 +134,7 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
         else {
             // If the image is in the cache, show it immediately:
             BufferedImage image = cache.getImage( file.getAbsolutePath() );
-            if( image != null ) {
-                setImage( image );
-            }
-            else {
+            if( image == null ) {
                 // Clear the image:
                 setImage( (BufferedImage)null );
 
@@ -148,6 +146,9 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
                     }
                 }
             }
+            else {
+                setImage( image );
+            }
         }
     }
     
@@ -157,22 +158,22 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
      *
      * @param thumbnail The thumbnail to display
      */
-    public void setImage( BufferedImage thumbnail ) {
-        if( thumbnail != null ) {
-            state = STATE_IMAGE;
+    public void setImage( final BufferedImage thumbnail ) {
+        if( thumbnail == null ) {
+            state = STATE_BLANK;
         }
         else {
-            state = STATE_BLANK;
+            state = STATE_IMAGE;
         }
         
         this.previewImage = thumbnail;
         repaint();
     }
     
-    public void paint( Graphics g ) {
+    public void paint( final Graphics g ) {
         wasPainted = true;
         
-        Dimension size = getSize();
+        final Dimension size = getSize();
         g.setColor( getBackground() );
         g.fillRect( 0, 0, size.width, size.height );
         
@@ -190,6 +191,9 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
             case STATE_INVALID:
                 paintInvalid( g );
                 break;
+            default:
+                paintInvalid( g );
+            	break;
             }
         }
         else {
@@ -197,27 +201,27 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
         }
     }
     
-    private void paintBlank( Graphics g ) {
+    private void paintBlank( final Graphics g ) {
         drawText( g, "" );
     }
     
-    private void paintLoading( Graphics g ) {
+    private void paintLoading( final Graphics g ) {
         drawText( g, "Loading Preview..." );
     }
     
-    private void paintImage( Graphics g ) {
+    private void paintImage( final Graphics g ) {
         g.drawImage( previewImage, 0, 0, null );
     }
     
-    private void paintInvalid( Graphics g ) {
+    private void paintInvalid( final Graphics g ) {
         drawText( g, "Not a Photo." );
     }
     
-    private void drawText( Graphics g, String text ) {
+    private void drawText( final Graphics g, final String text ) {
         g.setColor( Color.black );
-        Dimension size = getSize();
-        int textWidth = g.getFontMetrics().stringWidth( text );
-        int textHeight = g.getFontMetrics().getHeight();
+        final Dimension size = getSize();
+        final int textWidth = g.getFontMetrics().stringWidth( text );
+        final int textHeight = g.getFontMetrics().getHeight();
         
         g.drawString( 
             text,
@@ -246,7 +250,7 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
                 // can rest or if we have to load another one.
                 File justLoaded = null;
                 do {
-                    if( imageFile == justLoaded ) {
+                    if( imageFile == justLoaded )  {
                         try {                    
                             synchronized( imageFileChanged ) {
                                 imageFileChanged.wait();
@@ -272,8 +276,8 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
                     }
                     else {
                         try {
-                            String key = imageFile.getAbsolutePath();
-                            BufferedImage cachedImage = cache.getImage( key );
+                        	final String key = imageFile.getAbsolutePath();
+                        	final BufferedImage cachedImage = cache.getImage( key );
                             if( cachedImage == null ) {
                                 // Image is not in cache.  Load it:
                                 state = STATE_LOADING;
@@ -308,7 +312,7 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
      * to fill up cache slots.
      */
     public void suggestList( final File[] fileList ) {
-        Thread suggestThread = new Thread() {
+    	final Thread suggestThread = new Thread() {
             public void run() {
                 for( int i = 0; keepLoading && (i < fileList.length); i++ ) {
                     if( cache.available() > 0 ) {
@@ -339,7 +343,7 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
      * background.  If false, all background image loading will stop.
      * If true, background image loading will continue
      */
-    public void setKeepLoading( boolean keepLoading ) {
+    public void setKeepLoading( final boolean keepLoading ) {
         this.keepLoading = keepLoading;
     }
     
@@ -347,17 +351,17 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
      * Loads and caches the given image file, if it's not already
      * cached.
      */
-    private synchronized void loadAndCache( File imageFile ) 
+    private synchronized void loadAndCache( final File imageFile ) 
         throws IOException
     {
         // Even if caller does this, it's important that we check again,
         // because this method is synchronized and called from numerous
         // Threads.
-        String key = imageFile.getAbsolutePath();
+    	final String key = imageFile.getAbsolutePath();
         BufferedImage cachedImage = cache.getImage( key );
         if( cachedImage == null ) {
-            Dimension panelSize = getSize();
-            BufferedImage outImage = 
+        	final Dimension panelSize = getSize();
+        	final BufferedImage outImage = 
                 GUIUtils.loadImageFromFile( imageFile, lastThumbnailBuffer,
                 panelSize, panelSize );
             lastThumbnailBuffer = outImage;
@@ -376,13 +380,13 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
      */
     private class ThumbnailCache {
         // Key = thumbnail key, value = Image
-        private Hashtable images;
+    	final private Hashtable images;
         
         // Most recently used images are at the end of this Vector
-        private Vector mruList;
+    	final private Vector mruList;
         
         // How many images to store
-        private int size;
+    	final private int size;
         
         public ThumbnailCache( int initialSize ) {
             size = initialSize;
@@ -394,13 +398,13 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
          * Returns the image with the given key, if it is in the cache.
          * If it's not in the cache, null is returned.
          */
-        public synchronized BufferedImage getImage( String key ) {
+        public synchronized BufferedImage getImage( final String key ) {
             BufferedImage result = null;
             if( images.containsKey( key ) ) {
                 result = (BufferedImage)images.get( key );
                 
                 // Move this image to the front of the MRU list:
-                int index = mruList.indexOf( key );
+                final int index = mruList.indexOf( key );
                 mruList.removeElementAt( index );
                 mruList.addElement( key );
             }
@@ -413,15 +417,15 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
          * the Image is updated.  If the key doesn't exist, the least
          * recently used image is tossed, and this image is added.
          */
-        public synchronized void addImage( String key, BufferedImage image ) {
+        public synchronized void addImage( final String key, final BufferedImage image ) {
             if( images.containsKey( key ) ) {
                 images.put( key, image );
             }
             else {
                 // Destroy old image:
                 if( mruList.size() == size ) {
-                    String oldKey = (String)mruList.elementAt( 0 );
-                    Image img = (Image)images.get( oldKey );
+                	final String oldKey = (String)mruList.elementAt( 0 );
+                	final Image img = (Image)images.get( oldKey );
                     img.flush();
                     images.remove( oldKey );
                     mruList.removeElementAt( 0 );
@@ -438,8 +442,8 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
          */
         public synchronized void invalidate() {
             for( int i = 0; i < mruList.size(); i++ ) {
-                String key = (String)mruList.elementAt( i );
-                BufferedImage image = (BufferedImage)images.get( key );
+            	final String key = (String)mruList.elementAt( i );
+            	final BufferedImage image = (BufferedImage)images.get( key );
                 image.flush();
             }
             mruList.clear();

@@ -125,11 +125,12 @@
       <manifest>
         <attribute name="Built-By" value="${user.name}"/>
         <attribute name="Implementation-Title" value="${PrjName}"/>
+        <attribute name="Class-Path" value="."/>
         <attribute name="Main-Class" value="com.javaimagealbum.JavaImageAlbum"/>
         <attribute name="Implementation-Version" value="${CurrRel}"/>
         <attribute name="Last-Integration" value="${LastRelease}"/>
         <attribute name="Last-Build" value="${TODAY}"/>
-        <attribute name="Implementation-Vendor" value="Mirko Actis"/>
+        <attribute name="Implementation-Vendor" value="Mirko Actis Grosso"/>
         <attribute name="JVM" value="${ant.java.version}"/>
       </manifest>
     </jar>
@@ -148,7 +149,7 @@
         <attribute name="Implementation-Version" value="${CurrRel}"/>
         <attribute name="Last-Integration" value="${LastRelease}"/>
         <attribute name="Last-Build" value="${TODAY}"/>
-        <attribute name="Implementation-Vendor" value="Mirko Actis"/>
+        <attribute name="Implementation-Vendor" value="Mirko Actis Grosso"/>
         <attribute name="JVM" value="${ant.java.version}"/>
       </manifest>
     </jar>
@@ -190,7 +191,8 @@
 	<signjar jar="${dist}/${jarName}"
                 alias="javaimagealbum"
                 storepass="javaimagealbumpasswd"
-				keystore="keystore/.keystore"/>
+				keystore="keystore/jiakeystore"
+				keypass="javaimagealbumpasswd"/>
   </target>
 
   <target name="javadoc"
