@@ -29,6 +29,8 @@ package com.javaimagealbum.exif;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class ExifHashMap extends HashMap {
     
@@ -267,4 +269,26 @@ public class ExifHashMap extends HashMap {
             return "";
         return (String) obj;
     }
+
+    public String toString() {
+    	StringBuffer buf = new StringBuffer();
+    	buf.append("{\n");
+
+    	Iterator i = entrySet().iterator();
+            boolean hasNext = i.hasNext();
+            while (hasNext) {
+    	    Entry e = (Entry) (i.next());
+                Object key = e.getKey();
+                Object value = e.getValue();
+                buf.append((key == this ?  "(this Map)" : key) + "=" + 
+                           (value == this ? "(this Map)": value));
+
+                hasNext = i.hasNext();
+                if (hasNext)
+                    buf.append(",\n");
+            }
+
+    	buf.append("\n}");
+    	return buf.toString();
+        }
 }

@@ -106,8 +106,6 @@ public class OutputHTMLStage extends OutputStage {
     public void generateDescriptionPage()
     throws IOException {
         if (publishManager.getAlbumDescription().length() > 0) {
-            SimpleDateFormat sdf = new SimpleDateFormat( resOutput.getString("DATE_FORMAT") );
-            String todaysDate = sdf.format( new Date() );
             
             String indexFilename = "indexDescription";
             indexFilename += ".html";
@@ -143,7 +141,7 @@ public class OutputHTMLStage extends OutputStage {
             out.print(
                     "      </table>\n" +
                     "    </div>\n" );
-            printDetailFooter( out );
+            printThumbnailFooter( out );
             out.print(
                     "  </body>\n" +
                     "</html>" );
@@ -174,9 +172,6 @@ public class OutputHTMLStage extends OutputStage {
             // only have as many columns as there are photos on this page.
             numCols = onThisPage;
         }
-        
-        SimpleDateFormat sdf = new SimpleDateFormat( resOutput.getString("DATE_FORMAT") );
-        String todaysDate = sdf.format( new Date() );
         
         String indexFilename = "index";
         if( index > 0 ) indexFilename += index;
@@ -324,7 +319,7 @@ public class OutputHTMLStage extends OutputStage {
         out.print(
                 "      </table>\n" +
                 "    </div>\n" );
-        printThumbnailFooter( out, todaysDate );
+        printThumbnailFooter( out );
         out.print(
                 "  </body>\n" +
                 "</html>" );
@@ -335,14 +330,19 @@ public class OutputHTMLStage extends OutputStage {
     /**
      * Print Thunbnail page footer
      */
-    private void printThumbnailFooter( PrintWriter out, String todaysDate ) {
+    private void printThumbnailFooter( PrintWriter out ) {
+        SimpleDateFormat sdf = new SimpleDateFormat( resOutput.getString("DATE_FORMAT") );
+        String todaysDate = sdf.format( new Date() );
+
         out.print(
                 "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
-                "      <i>"+resOutput.getString("PUBLISHED")+": " + todaysDate + "\n" +
-                "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i>\n" +
+                "      <table width=\"100%\"><tr>\n" +
+                "      <td align=\"left\"><small><i>"+resOutput.getString("PUBLISHED")+":</i> " + todaysDate + 
+                "</small></small></td>\n" +
+                "      <td align=\"right\"><small><i>"+resOutput.getString("GENERATED_BY")+"</i>\n" +
                 "      <a href=\""+Constants.SITE_URL+"\"/>"+Constants.APP_NAME+"</a><br/>" + 
-                resOutput.getString("VERSION") + " " + Settings.getInstance().getProperty( Constants.LICENSE_AGREED ) +
-                "</small></div>\n");
+                "</i>" + resOutput.getString("VERSION") + ":</i> " + Settings.getInstance().getProperty( Constants.LICENSE_AGREED ) +
+                "</small></td>\n</tr></table>");
     }
     
     /**
@@ -391,38 +391,15 @@ public class OutputHTMLStage extends OutputStage {
                 "  </head>\n" +
                 "  <body bgcolor=\"#ffffff\">\n" );
         
-        out.print( "<table border=\"0\" cellpadding=\"5\"><tr>\n" );
-        
         String indexPage = "index";
         if( indexPageNum > 0 ) indexPage += indexPageNum;
         indexPage += ".html";
-        out.print( "<td><a href=\"" + indexPage + "\">"+resOutput.getString("BACK_ALBUM")+"</a></td>\n" );
-        
-        if( prev != null ) {
-            out.print(
-                    "<td width=\"180\"><div align=\"center\"><a href=\"" + prev +
-                    "\">&lt;&lt; "+resOutput.getString("PREVIOUS")+" &lt;&lt;</a></div></td>\n" );
-        } else {
-            out.print( "<td width=\"180\"><div align=\"center\">" +
-                    "<font color=\"#999999\">&lt;&lt; "+resOutput.getString("PREVIOUS")+" &lt;&lt;</font>" +
-                    "</div></td>\n" );
+
+        // Add Navigation button
+        if( publishManager.getNavButtonPosition().equals(
+                Constants.NAV_BUTTON_POSITION_ABOVE ) ) {
+            out.print( getNavButton(indexPage, prev, next, index, numPhotos) );
         }
-        
-        if( next != null ) {
-            out.print(
-                    "<td width=\"180\"><a href=\"" + next +
-                    "\">&gt;&gt; "+resOutput.getString("NEXT1")+" &gt;&gt;</a></td>\n" );
-        } else {
-            out.print(
-                    "<td width=\"180\">" +
-                    "<font color=\"#999999\">&gt;&gt; "+resOutput.getString("NEXT1")+" &gt;&gt;" +
-                    "</font></td>\n" );
-        }
-        
-        out.print(
-                "<td>[ "+resOutput.getString("PHOTO")+" " + (index+1) + " "+resOutput.getString("OF")+" " + numPhotos + " ]</td>\n" );
-        
-        out.print( "</tr></table>\n" );
         
         // Generate HTML for image:
         String outImageFilename = outPhoto.getOutImageName();
@@ -457,7 +434,14 @@ public class OutputHTMLStage extends OutputStage {
         if( publishManager.getCaptionPosition().equals(
                 Constants.CAPTION_POSITION_BELOW ) ) {
             out.println( "<br/>\n" );
-            out.print(getCaption(publishManager, caption));
+            out.print( getCaption(publishManager, caption) );
+        }
+        
+        // Add Navigation button
+        if( publishManager.getNavButtonPosition().equals(
+                Constants.NAV_BUTTON_POSITION_BELOW ) ) {
+            out.println( "<br/>\n" );
+            out.print( getNavButton(indexPage, prev, next, index, numPhotos) );
         }
         
         if( publishManager.getShowExif() ) {
@@ -474,19 +458,51 @@ public class OutputHTMLStage extends OutputStage {
         return pageFilename;
     }
     
+     private String getNavButton( String indexPage, String prev, String next, int index, int numPhotos ) {
+    	 StringBuffer out = new StringBuffer();
+		out.append( "<table border=\"0\" cellpadding=\"5\"><tr>\n" );
+		
+		out.append( "<td><a href=\"" + indexPage + "\">"+resOutput.getString("BACK_ALBUM")+"</a></td>\n" );
+		
+		if( prev != null ) {
+		    out.append( "<td width=\"180\"><div align=\"center\"><a href=\"" + prev +
+		            "\">&lt;&lt; "+resOutput.getString("PREVIOUS")+" &lt;&lt;</a></div></td>\n" );
+		} else {
+		    out.append( "<td width=\"180\"><div align=\"center\">" +
+		            "<font color=\"#999999\">&lt;&lt; "+resOutput.getString("PREVIOUS")+" &lt;&lt;</font>" +
+		            "</div></td>\n" );
+		}
+		
+		if( next != null ) {
+		    out.append( "<td width=\"180\"><a href=\"" + next +
+		            "\">&gt;&gt; "+resOutput.getString("NEXT1")+" &gt;&gt;</a></td>\n" );
+		} else {
+		    out.append( "<td width=\"180\">" +
+		            "<font color=\"#999999\">&gt;&gt; "+resOutput.getString("NEXT1")+" &gt;&gt;" +
+		            "</font></td>\n" );
+		}
+		
+		out.append( "<td>[ "+resOutput.getString("PHOTO")+" " + (index+1) + " "+resOutput.getString("OF")+" " + numPhotos + " ]</td>\n" );
+		out.append( "</tr></table>\n" );
+		
+		return out.toString();
+    }        
+
     private String getCaption(PublishManager publishManager, String caption) {
         String out = null;
-        if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_CENTER)) {
-            out = "<div align=\"Center\"><br/>\n" +
-                    "    " + caption + "<br/></div>\n";
-        }
-        if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_LEFT)) {
-            out = "<div align=\"Left\"><br/>\n" +
-                    "    " + caption + "<br/></div>\n";
-        }
-        if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_RIGHT)) {
-            out = "<div align=\"Right\"><br/>\n" +
-                    "    " + caption + "<br/></div>\n";
+        if ( ( caption != null ) && ( !caption.equals("")) ) {
+            if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_CENTER)) {
+                out = "<div align=\"Center\"><br/>\n" +
+                        "    " + caption + "<br/></div>\n";
+            } else if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_LEFT)) {
+                out = "<div align=\"Left\"><br/>\n" +
+                        "    " + caption + "<br/></div>\n";
+            } else if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_RIGHT)) {
+                out = "<div align=\"Right\"><br/>\n" +
+                        "    " + caption + "<br/></div>\n";
+            }
+        } else {
+                out = "<br/>\n<br/>\n";
         }
         return out;
         
@@ -531,8 +547,8 @@ public class OutputHTMLStage extends OutputStage {
             out.print( "      <td>"+outPhoto.getImageHeight()+"</td>\n" );
             out.print( "      <tr><td>Image Width</td>\n" );
             out.print( "      <td>"+outPhoto.getImageWidth()+"</td></tr>\n" );
-//            out.print( "      <tr><td>Log info</td>\n" );
-//            out.print( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
+            out.print( "      <tr><td>Log info</td>\n" );
+            out.print( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
             out.print( "</table>\n" );
         } else {
             out.println( "No EXIF information in this picture.\n" );

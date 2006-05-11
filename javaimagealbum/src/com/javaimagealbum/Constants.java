@@ -87,6 +87,9 @@ public final class Constants {
     public static final String CAPTION_ALIGN_LEFT = "left";
     public static final String CAPTION_ALIGN_CENTER = "center";
     public static final String CAPTION_ALIGN_RIGHT = "right";
+    public static final String NAV_BUTTON_POSITION = "nav_button_position";
+    public static final String NAV_BUTTON_POSITION_BELOW = "below";
+    public static final String NAV_BUTTON_POSITION_ABOVE = "above";
     
     // Miscellaneous Constants:
     public static final int THUMBNAIL_WIDTH = 160;

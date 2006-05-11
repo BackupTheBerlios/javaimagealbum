@@ -76,6 +76,7 @@ public class PublishManager extends Observable {
     private String photoPosition = Constants.PHOTO_POSITION_LEFT;
     private String captionPosition = Constants.CAPTION_POSITION_BELOW;
     private String captionAlign = Constants.CAPTION_ALIGN_LEFT;
+    private String navButtonPosition = Constants.CAPTION_POSITION_BELOW;
     private boolean showExif = false;
     private Locale outputLanguage = res.getLocale();
     
@@ -154,12 +155,14 @@ public class PublishManager extends Observable {
 // TODO: ADD persist options
 //        setOutputLanguage( settings.getProperty( 
 //                Constants.OUTPUT_LANGUAGE ) );
+        setPhotoPosition( settings.getProperty(
+            Constants.PHOTO_POSITION, Constants.PHOTO_POSITION_LEFT ) );
         setCaptionPosition( settings.getProperty(
             Constants.CAPTION_POSITION, Constants.CAPTION_POSITION_BELOW ) );
         setCaptionAlign( settings.getProperty(
                 Constants.CAPTION_ALIGN, Constants.CAPTION_ALIGN_LEFT ) );
-        setPhotoPosition( settings.getProperty(
-            Constants.PHOTO_POSITION, Constants.PHOTO_POSITION_LEFT ) );
+        setNavButtonPosition( settings.getProperty(
+            Constants.NAV_BUTTON_POSITION, Constants.NAV_BUTTON_POSITION_BELOW ) );
     }
     
     public void persistOutputSettings() {
@@ -204,6 +207,8 @@ public class PublishManager extends Observable {
             getCaptionPosition() );
         settings.setProperty( Constants.CAPTION_ALIGN,
             getCaptionAlign() );
+        settings.setProperty( Constants.NAV_BUTTON_POSITION,
+            getNavButtonPosition() );
     }
     
     /**
@@ -416,16 +421,24 @@ public class PublishManager extends Observable {
         return captionPosition;
     }
     
-    public java.lang.String getCaptionAlign() {
-        return captionAlign;
-    }
-    
     public void setCaptionPosition(java.lang.String captionPosition) {
         this.captionPosition = captionPosition;
     }
     
+    public java.lang.String getCaptionAlign() {
+        return captionAlign;
+    }
+    
     public void setCaptionAlign(java.lang.String captionAlign) {
         this.captionAlign = captionAlign;
+    }
+    
+    public java.lang.String getNavButtonPosition() {
+        return navButtonPosition;
+    }
+    
+    public void setNavButtonPosition(java.lang.String navButtonPosition) {
+        this.navButtonPosition = navButtonPosition;
     }
     
     /**
@@ -527,6 +540,8 @@ public class PublishManager extends Observable {
         detailSummary += "  <li>Detail captions will appear " +
             getCaptionPosition() + " the photo aligned " +
             getCaptionAlign() + ".</li>\n";
+        detailSummary += "  <li>Navigation Button will appear " +
+            getNavButtonPosition() + " the photo.</li>\n";
         
         return
             "<html><font face=\"SansSerif,Arial,Helvetica\" size=2>\n" +

@@ -84,6 +84,8 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbCaptionAlign = new javax.swing.JComboBox();
         lblPhotoPosition = new javax.swing.JLabel();
         cbPhotoPosition = new javax.swing.JComboBox();
+        lblNavButtonPosition = new javax.swing.JLabel();
+        cbNavButtonPosition = new javax.swing.JComboBox();
         pnlBroom = new javax.swing.JPanel();
         pnlBroom2 = new javax.swing.JPanel();
 
@@ -328,6 +330,8 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         pnlDetailPages.setOpaque(false);
         lblCaptionPosition.setFont(new java.awt.Font("SansSerif", 0, 12));
         lblCaptionPosition.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CAPTION_POSITION"));
+        lblCaptionPosition.setMaximumSize(new java.awt.Dimension(150, 16));
+        lblCaptionPosition.setPreferredSize(new java.awt.Dimension(140, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
@@ -350,6 +354,8 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
 
         lblCaptionAlign.setFont(new java.awt.Font("SansSerif", 0, 12));
         lblCaptionAlign.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("CAPTION_ALIGN"));
+        lblCaptionAlign.setMaximumSize(new java.awt.Dimension(150, 16));
+        lblCaptionAlign.setPreferredSize(new java.awt.Dimension(140, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
@@ -372,9 +378,11 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
 
         lblPhotoPosition.setFont(new java.awt.Font("SansSerif", 0, 12));
         lblPhotoPosition.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("PHOTO_POSITION"));
+        lblPhotoPosition.setMaximumSize(new java.awt.Dimension(150, 16));
+        lblPhotoPosition.setPreferredSize(new java.awt.Dimension(140, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
         pnlDetailPages.add(lblPhotoPosition, gridBagConstraints);
 
         cbPhotoPosition.setFont(new java.awt.Font("SansSerif", 0, 12));
@@ -389,7 +397,32 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pnlDetailPages.add(cbPhotoPosition, gridBagConstraints);
+
+        lblNavButtonPosition.setFont(new java.awt.Font("SansSerif", 0, 12));
+        lblNavButtonPosition.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("NAV_BUTTON_POSITION"));
+        lblNavButtonPosition.setMaximumSize(new java.awt.Dimension(150, 16));
+        lblNavButtonPosition.setPreferredSize(new java.awt.Dimension(140, 16));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
+        pnlDetailPages.add(lblNavButtonPosition, gridBagConstraints);
+
+        cbNavButtonPosition.setFont(new java.awt.Font("SansSerif", 0, 12));
+        cbNavButtonPosition.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Below Photo", "Above Photo" }));
+        cbNavButtonPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNavButtonPositionActionPerformed(evt);
+            }
+        });
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pnlDetailPages.add(cbNavButtonPosition, gridBagConstraints);
 
         pnlBroom.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -414,6 +447,10 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         add(pnlContents, java.awt.BorderLayout.CENTER);
 
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbNavButtonPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNavButtonPositionActionPerformed
+        scanAndPersistOptions();
+    }//GEN-LAST:event_cbNavButtonPositionActionPerformed
     
     private void cbCaptionAlignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCaptionAlignActionPerformed
         scanAndPersistOptions();
@@ -461,7 +498,9 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbCaptionAlign;
     private javax.swing.JComboBox cbCaptionPosition;
+    private javax.swing.JComboBox cbCaptionPosition1;
     private javax.swing.JCheckBox cbFullSize;
+    private javax.swing.JComboBox cbNavButtonPosition;
     private javax.swing.JComboBox cbPhotoPosition;
     private javax.swing.JCheckBox cbResizeAll;
     private javax.swing.JCheckBox cbResizePortraits;
@@ -472,7 +511,9 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private javax.swing.JLabel lblBy2;
     private javax.swing.JLabel lblCaptionAlign;
     private javax.swing.JLabel lblCaptionPosition;
+    private javax.swing.JLabel lblCaptionPosition1;
     private javax.swing.JLabel lblColumns;
+    private javax.swing.JLabel lblNavButtonPosition;
     private javax.swing.JLabel lblPhotoPosition;
     private javax.swing.JLabel lblThumbnailsPerPage;
     private javax.swing.JLabel lblTitle;
@@ -515,6 +556,11 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         captionAligns.add( Constants.CAPTION_ALIGN_CENTER);
         captionAligns.add( Constants.CAPTION_ALIGN_RIGHT);
     }
+    private static ArrayList navButtonPositions = new ArrayList();
+    static {
+        navButtonPositions.add( Constants.NAV_BUTTON_POSITION_BELOW );
+        navButtonPositions.add( Constants.NAV_BUTTON_POSITION_ABOVE );
+    }
     
     /** 
      * Returns true if all required data was filled in for this panel.
@@ -552,15 +598,19 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbSaveCaptions.setSelected( publishManager.getStoreCaptions() );
         cbFullSize.setSelected( publishManager.getPublishFullSize() );
         cbShowExif.setSelected( publishManager.getShowExif() );
-        String photoPosition = publishManager.getPhotoPosition();
         String captionPosition = publishManager.getCaptionPosition();
-        cbPhotoPosition.setSelectedIndex( photoPositions.indexOf(
-                photoPosition ) );
         cbCaptionPosition.setSelectedIndex( captionPositions.indexOf(
                 captionPosition ) );
         String captionAlign = publishManager.getCaptionAlign();
         cbCaptionAlign.setSelectedIndex( captionAligns.indexOf(
                 captionAlign ) );
+        String photoPosition = publishManager.getPhotoPosition();
+        cbPhotoPosition.setSelectedIndex( photoPositions.indexOf(
+                photoPosition ) );
+        String navButtonPosition = publishManager.getNavButtonPosition();
+        cbNavButtonPosition.setSelectedIndex( navButtonPositions.indexOf(
+                navButtonPosition ) );
+
         enableComponents();
     }
     
@@ -591,12 +641,14 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         publishManager.setStoreCaptions( cbSaveCaptions.isSelected() );
         publishManager.setPublishFullSize( cbFullSize.isSelected() );
         publishManager.setShowExif( cbShowExif.isSelected() );
-        publishManager.setPhotoPosition( (String)photoPositions.get(
-                cbPhotoPosition.getSelectedIndex() ) );
         publishManager.setCaptionPosition( (String)captionPositions.get(
                 cbCaptionPosition.getSelectedIndex() ) );
         publishManager.setCaptionAlign( (String)captionAligns.get(
                 cbCaptionAlign.getSelectedIndex() ) );
+        publishManager.setPhotoPosition( (String)photoPositions.get(
+                cbPhotoPosition.getSelectedIndex() ) );
+        publishManager.setNavButtonPosition( (String)navButtonPositions.get(
+                cbNavButtonPosition.getSelectedIndex() ) );
         
         publishManager.persistOutputSettings();
     }
