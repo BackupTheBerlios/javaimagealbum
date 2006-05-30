@@ -78,6 +78,7 @@ public class PublishManager extends Observable {
     private String captionAlign = Constants.CAPTION_ALIGN_LEFT;
     private String navButtonPosition = Constants.CAPTION_POSITION_BELOW;
     private boolean showExif = false;
+    private boolean exifInSeparatePage = false;
     private Locale outputLanguage = res.getLocale();
     
     // Keep track of what data is unsaved so we can warn the user
@@ -152,6 +153,9 @@ public class PublishManager extends Observable {
         setShowExif( settings.getProperty( 
                 Constants.SHOW_EXIF, "true" ).toLowerCase().equals( 
                 "true" ) );
+        setExifInSeparatePage( settings.getProperty( 
+                Constants.EXIF_IN_SEPARATE_PAGE, "true" ).toLowerCase().equals( 
+                "true" ) );
 // TODO: ADD persist options
 //        setOutputLanguage( settings.getProperty( 
 //                Constants.OUTPUT_LANGUAGE ) );
@@ -199,6 +203,8 @@ public class PublishManager extends Observable {
                 "" + getDescriptionInEmptyPage() );
         settings.setProperty( Constants.SHOW_EXIF, 
                 "" + getShowExif() );
+        settings.setProperty( Constants.EXIF_IN_SEPARATE_PAGE, 
+                "" + getExifInSeparatePage() );
         settings.setProperty( Constants.OUTPUT_LANGUAGE, 
                 "" + getOutputLanguage() );        
         settings.setProperty( Constants.PHOTO_POSITION, 
@@ -396,9 +402,17 @@ public class PublishManager extends Observable {
     public void setShowExif( boolean showExif ) {
         this.showExif = showExif;
     }
-    
+
     public boolean getShowExif() {
         return this.showExif;
+    }
+    
+    public void setExifInSeparatePage( boolean exifInSeparatePage ) {
+        this.exifInSeparatePage = exifInSeparatePage;
+    }
+    
+    public boolean getExifInSeparatePage() {
+        return this.exifInSeparatePage;
     }
     
     public void setOutputLanguage( Locale outputLanguage ) {
@@ -528,7 +542,11 @@ public class PublishManager extends Observable {
 
         // Create Exif summary:
         if( showExif ) {
-            exifSummary = "  <li>Exif information will be printed</li>\n";
+            exifSummary = "  <li>Exif information will be printed";
+            if ( exifInSeparatePage ) {
+                exifSummary += " in a separate page";
+            }
+            exifSummary += "</li>\n";
         }
 
         // Output Language summary:

@@ -2,8 +2,8 @@
 
 <Form version="1.0" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
-    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-      <ResourceString bundle="com/javaimagealbum/resources/Resource.properties" key="LICENSE_AGREEMENT_TITLE" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="java.util.ResourceBundle.getBundle(&quot;com/javaimagealbum/resources/Resource&quot;).getString(&quot;LICENSE_AGREEMENT_TITLE&quot;)+ &quot; &quot; + res.getString(&quot;VERSION&quot;)+&quot; &quot; + JavaImageAlbumFrame.class.getPackage().getImplementationVersion()" type="code"/>
     </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>

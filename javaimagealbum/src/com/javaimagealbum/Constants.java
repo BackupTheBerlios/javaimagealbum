@@ -43,7 +43,7 @@ public final class Constants {
     public static final String APP_NAME = "Java Image Album";
 
     public static final String SITE_URL = "http://javaimagealbum.berlios.de/";
-    public static final String HOSTING_URL = "http://developer.berlios.de/javaimagealbum/";
+    public static final String HOSTING_URL = "http://developer.berlios.de/projects/javaimagealbum/";
     public static final String MAIL_LIST = "http://developer.berlios.de/mail/?group_id=5725";
     public static final String SUBMIT_BUG = "http://developer.berlios.de/bugs/?group_id=5725";
 
@@ -75,6 +75,7 @@ public final class Constants {
     public static final String LINK_TO_ALBUM_INDEX = "link_to_album_index";
     public static final String DESCRIPTION_IN_EMPTY_PAGE = "description_in_empty_page";
     public static final String SHOW_EXIF = "show_exif";
+    public static final String EXIF_IN_SEPARATE_PAGE = "exif_in_separate_page";
     public static final String OUTPUT_LANGUAGE = "output_language";
     public static final String PHOTO_POSITION = "photo_position";
     public static final String PHOTO_POSITION_LEFT = "left";

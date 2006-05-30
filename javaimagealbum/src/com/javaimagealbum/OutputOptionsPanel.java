@@ -77,6 +77,8 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbFullSize = new javax.swing.JCheckBox();
         pnShowExif = new javax.swing.JPanel();
         cbShowExif = new javax.swing.JCheckBox();
+        pnlExifInSeparatePage = new javax.swing.JPanel();
+        cbExifInSeparatePage = new javax.swing.JCheckBox();
         pnlDetailPages = new javax.swing.JPanel();
         lblCaptionPosition = new javax.swing.JLabel();
         cbCaptionPosition = new javax.swing.JComboBox();
@@ -311,13 +313,35 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pnlCheckboxes.add(pnShowExif, gridBagConstraints);
+
+        pnlExifInSeparatePage.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        pnlExifInSeparatePage.setBackground(java.awt.Color.white);
+        cbExifInSeparatePage.setBackground(java.awt.Color.white);
+        cbExifInSeparatePage.setFont(new java.awt.Font("SansSerif", 0, 12));
+        cbExifInSeparatePage.setMnemonic('h');
+        cbExifInSeparatePage.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("EXIF_IN_SEPARATE_PAGE"));
+        cbExifInSeparatePage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbExifInSeparatePageActionPerformed(evt);
+            }
+        });
+
+        pnlExifInSeparatePage.add(cbExifInSeparatePage);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 15, 5, 0);
+        pnlCheckboxes.add(pnlExifInSeparatePage, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -448,6 +472,10 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
 
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbExifInSeparatePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExifInSeparatePageActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_cbExifInSeparatePageActionPerformed
+
     private void cbNavButtonPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNavButtonPositionActionPerformed
         scanAndPersistOptions();
     }//GEN-LAST:event_cbNavButtonPositionActionPerformed
@@ -465,6 +493,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     }
     
     private void cbShowExifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowExifActionPerformed
+        enableExifComponents();
         scanAndPersistOptions();
     }//GEN-LAST:event_cbShowExifActionPerformed
     
@@ -485,12 +514,12 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
   }//GEN-LAST:event_tfResizeWidthKeyReleased
   
   private void cbResizePortraitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbResizePortraitsActionPerformed
-      enableComponents();
+      enableResizeComponents();
       scanAndPersistOptions();
   }//GEN-LAST:event_cbResizePortraitsActionPerformed
   
   private void cbResizeAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbResizeAllActionPerformed
-      enableComponents();
+      enableResizeComponents();
       scanAndPersistOptions();
   }//GEN-LAST:event_cbResizeAllActionPerformed
   
@@ -498,8 +527,9 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbCaptionAlign;
     private javax.swing.JComboBox cbCaptionPosition;
-    private javax.swing.JComboBox cbCaptionPosition1;
+    private javax.swing.JCheckBox cbExifInSeparatePage;
     private javax.swing.JCheckBox cbFullSize;
+    private javax.swing.JCheckBox cbFullSize1;
     private javax.swing.JComboBox cbNavButtonPosition;
     private javax.swing.JComboBox cbPhotoPosition;
     private javax.swing.JCheckBox cbResizeAll;
@@ -511,7 +541,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private javax.swing.JLabel lblBy2;
     private javax.swing.JLabel lblCaptionAlign;
     private javax.swing.JLabel lblCaptionPosition;
-    private javax.swing.JLabel lblCaptionPosition1;
     private javax.swing.JLabel lblColumns;
     private javax.swing.JLabel lblNavButtonPosition;
     private javax.swing.JLabel lblPhotoPosition;
@@ -523,6 +552,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private javax.swing.JPanel pnlCheckboxes;
     private javax.swing.JPanel pnlContents;
     private javax.swing.JPanel pnlDetailPages;
+    private javax.swing.JPanel pnlExifInSeparatePage;
     private javax.swing.JPanel pnlKeepFullSizeOption;
     private javax.swing.JPanel pnlOutputColumnsOption;
     private javax.swing.JPanel pnlPortraitResizeOption;
@@ -569,7 +599,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         return publishManager.getOutputDirectory() != null;
     }
     
-    private void enableComponents() {
+    private void enableResizeComponents() {
         boolean resizeAll = cbResizeAll.isSelected();
         tfResizeWidth.setEnabled( resizeAll );
         tfResizeHeight.setEnabled( resizeAll );
@@ -578,6 +608,11 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         tfResizePortraitsWidth.setEnabled( resizeAll & resizePortraits );
         tfResizePortraitsHeight.setEnabled( resizeAll & resizePortraits );
         cbFullSize.setEnabled( resizeAll );
+    }
+    
+    private void enableExifComponents() {
+        boolean printExif = cbShowExif.isSelected();
+        cbExifInSeparatePage.setEnabled( printExif );
     }
     
     /**
@@ -598,6 +633,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbSaveCaptions.setSelected( publishManager.getStoreCaptions() );
         cbFullSize.setSelected( publishManager.getPublishFullSize() );
         cbShowExif.setSelected( publishManager.getShowExif() );
+        cbExifInSeparatePage.setSelected( publishManager.getExifInSeparatePage() );
         String captionPosition = publishManager.getCaptionPosition();
         cbCaptionPosition.setSelectedIndex( captionPositions.indexOf(
                 captionPosition ) );
@@ -611,7 +647,8 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         cbNavButtonPosition.setSelectedIndex( navButtonPositions.indexOf(
                 navButtonPosition ) );
 
-        enableComponents();
+        enableResizeComponents();
+        enableExifComponents();
     }
     
     /**
@@ -641,6 +678,7 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
         publishManager.setStoreCaptions( cbSaveCaptions.isSelected() );
         publishManager.setPublishFullSize( cbFullSize.isSelected() );
         publishManager.setShowExif( cbShowExif.isSelected() );
+        publishManager.setExifInSeparatePage( cbExifInSeparatePage.isSelected() );
         publishManager.setCaptionPosition( (String)captionPositions.get(
                 cbCaptionPosition.getSelectedIndex() ) );
         publishManager.setCaptionAlign( (String)captionAligns.get(

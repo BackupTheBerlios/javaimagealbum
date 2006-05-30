@@ -444,8 +444,14 @@ public class OutputHTMLStage extends OutputStage {
             out.print( getNavButton(indexPage, prev, next, index, numPhotos) );
         }
         
+        out.print( "<hr/>\n" );
+
         if( publishManager.getShowExif() ) {
-            printExifInformation( outPhoto, out );
+            if ( publishManager.getExifInSeparatePage()  ) {
+                out.println( generateExifPage( outPhoto ) );
+            } else {
+                out.println( printExifInformation( outPhoto, "60" ) );
+            }
         }
         
         printDetailFooter( out );;
@@ -488,7 +494,7 @@ public class OutputHTMLStage extends OutputStage {
 		return out.toString();
     }        
 
-    private String getCaption(PublishManager publishManager, String caption) {
+    private String getCaption( PublishManager publishManager, String caption ) {
         String out = null;
         if ( ( caption != null ) && ( !caption.equals("")) ) {
             if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_CENTER)) {
@@ -509,51 +515,98 @@ public class OutputHTMLStage extends OutputStage {
     }
     
     /**
+     * If Exif information should be printed in a separate page, create it otherwise
+     * get the Exif in HTML
+     */
+    private String generateExifPage( OutputPhoto outPhoto ) 
+    throws IOException {
+        String pageName = outPhoto.getFilename() + "Exif.html";
+        
+        StringBuffer sbExifInfo = new StringBuffer();
+        
+        // Create Link to separate page
+//        sbExifInfo.append( "<a href=\"" + pageName + "\">"+resOutput.getString("EXIF_INFORMATION")+"</a></td>\n" );
+        sbExifInfo.append( "<form>\n" );
+        sbExifInfo.append( "      <input type=\"button\" value=\""+ resOutput.getString("EXIF_INFORMATION") +"\" onclick=\"window.open('"+ pageName +"', '"+ pageName +"','width=600,height=500')\">\n" );
+        sbExifInfo.append( "</form>\n" );
+                
+        // Create separate page
+        File outputDirectory = publishManager.getOutputDirectory();
+        File outFile = new File( outputDirectory, pageName );
+        PrintWriter out = new PrintWriter( new FileWriter( outFile ) );
+        
+        out.print(
+                "<html>\n" +
+                "  <head>\n" +
+                "    <title>" + outPhoto.getFilename() );
+        out.print(
+                "</title>\n" +
+                "  </head>\n" +
+                "  <body bgcolor=\"#ffffff\">\n" );
+        
+        out.print(
+                "<h1>" + outPhoto.getFilename() + "</h1>");
+
+        out.print( "<hr/>\n" );
+
+        out.print( printExifInformation( outPhoto, "100" ) );
+        
+        out.print(
+                "  </body>\n" +
+                "</html>" );
+
+        out.close();
+            
+        return sbExifInfo.toString();
+    }
+    
+    /**
      * Print EXIF information
      */
-    private void printExifInformation( OutputPhoto outPhoto, PrintWriter out ) {
-        out.println( "<hr/>\n" );
+    private String printExifInformation( OutputPhoto outPhoto, String width ) {
+        StringBuffer sbExifInfo = new StringBuffer();
         if ( outPhoto.isExif() ) {
-            out.print(
-                    "<table cellpadding=\"2\" cellspacing=\"0\" " +
-                    "border=\"0\" width=\"60%\" align=\"Left\">\n" );
-            out.print( "      <tr><td>Creation Date</td>\n" );
-            out.print( "      <td>"+outPhoto.getCreationDate()+"</td></tr>\n" );
-            out.print( "      <tr><td>Digitized Date</td>\n" );
-            out.print( "      <td>"+outPhoto.getDigitizedDate()+"</td></tr>\n" );
-            out.print( "      <tr><td>Modified Date</td>\n" );
-            out.print( "      <td>"+outPhoto.getModifiedDate()+"</td></tr>\n" );
-            out.print( "      <tr><td>Camera Type</td>\n" );
-            out.print( "      <td>"+outPhoto.getCameraType()+"</td></tr>\n" );
-            out.print( "      <tr><td>Camera Model</td>\n" );
-            out.print( "      <td>"+outPhoto.getCameraModel()+"</td></tr>\n" );
-            out.print( "      <tr><td>Camera Make</td>\n" );
-            out.print( "      <td>"+outPhoto.getCameraMake()+"</td></tr>\n" );
-            out.print( "      <tr><td>Firmware Version</td>\n" );
-            out.print( "      <td>"+outPhoto.getFirmwareVersion()+"</td></tr>\n" );
-            out.print( "      <tr><td>FStop</td>\n" );
-            out.print( "      <td>"+outPhoto.getFStop()+"</td></tr>\n" );
-            out.print( "      <tr><td>Exposure Program</td>\n" );
-            out.print( "      <td>"+outPhoto.getExposureProgram()+"</td></tr>\n" );
-            out.print( "      <tr><td>Light Source</td>\n" );
-            out.print( "      <td>"+outPhoto.getLightSource()+"</td></tr>\n" );
-            out.print( "      <tr><td>ISO</td>\n" );
-            out.print( "      <td>"+outPhoto.getISO()+"</td></tr>\n" );
-            out.print( "      <tr><td>Shutter Speed</td>\n" );
-            out.print( "      <td>"+outPhoto.getShutterSpeed()+"</td></tr>\n" );
-            out.print( "      <tr><td>Flash</td>\n" );
-            out.print( "      <td>"+outPhoto.getFlash()+"</td></tr>\n" );
-            out.print( "      <tr><td>Image Height</td>\n" );
-            out.print( "      <td>"+outPhoto.getImageHeight()+"</td>\n" );
-            out.print( "      <tr><td>Image Width</td>\n" );
-            out.print( "      <td>"+outPhoto.getImageWidth()+"</td></tr>\n" );
-            out.print( "      <tr><td>Log info</td>\n" );
-            out.print( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
-            out.print( "</table>\n" );
+            sbExifInfo.append(
+                    "<table cellspacing=\"0\" " +
+                    "border=\"0\" width=\""+ width +"%\" align=\"Left\">\n" );
+            sbExifInfo.append( "      <tr><td>Creation Date</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getCreationDate()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Digitized Date</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getDigitizedDate()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Modified Date</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getModifiedDate()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Camera Type</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraType()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Camera Model</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraModel()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Camera Make</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraMake()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Firmware Version</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getFirmwareVersion()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>FStop</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getFStop()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Exposure Program</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getExposureProgram()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Light Source</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getLightSource()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>ISO</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getISO()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Shutter Speed</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getShutterSpeed()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Flash</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getFlash()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Image Height</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getImageHeight()+"</b></td>\n" );
+            sbExifInfo.append( "      <tr><td>Image Width</td>\n" );
+            sbExifInfo.append( "      <td><b>"+outPhoto.getImageWidth()+"</b></td></tr>\n" );
+            sbExifInfo.append( "      <tr><td>Log info</td>\n" );
+            sbExifInfo.append( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
+            sbExifInfo.append( "</table>\n" );
         } else {
-            out.println( "No EXIF information in this picture.\n" );
+            sbExifInfo.append( "No EXIF information in this picture.\n" );
         }
-//        out.println( "<hr/>\n" );
+//        sbExifInfo.append( "<hr/>\n" );
+        return sbExifInfo.toString();
     }
     
     /**

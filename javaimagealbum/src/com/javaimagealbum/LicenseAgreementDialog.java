@@ -105,7 +105,7 @@ public class LicenseAgreementDialog extends javax.swing.JDialog {
         lblDoNotAgreeDef = new javax.swing.JLabel();
         lblAgreeDef = new javax.swing.JLabel();
 
-        setTitle(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LICENSE_AGREEMENT_TITLE"));
+        setTitle(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("LICENSE_AGREEMENT_TITLE")+ " " + res.getString("VERSION")+" " + JavaImageAlbumFrame.class.getPackage().getImplementationVersion());
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {

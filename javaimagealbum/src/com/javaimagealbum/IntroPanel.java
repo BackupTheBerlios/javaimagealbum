@@ -203,7 +203,7 @@ public class IntroPanel
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitBugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitBugMouseClicked
-        BrowserControl.displayURL(Constants.HOSTING_URL);
+        BrowserControl.displayURL(Constants.SUBMIT_BUG);
     }//GEN-LAST:event_btnSubmitBugMouseClicked
 
     private void btnMailingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailingListMouseClicked
@@ -211,7 +211,7 @@ public class IntroPanel
     }//GEN-LAST:event_btnMailingListMouseClicked
 
     private void btnWebSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWebSiteMouseClicked
-        BrowserControl.displayURL(Constants.SUBMIT_BUG);
+        BrowserControl.displayURL(Constants.HOSTING_URL);
     }//GEN-LAST:event_btnWebSiteMouseClicked
 
     private void cbSkipIntroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSkipIntroActionPerformed
