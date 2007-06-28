@@ -489,8 +489,8 @@ public class FileSelector
         }
         fs.scrollToSelection();
         do {
-            System.out.println( "Selected = " + 
-                fs.getSelectedFile().getAbsolutePath() );
+//            System.out.println( "Selected = " + 
+//                fs.getSelectedFile().getAbsolutePath() );
             try {
                 Thread.sleep( 1000 );
             }

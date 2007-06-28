@@ -24,9 +24,17 @@
 package com.javaimagealbum;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Iterator;
 
-import com.javaimagealbum.exif.ExifHashMap;
-import com.javaimagealbum.exif.ExifReader;
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.MetadataException;
+import com.drew.metadata.Tag;
+//import com.javaimagealbum.exif.ExifHashMap;
+//import com.javaimagealbum.exif.ExifReader;
 
 /**
  * Stores information about a photograph to be output.
@@ -71,7 +79,8 @@ public class OutputPhoto {
     /**
      * The HashMap containing the EXIF information for this photo.
      */
-    private ExifHashMap exifHashMap;
+//    private ExifHashMap exifHashMap;
+    private Metadata metadata; 
     
     /** 
      * Set to true if this photo contain EXIF information.
@@ -89,18 +98,50 @@ public class OutputPhoto {
         this.caption = OutputPhoto.guessCaption( this.source );
         
         // Attempt to read EXIF information.
+//        try {
+//            this.isExif = ExifReader.isExif( this.source );
+//            if ( this.isExif ) {
+//                exifHashMap = new ExifHashMap(ExifReader.decode( this.source ));
+//            }
+//        } catch (java.lang.ArrayIndexOutOfBoundsException ex) {
+//            // If error occour during EXIF reading set it to false.
+//            this.isExif = false;
+//        }
         try {
-            this.isExif = ExifReader.isExif( this.source );
-            if ( this.isExif ) {
-                exifHashMap = new ExifHashMap(ExifReader.decode( this.source ));
-            }
-        } catch (java.lang.ArrayIndexOutOfBoundsException ex) {
-            // If error occour during EXIF reading set it to false.
-            this.isExif = false;
-        }
+	    metadata = JpegMetadataReader.readMetadata(this.source);
+            this.isExif = true;
+	} catch (JpegProcessingException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    this.isExif = false;
+	}
+
         
         
     }
+    
+    private HashMap createMap (Metadata metadata) throws MetadataException
+    {
+	HashMap out = new HashMap();
+        // iterate over the exif data and print to System.out
+        Iterator directories = metadata.getDirectoryIterator();
+        while (directories.hasNext()) {
+            Directory directory = (Directory)directories.next();
+            Iterator tags = directory.getTagIterator();
+            while (tags.hasNext()) {
+                Tag tag = (Tag)tags.next();
+                out.put(tag.getTagName(),tag.getDescription());
+            }
+            if (directory.hasErrors()) {
+                Iterator errors = directory.getErrors();
+                while (errors.hasNext()) {
+                    System.out.println("ERROR: " + errors.next());
+                }
+            }
+        }
+        return out;
+    }
+
     
     public File getSource() {
         return source;
@@ -148,71 +189,79 @@ public class OutputPhoto {
 
     /* Start EXIF getter */
     public boolean isExif() {
-        return ((this.isExif) && (exifHashMap.size()>0));
-    }
-    public String getCreationDate() {
-        return this.exifHashMap.getDate(ExifHashMap.CREATION_DATE);
+	return ((this.isExif) && (metadata != null));
     }
 
-    public String getDigitizedDate() {
-        return this.exifHashMap.getDate(ExifHashMap.DIGITIZED_DATE);
-    }
-
-    public String getModifiedDate() {
-        return this.exifHashMap.getDate(ExifHashMap.MODIFIED_DATE);
-    }
-
-    public String getCameraType() {
-        return this.exifHashMap.getCameraType();
-    }
-
-    public String getCameraMake() {
-        return this.exifHashMap.getCameraMake();
-    }
-
-    public String getCameraModel() {
-        return this.exifHashMap.getCameraModel();
-    }
-
-    public String getFirmwareVersion() {
-        return this.exifHashMap.getFirmwareVersion();
-    }
-
-    public String getFStop() {
-        return this.exifHashMap.getFStop();
-    }
-
-    public String getExposureProgram() {
-        return this.exifHashMap.getExposureProgram();
+    public Metadata getMetadata() {
+	return (metadata);
     }
     
-    public String getLightSource() {
-        return this.exifHashMap.getLightSource();
-    }
-
-    public String getISO() {
-        return this.exifHashMap.getISO();
-    }
-
-    public String getShutterSpeed() {
-        return this.exifHashMap.getShutterSpeed();
-    }
-
-    public String getFlash() {
-        return this.exifHashMap.getFlash();
-    }
-
-    public String getImageHeight() {
-        return this.exifHashMap.getImageHeight();
-    }
-
-    public String getImageWidth() {
-        return this.exifHashMap.getImageWidth();
-    }
-
-    public String getAllExif() {
-        return this.exifHashMap.toString();
-    }
+//    public boolean isExif() {
+//        return ((this.isExif) && (exifHashMap.size()>0));
+//    }
+//    public String getCreationDate() {
+//        return this.exifHashMap.getDate(ExifHashMap.CREATION_DATE);
+//    }
+//
+//    public String getDigitizedDate() {
+//        return this.exifHashMap.getDate(ExifHashMap.DIGITIZED_DATE);
+//    }
+//
+//    public String getModifiedDate() {
+//        return this.exifHashMap.getDate(ExifHashMap.MODIFIED_DATE);
+//    }
+//
+//    public String getCameraType() {
+//        return this.exifHashMap.getCameraType();
+//    }
+//
+//    public String getCameraMake() {
+//        return this.exifHashMap.getCameraMake();
+//    }
+//
+//    public String getCameraModel() {
+//        return this.exifHashMap.getCameraModel();
+//    }
+//
+//    public String getFirmwareVersion() {
+//        return this.exifHashMap.getFirmwareVersion();
+//    }
+//
+//    public String getFStop() {
+//        return this.exifHashMap.getFStop();
+//    }
+//
+//    public String getExposureProgram() {
+//        return this.exifHashMap.getExposureProgram();
+//    }
+//    
+//    public String getLightSource() {
+//        return this.exifHashMap.getLightSource();
+//    }
+//
+//    public String getISO() {
+//        return this.exifHashMap.getISO();
+//    }
+//
+//    public String getShutterSpeed() {
+//        return this.exifHashMap.getShutterSpeed();
+//    }
+//
+//    public String getFlash() {
+//        return this.exifHashMap.getFlash();
+//    }
+//
+//    public String getImageHeight() {
+//        return this.exifHashMap.getImageHeight();
+//    }
+//
+//    public String getImageWidth() {
+//        return this.exifHashMap.getImageWidth();
+//    }
+//
+//    public String getAllExif() {
+//        return this.exifHashMap.toString();
+//    }
     /* End EXIF getter */
     
     public int hashCode() {

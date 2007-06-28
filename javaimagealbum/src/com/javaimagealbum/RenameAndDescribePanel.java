@@ -506,7 +506,7 @@ implements WizardPanel, TableModelListener, ListSelectionListener
     }
 
     private void showPreview( final int index ) {
-        java.awt.Dimension d = pnlPreview.getSize();
+        //java.awt.Dimension d = pnlPreview.getSize();
         if( autoPreview && (index >= 0) ) {
             previewPanel.setEnabled( true );
             PhotoSource source = publishManager.getPhotoSource();

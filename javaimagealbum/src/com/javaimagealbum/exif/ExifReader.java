@@ -32,10 +32,10 @@ import java.util.*;
 import javax.imageio.*;
 
 public class ExifReader {
-    // FIX ME -- Type declarations are not complete....
-    // Need to finish off all data types
 
-    public static boolean isExif(File f) {
+	ExifConstants exifConstants = new ExifConstants();
+
+	public static boolean isExif(File f) {
         if (!f.exists())
             return false;
         try {
@@ -81,7 +81,8 @@ public class ExifReader {
         thumbnailOffset = -1;
         thumbnailLength = -1;
         HashMap hashMap = new HashMap();
-        ExifConstants exifConstants = new ExifConstants();
+        // TODO: may be chage this
+        new ExifConstants();
 
         // Error catching for Bad Exif Files Here.
         if (!f.exists())
@@ -147,7 +148,7 @@ public class ExifReader {
     public static BufferedImage getThumbnail(File f) {
         thumbnailOffset = -1;
         thumbnailLength = -1;
-        ExifConstants exifConstants = new ExifConstants();
+        //ExifConstants exifConstants = new ExifConstants();
 
         // Error catching for Bad Exif Files Here.
         if (!f.exists())
@@ -212,7 +213,7 @@ public class ExifReader {
     public static boolean hasThumbnail(File f) {
         thumbnailOffset = -1;
         thumbnailLength = -1;
-        ExifConstants exifConstants = new ExifConstants();
+//        ExifConstants exifConstants = new ExifConstants();
 
         // Error catching for Bad Exif Files Here.
         if (!f.exists())
@@ -289,7 +290,7 @@ public class ExifReader {
     private static void readImageForThumb(byte[] exifBuffer, int offset,
             boolean intelByteOrder) {
         int tagNumber = readBytes(exifBuffer, offset, 2, intelByteOrder);
-        String tagName = ExifConstants.getName(tagNumber);
+//        String tagName = ExifConstants.getName(tagNumber);
         int dataType = readBytes(exifBuffer, offset + 2, 2, intelByteOrder);
         int numComponents = readBytes(exifBuffer, offset + 4, 2, intelByteOrder);
         int numBytes = numComponents
@@ -326,7 +327,7 @@ public class ExifReader {
         // all data types
 
         int tagNumber = readBytes(exifBuffer, offset, 2, intelByteOrder);
-        String tagName = ExifConstants.getName(tagNumber);
+//        String tagName = ExifConstants.getName(tagNumber);
         int dataType = readBytes(exifBuffer, offset + 2, 2, intelByteOrder);
         int numComponents = readBytes(exifBuffer, offset + 4, 2, intelByteOrder);
         int numBytes = numComponents
@@ -506,7 +507,7 @@ public class ExifReader {
         return s.substring(s.length() - 2 * length, s.length());
     }
 
-    private File imageFile;
+   // private File imageFile;
 
     private static int thumbnailOffset;
 

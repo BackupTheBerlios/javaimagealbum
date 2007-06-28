@@ -363,7 +363,10 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
         	final Dimension panelSize = getSize();
         	final BufferedImage outImage = 
                 GUIUtils.loadImageFromFile( imageFile, lastThumbnailBuffer,
-                panelSize, panelSize );
+                null, panelSize, panelSize );
+            if(outImage == null) {
+                throw new IOException("Could not load image.");
+            }
             lastThumbnailBuffer = outImage;
             cachedImage = GUIUtils.createThumbnail( 
                 outImage, 

@@ -27,7 +27,6 @@
 package com.javaimagealbum;
 
 import java.io.*;
-import java.util.*;
 
 /**
  * Saves captions in source folder.

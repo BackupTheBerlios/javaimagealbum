@@ -231,14 +231,19 @@ public class PickOutputPanel
 
     private void btnCreateFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateFolderActionPerformed
         if( selectedDirectory != null ) {
+            // Output folder name will default to input folder name
+            String inputFolderName = publishManager.getPhotoSource().
+                getSourceDir().getName();
+            
             // Add your handling code here:
-            String newFolderName = JOptionPane.showInputDialog( this, 
+            String newFolderName = (String)JOptionPane.showInputDialog( this, 
                 "Your new folder will be created inside\n" +
                 "of the currently selected folder:\n\n" + 
                 "    " + selectedDirectory.getAbsolutePath() + "\n\n" +
                 "Enter the name of the new folder and click OK:",
                 "Create New Folder",
-                JOptionPane.QUESTION_MESSAGE );
+                JOptionPane.QUESTION_MESSAGE, null, null, 
+                inputFolderName );
             if( newFolderName != null ) {
                 File newFolder = new File( selectedDirectory, newFolderName );
                 boolean createSuccess = newFolder.mkdirs();

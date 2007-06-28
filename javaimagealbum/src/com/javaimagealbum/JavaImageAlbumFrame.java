@@ -230,7 +230,7 @@ public class JavaImageAlbumFrame extends javax.swing.JFrame {
         
         if( skipIntro ) {
             JPanel[] tmp = panels;
-            panels = new JPanel[5];
+            panels = new JPanel[tmp.length-1];
             for( int i = 1; i < tmp.length; i++ ) {
                 panels[i-1] = tmp[i];
             }

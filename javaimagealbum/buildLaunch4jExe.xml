@@ -18,11 +18,11 @@
     <args></args>
   </jre>
   <versionInfo>
-    <fileVersion>1.0.0.0</fileVersion>
+    <fileVersion>1.2.0.0</fileVersion>
     <txtFileVersion>BerliOS.De</txtFileVersion>
     <fileDescription>java Image Album</fileDescription>
     <copyright>Mirko Actis Grosso</copyright>
-    <productVersion>1.0.0.0</productVersion>
+    <productVersion>1.2.0.0</productVersion>
     <txtProductVersion>BerliOS.De</txtProductVersion>
     <productName>java Image Album</productName>
     <companyName></companyName>

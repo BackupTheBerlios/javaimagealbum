@@ -167,8 +167,11 @@ public class ZoomFrame extends javax.swing.JFrame implements ContainerListener, 
             new Thread() {
                 public void run() {
                     try {
-                        image = GUIUtils.loadImageFromFile(file, image, null,
-                                null);
+                        image = GUIUtils.loadImageFromFile(file, image, null, 
+                            null, null);
+                        if(image == null) {
+                            throw new IOException("Could not load image.");
+                        }
                         SwingUtilities.invokeLater(
                                 new Runnable() {
                             public void run() {

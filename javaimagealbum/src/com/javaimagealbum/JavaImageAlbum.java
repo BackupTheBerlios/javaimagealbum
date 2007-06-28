@@ -54,6 +54,10 @@ public class JavaImageAlbum {
                         System.out.println( "Hosting Site: " + Constants.HOSTING_URL );
                     } else if (args[i].equalsIgnoreCase("-h")) {
                         System.out.println("Help");
+                        System.out.println( "For more information see: ");
+                        System.out.println( "Web Site: " + Constants.SITE_URL );
+                        System.out.println( "Mailing List: " + Constants.MAIL_LIST );
+                        System.out.println( "Hosting Site: " + Constants.HOSTING_URL );
                     } else  {
                         System.out.println("Invalid command line parameter: "+args[i]);
                         System.out.println("Use: [-h] for Help, [-v] for Version");

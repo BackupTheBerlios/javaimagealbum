@@ -576,6 +576,7 @@ public class PublishManager extends Observable {
             sizeSummary + 
             detailSummary + 
             captionsSummary + 
+            descriptionsSummary +
             linkSummary +
             exifSummary +
             outputLanguageSummary +

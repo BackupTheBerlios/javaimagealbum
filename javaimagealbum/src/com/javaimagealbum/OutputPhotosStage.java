@@ -90,9 +90,13 @@ public class OutputPhotosStage extends OutputStage {
             
             File sourceFile = outPhoto.getSource();
             try {
+                Dimension originalSize = new Dimension();
                 BufferedImage image = 
                     GUIUtils.loadImageFromFile( sourceFile, inImage, 
-                    subsampleLandscape, subsamplePortrait );
+                    originalSize, subsampleLandscape, subsamplePortrait );
+                if(image == null) {
+                    throw new IOException("Could not load image");
+                }
                 generateThumbnail( outPhoto, image );
 
                 // Generate output photo:
@@ -100,7 +104,7 @@ public class OutputPhotosStage extends OutputStage {
                 updateProgress();
                 setGenerationMessage( "Generating Photo Image (" + (i+1) + "/" + 
                     photos.size() + ")..." );
-                generateOutputPhoto( outPhoto, image );
+                generateOutputPhoto( outPhoto, image, originalSize );
             }
             catch( IOException e ) {
                 error( "Could not create output photos for '" + 
@@ -134,7 +138,7 @@ public class OutputPhotosStage extends OutputStage {
     }
     
     private void generateOutputPhoto( OutputPhoto outPhoto, 
-        BufferedImage image ) 
+        BufferedImage image, Dimension originalSize ) 
     {
         File outputDirectory = publishManager.getOutputDirectory();
         File sourceFile = outPhoto.getSource();
@@ -167,8 +171,8 @@ public class OutputPhotosStage extends OutputStage {
                 BufferedImage outImage;
                 
                 // First, determine if we need to resize this image.
-                int imageWidth = image.getWidth();
-                int imageHeight = image.getHeight();
+                int imageWidth = originalSize.width;
+                int imageHeight = originalSize.height;
                 boolean needsResize;
                 if( (imageWidth > imageHeight) || 
                     !publishManager.getResizePortraits() ) 

@@ -98,7 +98,9 @@
 
   <target name="compile" depends="prepare"
           description="Compile the distribution">
-    <javac debug="on" destdir="${build}/classes" srcdir="${src}" verbose="on"/>
+    <javac debug="on" destdir="${build}/classes" srcdir="${src}" verbose="on">
+        <compilerarg value="-Xlint"/>
+    </javac>
     <copy todir="${build}/classes">
       <fileset dir="${src}">
         <include name="**/*.jpg" />
@@ -203,12 +205,13 @@
     <mkdir dir="${JDoc}"/>
 
     <javadoc
-      destdir="${JDoc}"
-      author="true"
+	  sourcepath="${src}"
+      destdir="${JDoc}">
+<!--      author="true"
       version="true"
       use="true"
       classpath="${build}"
-      windowtitle="${PrjName}" >
+      windowtitle="${PrjName}" -->
 
 		  <packageset dir="${src}" defaultexcludes="yes">
 		    <include name="${JDocPackages}" />

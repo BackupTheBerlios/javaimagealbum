@@ -27,6 +27,9 @@ import java.text.*;
 import java.io.*;
 import java.util.*;
 
+import com.drew.metadata.Directory;
+import com.drew.metadata.MetadataException;
+import com.drew.metadata.Tag;
 import com.javaimagealbum.resources.ResourceFactory;
 
 /**
@@ -37,6 +40,14 @@ import com.javaimagealbum.resources.ResourceFactory;
  */
 public class OutputHTMLStage extends OutputStage {
     static ResourceBundle resOutput;
+    
+    private static String doctype="<!DOCTYPE html\n"+
+	"PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \n"+
+    	" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"> \n";
+//    private static String doctype="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \n"+ 
+//    " \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"> ";
+    private static String encoding = "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\" />";
+    //private static String encoding = "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />";
     
     /** Current progress */
     int progress = 0;
@@ -113,12 +124,14 @@ public class OutputHTMLStage extends OutputStage {
             File outputDirectory = publishManager.getOutputDirectory();
             File destFile = new File( outputDirectory, indexFilename );
             PrintWriter out = new PrintWriter( new FileWriter( destFile ) );
+            out.print(doctype);
             out.print(
                     "<html>\n" +
                     "  <head>\n" +
-                    "    <title>" + publishManager.getAlbumTitle() );
+                    "    <title>" + publishManager.getAlbumTitle() +
+                    "</title>\n" );
+            out.print("    " + encoding + "\n");
             out.print(
-                    "</title>\n" +
                     "  </head>\n" +
                     "  <body bgcolor=\"#ffffff\">\n" );
             out.print( "<table border=\"0\" cellpadding=\"5\"><tr>\n" );
@@ -130,16 +143,15 @@ public class OutputHTMLStage extends OutputStage {
             out.print( "</tr></table>\n" );
             
             out.print(
-                    "    <div align=\"Center\">\n" +
+                    "    <div align=\"center\">\n" +
                     "      <h1>" + publishManager.getAlbumTitle() + "</h1>\n" );
             out.print(
-                    "    <div align=\"Left\">\n" +
+                    "    <div align=\"left\">\n" +
                     "      " + publishManager.getAlbumDescription() + "\n" +
                     "    </div>\n" +
                     "    <br/>");
             
             out.print(
-                    "      </table>\n" +
                     "    </div>\n" );
             printThumbnailFooter( out );
             out.print(
@@ -180,6 +192,7 @@ public class OutputHTMLStage extends OutputStage {
         File outputDirectory = publishManager.getOutputDirectory();
         File destFile = new File( outputDirectory, indexFilename );
         PrintWriter out = new PrintWriter( new FileWriter( destFile ) );
+        out.print(doctype);
         out.print(
                 "<html>\n" +
                 "  <head>\n" +
@@ -188,7 +201,9 @@ public class OutputHTMLStage extends OutputStage {
             out.print( " - " + resOutput.getString("PAGE") + " " + (index + 1) + " " + resOutput.getString("OF") + " " + numPages );
         }
         out.print(
-                "</title>\n" +
+                "    </title>\n" );
+        out.print("    " + encoding + "\n");
+        out.print(
                 "  </head>\n" +
                 "  <body bgcolor=\"#ffffff\">\n" );
         if( publishManager.getLinkToAlbumIndex() ) {
@@ -198,7 +213,7 @@ public class OutputHTMLStage extends OutputStage {
         out.print("<br/>\n");
         
         out.print(
-                "    <div align=\"Center\">\n" +
+                "    <div align=\"center\">\n" +
                 "      <h1>" + publishManager.getAlbumTitle() + "</h1>\n" );
         
         // Manage description page
@@ -206,14 +221,14 @@ public class OutputHTMLStage extends OutputStage {
             if (publishManager.getDescriptionInEmptyPage()) {
                 // Create link to Description Page
                 out.print(
-                        "    <div align=\"Left\">\n" +
+                        "    <div align=\"left\">\n" +
                         "       <a href=\"indexDescription.html\">"+resOutput.getString("ALBUM_DESCRIPTION")+"</a>\n" +
                         "    </div>\n" +
                         "    <br/>\n");
             } else if (index == 0) {
                 // Add Album Description in first Thumbnail page
                 out.print(
-                        "    <div align=\"Left\">\n" +
+                        "    <div align=\"left\">\n" +
                         "      " + publishManager.getAlbumDescription() + "\n" +
                         "    </div>\n" +
                         "    <br/>\n");
@@ -256,11 +271,11 @@ public class OutputHTMLStage extends OutputStage {
         }
         out.print(
                 "      <table cellpadding=\"2\" cellspacing=\"0\" " +
-                "border=\"1\" width=\"100%\" align=\"Center\">\n" );
+                "border=\"1\" width=\"100%\" align=\"center\">\n" );
         
         for( int row = 0; !isStopGeneration() && (row < numRows); row++ ) {
             out.print(
-                    "        <tr valign=\"Top\">\n" );
+                    "        <tr valign=\"top\">\n" );
             for( int col = 0; !isStopGeneration() && (col < numCols);
             col++ ) {
                 int i = beginIndex + row * numCols + col;
@@ -273,28 +288,24 @@ public class OutputHTMLStage extends OutputStage {
                 String detailFilename = outPhoto.getDetailHTMLFilename();
                 
                 out.print(
-                        "          <td valign=\"Top\" width=\"" +
+                        "          <td valign=\"top\" width=\"" +
                         (100/numCols) + "%\">\n" +
-                        "            <div align=\"Center\">\n" +
+                        "            <div align=\"center\">\n" +
                         "              <table cellpadding=\"0\" " +
                         "cellspacing=\"0\" border=\"0\">\n" +
-                        "                <tr height=\"" +
-                        (Constants.THUMBNAIL_HEIGHT+6) +
-                        "\">\n" +
+                        "                <tr>\n" +
                         "                  <td height=\"" +
                         (Constants.THUMBNAIL_HEIGHT+6) +
-                        "\">\n" +
-                        "                    <center>\n" +
+                        "\" align=\"center\">\n" +
                         "                      <a href=\"" + detailFilename +
                         "\">" +
                         "<img src=\"" + thumbnail +
                         "\" alt=\"" + caption +
                         "\"/></a>\n" +
-                        "                    </center>\n" +
                         "                  </td>\n" +
                         "                </tr>\n" +
-                        "                <tr><td><center>" +
-                        caption + "</center></td></tr>\n"+
+                        "                <tr><td align=\"center\">" +
+                        caption + "</td></tr>\n"+
                         "              </table>\n" +
                         "            </div>\n" +
                         "          </td>\n" );
@@ -306,7 +317,7 @@ public class OutputHTMLStage extends OutputStage {
                         ( ( ( numPhotos - 1 ) % numCols ) + 1 );
                 for( int col = 0; col < emptyCols; col++ ) {
                     out.print(
-                            "        <td valign=\"Top\" width=\"" +
+                            "        <td valign=\"top\" width=\"" +
                             (100/numCols) + "%\"><br/>\n" +
                             "        </td>\n" );
                 }
@@ -335,13 +346,13 @@ public class OutputHTMLStage extends OutputStage {
         String todaysDate = sdf.format( new Date() );
 
         out.print(
-                "    <hr align=\"Left\" width=\"100%\" size=\"2\" noshade>\n" +
+                "    <hr align=\"left\" width=\"100%\" size=\"2\" noshade=\"noshade\"/>\n" +
                 "      <table width=\"100%\"><tr>\n" +
                 "      <td align=\"left\"><small><i>"+resOutput.getString("PUBLISHED")+":</i> " + todaysDate + 
-                "</small></small></td>\n" +
+                "</small></td>\n" +
                 "      <td align=\"right\"><small><i>"+resOutput.getString("GENERATED_BY")+"</i>\n" +
-                "      <a href=\""+Constants.SITE_URL+"\"/>"+Constants.APP_NAME+"</a><br/>" + 
-                "</i>" + resOutput.getString("VERSION") + ":</i> " + Settings.getInstance().getProperty( Constants.LICENSE_AGREED ) +
+                "      <a href=\""+Constants.SITE_URL+"\">"+Constants.APP_NAME+"</a><br/>" + 
+                "<i>" + resOutput.getString("VERSION") + ":</i> " + Settings.getInstance().getProperty( Constants.LICENSE_AGREED ) +
                 "</small></td>\n</tr></table>");
     }
     
@@ -350,8 +361,8 @@ public class OutputHTMLStage extends OutputStage {
      */
     private void printDetailFooter( PrintWriter out ) {
         out.print(
-                "      <div align=\"right\"><small>"+resOutput.getString("GENERATED_BY")+"</i>\n" +
-                "      <a href=\""+Constants.SITE_URL+"\"/>"+Constants.APP_NAME+"</a><br/>" + 
+                "      <div align=\"right\"><small><i>"+resOutput.getString("GENERATED_BY")+"</i>\n" +
+                "      <a href=\""+Constants.SITE_URL+"\">"+Constants.APP_NAME+"</a><br/>" + 
                 resOutput.getString("VERSION") + " " + Settings.getInstance().getProperty( Constants.LICENSE_AGREED ) +
                 "</small></div>\n");
     }
@@ -382,12 +393,13 @@ public class OutputHTMLStage extends OutputStage {
         File outputDirectory = publishManager.getOutputDirectory();
         File outFile = new File( outputDirectory, pageFilename );
         PrintWriter out = new PrintWriter( new FileWriter( outFile ) );
-        
+        out.print(doctype);
         out.print(
                 "<html>\n" +
                 "  <head>\n" +
                 "    <title>" + publishManager.getAlbumTitle() +
                 " - "+resOutput.getString("PHOTO")+": " + imageFilename + "</title>\n" +
+                "    " + encoding + "\n" +
                 "  </head>\n" +
                 "  <body bgcolor=\"#ffffff\">\n" );
         
@@ -498,13 +510,13 @@ public class OutputHTMLStage extends OutputStage {
         String out = null;
         if ( ( caption != null ) && ( !caption.equals("")) ) {
             if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_CENTER)) {
-                out = "<div align=\"Center\"><br/>\n" +
+                out = "<div align=\"center\"><br/>\n" +
                         "    " + caption + "<br/></div>\n";
             } else if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_LEFT)) {
-                out = "<div align=\"Left\"><br/>\n" +
+                out = "<div align=\"left\"><br/>\n" +
                         "    " + caption + "<br/></div>\n";
             } else if (publishManager.getCaptionAlign().equals(Constants.CAPTION_ALIGN_RIGHT)) {
-                out = "<div align=\"Right\"><br/>\n" +
+                out = "<div align=\"right\"><br/>\n" +
                         "    " + caption + "<br/></div>\n";
             }
         } else {
@@ -527,20 +539,21 @@ public class OutputHTMLStage extends OutputStage {
         // Create Link to separate page
 //        sbExifInfo.append( "<a href=\"" + pageName + "\">"+resOutput.getString("EXIF_INFORMATION")+"</a></td>\n" );
         sbExifInfo.append( "<form>\n" );
-        sbExifInfo.append( "      <input type=\"button\" value=\""+ resOutput.getString("EXIF_INFORMATION") +"\" onclick=\"window.open('"+ pageName +"', '"+ pageName +"','width=600,height=500')\">\n" );
+        sbExifInfo.append( "      <input type=\"button\" value=\""+ resOutput.getString("EXIF_INFORMATION") +"\" onclick=\"window.open('"+ pageName +"', '"+ pageName +"','width=600,height=500,scrollbars=yes')\"/>\n" );
         sbExifInfo.append( "</form>\n" );
                 
         // Create separate page
         File outputDirectory = publishManager.getOutputDirectory();
         File outFile = new File( outputDirectory, pageName );
         PrintWriter out = new PrintWriter( new FileWriter( outFile ) );
-        
+        out.print(doctype);
         out.print(
                 "<html>\n" +
                 "  <head>\n" +
                 "    <title>" + outPhoto.getFilename() );
         out.print(
-                "</title>\n" +
+                "    </title>\n" +
+                "    " + encoding + "\n" +
                 "  </head>\n" +
                 "  <body bgcolor=\"#ffffff\">\n" );
         
@@ -564,50 +577,84 @@ public class OutputHTMLStage extends OutputStage {
      * Print EXIF information
      */
     private String printExifInformation( OutputPhoto outPhoto, String width ) {
-        StringBuffer sbExifInfo = new StringBuffer();
+	StringBuffer sbExifInfo = new StringBuffer();
         if ( outPhoto.isExif() ) {
             sbExifInfo.append(
-                    "<table cellspacing=\"0\" " +
-                    "border=\"0\" width=\""+ width +"%\" align=\"Left\">\n" );
-            sbExifInfo.append( "      <tr><td>Creation Date</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getCreationDate()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Digitized Date</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getDigitizedDate()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Modified Date</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getModifiedDate()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Camera Type</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraType()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Camera Model</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraModel()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Camera Make</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraMake()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Firmware Version</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getFirmwareVersion()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>FStop</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getFStop()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Exposure Program</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getExposureProgram()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Light Source</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getLightSource()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>ISO</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getISO()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Shutter Speed</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getShutterSpeed()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Flash</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getFlash()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Image Height</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getImageHeight()+"</b></td>\n" );
-            sbExifInfo.append( "      <tr><td>Image Width</td>\n" );
-            sbExifInfo.append( "      <td><b>"+outPhoto.getImageWidth()+"</b></td></tr>\n" );
-            sbExifInfo.append( "      <tr><td>Log info</td>\n" );
-            sbExifInfo.append( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
+                  "<table cellspacing=\"0\" " +
+                  "border=\"0\" width=\""+ width +"%\" align=\"left\">\n" );
+            
+            // iterate over the exif data and print to System.out
+            Iterator directories = outPhoto.getMetadata().getDirectoryIterator();
+            while (directories.hasNext()) {
+                Directory directory = (Directory)directories.next();
+                Iterator tags = directory.getTagIterator();
+                while (tags.hasNext()) {
+                    Tag tag = (Tag)tags.next();
+                    sbExifInfo.append( "      <tr><td>"+tag.getTagName()+"</td>\n" );
+                    try {
+			sbExifInfo.append( "      <td><b>"+tag.getDescription()+"</b></td></tr>\n" );
+		    } catch (MetadataException e) {
+			sbExifInfo.append( "      <td><b>No Information</b></td></tr>\n" );		    }
+                }
+//                if (directory.hasErrors()) {
+//                    Iterator errors = directory.getErrors();
+//                    while (errors.hasNext()) {
+//                        System.out.println("ERROR: " + errors.next());
+//                    }
+//                }
+            }
+
             sbExifInfo.append( "</table>\n" );
         } else {
             sbExifInfo.append( "No EXIF information in this picture.\n" );
         }
-//        sbExifInfo.append( "<hr/>\n" );
         return sbExifInfo.toString();
     }
+//    private String printExifInformation( OutputPhoto outPhoto, String width ) {
+//        StringBuffer sbExifInfo = new StringBuffer();
+//        if ( outPhoto.isExif() ) {
+//            sbExifInfo.append(
+//                    "<table cellspacing=\"0\" " +
+//                    "border=\"0\" width=\""+ width +"%\" align=\"Left\">\n" );
+//            sbExifInfo.append( "      <tr><td>Creation Date</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getCreationDate()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Digitized Date</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getDigitizedDate()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Modified Date</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getModifiedDate()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Camera Type</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraType()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Camera Model</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraModel()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Camera Make</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraMake()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Firmware Version</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getFirmwareVersion()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>FStop</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getFStop()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Exposure Program</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getExposureProgram()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Light Source</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getLightSource()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>ISO</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getISO()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Shutter Speed</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getShutterSpeed()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Flash</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getFlash()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Image Height</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getImageHeight()+"</b></td>\n" );
+//            sbExifInfo.append( "      <tr><td>Image Width</td>\n" );
+//            sbExifInfo.append( "      <td><b>"+outPhoto.getImageWidth()+"</b></td></tr>\n" );
+//            sbExifInfo.append( "      <tr><td>Log info</td>\n" );
+//            sbExifInfo.append( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
+//            sbExifInfo.append( "</table>\n" );
+//        } else {
+//            sbExifInfo.append( "No EXIF information in this picture.\n" );
+//        }
+////        sbExifInfo.append( "<hr/>\n" );
+//        return sbExifInfo.toString();
+//    }
     
     /**
      * Returns current progress, on a scale from 0 to 100

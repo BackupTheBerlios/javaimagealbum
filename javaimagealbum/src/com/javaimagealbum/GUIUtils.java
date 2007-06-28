@@ -148,7 +148,9 @@ public final class GUIUtils {
         g.setColor( Color.white );
         g.fillRect( 0, 0, size.width, size.height );
             
-        g.drawImage( inImage, newX, newY, newWidth, newHeight, null );
+// Mirko        g.drawImage( inImage, newX, newY, newWidth, newHeight, null );
+        g.drawImage( inImage.getScaledInstance( newWidth, newHeight,
+            Image.SCALE_SMOOTH ), newX, newY, null );
         
         return outImage;
     }
@@ -169,6 +171,8 @@ public final class GUIUtils {
      * @param outImage The BufferedImage to load the file into.  If
      *   null, or if the BufferedImage is unsuitable for the file being
      *   read, a new BufferedImage is created and returned.
+     * @param originalSize Returns the original size of the image, 
+     *   before it was subsampled.  Set to null to not return original size.
      * @param targetSizeLandscape Desired target size for image if the
      *   image is landscape (result will be slightly larger).  Pass null to 
      *   use the full size of the source image.
@@ -180,12 +184,15 @@ public final class GUIUtils {
      *   file, or if the image is invalid.
      */
     public static BufferedImage loadImageFromFile( File inFile, 
-        BufferedImage outImage, Dimension targetSizeLandscape, 
+//Mirko        BufferedImage outImage, Dimension targetSizeLandscape, 
+        BufferedImage outImage, Dimension originalSize, 
+        Dimension targetSizeLandscape, 
         Dimension targetSizePortrait ) 
         throws IOException
     {
         BufferedImage result = outImage;
         boolean useImageIORead = true;
+        Throwable reasonForUseImageIORead = null;
         FileImageInputStream inStream = new FileImageInputStream( inFile );
         
         int dotIndex = inFile.getName().lastIndexOf( '.' );
@@ -200,6 +207,10 @@ public final class GUIUtils {
                 ImageReadParam param = reader.getDefaultReadParam();
                 int sourceWidth = reader.getWidth( 0 );
                 int sourceHeight = reader.getHeight( 0 );
+                if(originalSize != null) {
+                    originalSize.width = sourceWidth;
+                    originalSize.height = sourceHeight;
+                }
                 
                 int destWidth, destHeight;
 
@@ -266,18 +277,49 @@ public final class GUIUtils {
                 }
                 
                 // Read the image
+                boolean tryAgain;
+                boolean triedWithNoDestination = false;
                 try {
-                    // Read image:
-                    result = reader.read( 0, param );
-                    useImageIORead = false;
-                }
-                catch( IOException e ) {
-                    // try again using ImageIO.read, below.
-                }
-                catch( IllegalArgumentException e ) {
-                    // this can happen if the source image is monochrome, 
-                    // for example.
-                    // try again using ImageIO.read, below.
+//Mirko                    // Read image:
+//                    result = reader.read( 0, param );
+//                    useImageIORead = false;
+//                }
+//                catch( IOException e ) {
+//                    // try again using ImageIO.read, below.
+//                }
+//                catch( IllegalArgumentException e ) {
+//                    // this can happen if the source image is monochrome, 
+//                    // for example.
+//                    // try again using ImageIO.read, below.
+                    do {
+                        tryAgain = false;
+                        try {
+                            // Read image:
+                            result = reader.read( 0, param );
+                            useImageIORead = false;
+                        }
+                        catch( IOException e ) {
+                            // try again using ImageIO.read, below.
+                            reasonForUseImageIORead = e;
+                        }
+                        catch( IllegalArgumentException e ) {
+                            // this can happen if the source image is monochrome, 
+                            // for example.
+                            // First try again with no destination image.
+                            if(!triedWithNoDestination) {
+                                param.setDestination( null );
+                                triedWithNoDestination = true;
+                                tryAgain = true;
+                            }
+                            else {
+                                // try again using ImageIO.read, below.
+                                reasonForUseImageIORead = e;
+                            }
+                        }
+                        catch(Throwable e) {
+                            reasonForUseImageIORead = e;
+                        }
+                    } while(tryAgain);
                 }
                 finally {
                     reader.dispose();

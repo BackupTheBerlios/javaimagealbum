@@ -529,7 +529,6 @@ public class OutputOptionsPanel extends javax.swing.JPanel implements WizardPane
     private javax.swing.JComboBox cbCaptionPosition;
     private javax.swing.JCheckBox cbExifInSeparatePage;
     private javax.swing.JCheckBox cbFullSize;
-    private javax.swing.JCheckBox cbFullSize1;
     private javax.swing.JComboBox cbNavButtonPosition;
     private javax.swing.JComboBox cbPhotoPosition;
     private javax.swing.JCheckBox cbResizeAll;

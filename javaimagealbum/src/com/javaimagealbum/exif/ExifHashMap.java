@@ -86,26 +86,28 @@ public class ExifHashMap extends HashMap {
     
     public String getExposureProgram() {
         final int programNumber = getInt(ExifConstants.EXPOSURE_PROGRAM);
+        String out = "";
         switch (programNumber) {
             case 1:
-                return "Manual Mode";
+                out = "Manual Mode";
             case 2:
-                return "Automatic Mode";
+                out = "Automatic Mode";
             case 3:
-                return "Aperture Priority";
+                out = "Aperture Priority";
             case 4:
-                return "Shutter Priority";
+                out = "Shutter Priority";
             case 5:
-                return "Night Mode";
+                out = "Night Mode";
             case 6:
-                return "Action Mode";
+                out = "Action Mode";
             case 7:
-                return "Portrait Mode";
+                out = "Portrait Mode";
             case 8:
-                return "Landscape Mode";
+                out = "Landscape Mode";
             default:
-                return "";
+                out = "";
         }
+        return (out);
     }
     
     public String getISO() {
@@ -138,48 +140,54 @@ public class ExifHashMap extends HashMap {
     
     public String getFlash() {
         final int flash = getInt(ExifConstants.FLASH);
+        String out = "";
         switch (flash) {
             case 0:
-                return "No Flash";
+                out = "No Flash";
             case 5:
-                return "Camera Flash";
+                out = "Camera Flash";
             case 6:
-                return "Camera Flash, no Strobe Bounce Detected";
+                out = "Camera Flash, no Strobe Bounce Detected";
             case 7:
-                return "Camera Flash, Strobe Bounce Detected";
+                out = "Camera Flash, Strobe Bounce Detected";
+            default :
+                out = "";
         }
-        return "";
+        return (out);
     }
     
     public String getLightSource() {
         int light = getInt(ExifConstants.LIGHT_SOURCE);
+        String out = "";
         switch (light) {
             case 0:
-                return "Unknown";
+                out = "Unknown";
             case 1:
-                return "Daylight";
+                out = "Daylight";
             case 2:
-                return "Fluorescent";
+                out = "Fluorescent";
             case 3:
-                return "Tungsten";
+                out = "Tungsten";
             case 10:
-                return "Flash";
+                out = "Flash";
             case 17:
-                return "Standard Light A";
+                out = "Standard Light A";
             case 18:
-                return "Standard Light B";
+                out = "Standard Light B";
             case 19:
-                return "Standard Light C";
+                out = "Standard Light C";
             case 20:
-                return "D55";
+                out = "D55";
             case 21:
-                return "D65";
+                out = "D65";
             case 22:
-                return "D75";
+                out = "D75";
             case 255:
-                return "Other";
+                out = "Other";
+            default :
+                out = "";
         }
-        return "";
+        return (out);
     }
     
     public String getDate( final int dateType ) {

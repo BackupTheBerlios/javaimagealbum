@@ -22,7 +22,9 @@
 
 package com.javaimagealbum;
 
-import com.javaimagealbum.util.BrowserControl;
+import edu.stanford.ejalbert.BrowserLauncher;
+import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
+import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
 /**
  * Introduces the user to the program
@@ -106,6 +108,8 @@ public class IntroPanel
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         pnlNavigation.add(lblWebSite, gridBagConstraints);
 
         btnWebSite.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("WEB_SITE"));
@@ -134,6 +138,7 @@ public class IntroPanel
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         pnlNavigation.add(lblSubmitBug, gridBagConstraints);
 
         btnSubmitBug.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("SUBMIT_BUG"));
@@ -162,6 +167,7 @@ public class IntroPanel
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         pnlNavigation.add(lblMailingList, gridBagConstraints);
 
         btnMailingList.setText(java.util.ResourceBundle.getBundle("com/javaimagealbum/resources/Resource").getString("MAILING_LIST"));
@@ -203,15 +209,33 @@ public class IntroPanel
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitBugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitBugMouseClicked
-        BrowserControl.displayURL(Constants.SUBMIT_BUG);
+	BrowserLauncher launcher;
+	try {
+	    launcher = new BrowserLauncher(null);
+	    launcher.openURLinBrowser(Constants.SUBMIT_BUG);
+	} catch (BrowserLaunchingInitializingException e) {
+	} catch (UnsupportedOperatingSystemException e) {
+	}
     }//GEN-LAST:event_btnSubmitBugMouseClicked
 
     private void btnMailingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailingListMouseClicked
-        BrowserControl.displayURL(Constants.MAIL_LIST);
+	BrowserLauncher launcher;
+	try {
+	    launcher = new BrowserLauncher(null);
+	    launcher.openURLinBrowser(Constants.MAIL_LIST);
+	} catch (BrowserLaunchingInitializingException e) {
+	} catch (UnsupportedOperatingSystemException e) {
+	}
     }//GEN-LAST:event_btnMailingListMouseClicked
 
     private void btnWebSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWebSiteMouseClicked
-        BrowserControl.displayURL(Constants.HOSTING_URL);
+	BrowserLauncher launcher;
+	try {
+	    launcher = new BrowserLauncher(null);
+	    launcher.openURLinBrowser(Constants.MAIL_LIST);
+	} catch (BrowserLaunchingInitializingException e) {
+	} catch (UnsupportedOperatingSystemException e) {
+	}
     }//GEN-LAST:event_btnWebSiteMouseClicked
 
     private void cbSkipIntroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSkipIntroActionPerformed
