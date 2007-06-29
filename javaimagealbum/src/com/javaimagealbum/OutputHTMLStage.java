@@ -537,11 +537,17 @@ public class OutputHTMLStage extends OutputStage {
         StringBuffer sbExifInfo = new StringBuffer();
         
         // Create Link to separate page
-//        sbExifInfo.append( "<a href=\"" + pageName + "\">"+resOutput.getString("EXIF_INFORMATION")+"</a></td>\n" );
-        sbExifInfo.append( "<form>\n" );
-        sbExifInfo.append( "      <input type=\"button\" value=\""+ resOutput.getString("EXIF_INFORMATION") +"\" onclick=\"window.open('"+ pageName +"', '"+ pageName +"','width=600,height=500,scrollbars=yes')\"/>\n" );
-        sbExifInfo.append( "</form>\n" );
-                
+//        sbExifInfo.append( "<form>\n" );
+//        sbExifInfo.append( "      <input type=\"button\" value=\""+ resOutput.getString("EXIF_INFORMATION") +"\" onclick=\"window.open('"+ pageName +"', '"+ pageName +"','width=600,height=500,scrollbars=yes')\"/>\n" );
+//        sbExifInfo.append( "</form>\n" );
+        sbExifInfo.append("<script type=\"text/javascript\">\n");
+        sbExifInfo.append("\t function openwindow()\n" +
+                          "\t\t {\n" +
+                          "\t\t\t window.open(\"" + pageName + "\",\"ExifInfoPage\",\"width=600,height=500,scrollbars=yes\");\n" +
+                          "\t\t }\n" +
+                          "</script>\n");
+        sbExifInfo.append("<a href=\"javascript: openwindow()\">"+ resOutput.getString("EXIF_INFORMATION") +"</a>\n");
+        
         // Create separate page
         File outputDirectory = publishManager.getOutputDirectory();
         File outFile = new File( outputDirectory, pageName );
@@ -610,51 +616,7 @@ public class OutputHTMLStage extends OutputStage {
         }
         return sbExifInfo.toString();
     }
-//    private String printExifInformation( OutputPhoto outPhoto, String width ) {
-//        StringBuffer sbExifInfo = new StringBuffer();
-//        if ( outPhoto.isExif() ) {
-//            sbExifInfo.append(
-//                    "<table cellspacing=\"0\" " +
-//                    "border=\"0\" width=\""+ width +"%\" align=\"Left\">\n" );
-//            sbExifInfo.append( "      <tr><td>Creation Date</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getCreationDate()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Digitized Date</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getDigitizedDate()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Modified Date</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getModifiedDate()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Camera Type</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraType()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Camera Model</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraModel()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Camera Make</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getCameraMake()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Firmware Version</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getFirmwareVersion()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>FStop</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getFStop()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Exposure Program</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getExposureProgram()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Light Source</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getLightSource()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>ISO</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getISO()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Shutter Speed</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getShutterSpeed()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Flash</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getFlash()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Image Height</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getImageHeight()+"</b></td>\n" );
-//            sbExifInfo.append( "      <tr><td>Image Width</td>\n" );
-//            sbExifInfo.append( "      <td><b>"+outPhoto.getImageWidth()+"</b></td></tr>\n" );
-//            sbExifInfo.append( "      <tr><td>Log info</td>\n" );
-//            sbExifInfo.append( "      <td>"+outPhoto.getAllExif()+"</td></tr>\n" );
-//            sbExifInfo.append( "</table>\n" );
-//        } else {
-//            sbExifInfo.append( "No EXIF information in this picture.\n" );
-//        }
-////        sbExifInfo.append( "<hr/>\n" );
-//        return sbExifInfo.toString();
-//    }
+
     
     /**
      * Returns current progress, on a scale from 0 to 100
